@@ -14,7 +14,10 @@ type MenuItems = ({
   path: PathValueDef
 } & StrictMenuItemProps)[]
 
-const items: MenuItems = [{ path: "/", name: "Top" }]
+const items: MenuItems = [
+  { path: "/", name: "Top" },
+  { path: "/counter", name: "Counter" },
+]
 
 const _HeaderMenu: React.FC<Props> = ({ location }) => {
   return (
