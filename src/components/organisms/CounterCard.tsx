@@ -2,16 +2,27 @@
 import React from "react"
 import { css, jsx } from "@emotion/core"
 import { Card, Statistic, Button } from "semantic-ui-react"
+import { connect } from "react-redux"
+import { Dispatch } from "redux"
+import { actions } from "ducks/counter/actions"
+import { RootState } from "ducks/store"
 
-type Props = {
-  children?: never
+type ReduxStateProps = {
   count: number
+}
+
+type ReduxDispatchProps = {
   add: (amount: number) => void
   decrement: () => void
   increment: () => void
 }
 
-export const CounterCard: React.FC<Props> = ({
+type Props = {
+  children?: never
+} & ReduxStateProps &
+  ReduxDispatchProps
+
+const _CounterCard: React.FC<Props> = ({
   count,
   add,
   decrement,
@@ -49,3 +60,22 @@ const numberBoard = css`
 const actionsBottom = css`
   margin-top: 10px;
 `
+
+const mapStateToProps = (state: RootState): ReduxStateProps => {
+  return {
+    count: state.counterReducer.count,
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+  return {
+    add: (amount) => dispatch(actions.add(amount)),
+    decrement: () => dispatch(actions.decrement()),
+    increment: () => dispatch(actions.increment()),
+  }
+}
+
+export const CounterCard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_CounterCard)

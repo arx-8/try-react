@@ -2,14 +2,11 @@
 import React from "react"
 import { css, jsx } from "@emotion/core"
 import { SemanticCOLORS, Label } from "semantic-ui-react"
-
-type Props = {
-  children?: never
-  count: number
-}
+import { RootState } from "ducks/store"
+import { connect } from "react-redux"
 
 const range = (end: number): number[] => {
-  return [...Array(end).keys()]
+  return 0 < end ? [...Array(end).keys()] : []
 }
 
 const COLORS: readonly SemanticCOLORS[] = [
@@ -28,7 +25,15 @@ const COLORS: readonly SemanticCOLORS[] = [
   "black",
 ]
 
-export const ColorfulBeads: React.FC<Props> = ({ count }) => {
+type ReduxStateProps = {
+  count: number
+}
+
+type Props = {
+  children?: never
+} & ReduxStateProps
+
+const _ColorfulBeads: React.FC<Props> = ({ count }) => {
   return (
     <div css={root}>
       {range(count).map((i) => (
@@ -41,3 +46,11 @@ export const ColorfulBeads: React.FC<Props> = ({ count }) => {
 const root = css`
   margin-top: 40px;
 `
+
+const mapStateToProps = (state: RootState): ReduxStateProps => {
+  return {
+    count: state.counterReducer.count,
+  }
+}
+
+export const ColorfulBeads = connect(mapStateToProps)(_ColorfulBeads)

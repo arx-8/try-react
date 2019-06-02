@@ -10,13 +10,8 @@ type Props = {
 export const Counter: React.FC<Props> = () => {
   return (
     <Container>
-      <CounterCard
-        add={() => {}}
-        decrement={() => {}}
-        increment={() => {}}
-        count={7}
-      />
-      <ColorfulBeads count={7} />
+      <CounterCard />
+      <ColorfulBeads />
     </Container>
   )
 }

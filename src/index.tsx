@@ -6,14 +6,20 @@ import { Routes } from "components/helpers/Routes"
 import { GlobalStyles } from "components/helpers/GlobalStyles"
 import { HeaderMenu } from "components/organisms/HeaderMenu"
 import { HashRouter as Router } from "react-router-dom"
+import { configureStore } from "ducks/store"
+import { Provider as ReduxProvider } from "react-redux"
+
+const reduxStore = configureStore((window as any).REDUX_INITIAL_DATA)
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <GlobalStyles />
-      <HeaderMenu />
-      <Routes />
-    </Router>
+    <ReduxProvider store={reduxStore}>
+      <Router>
+        <GlobalStyles />
+        <HeaderMenu />
+        <Routes />
+      </Router>
+    </ReduxProvider>
   )
 }
 
