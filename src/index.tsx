@@ -1,35 +1,17 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import * as serviceWorker from "./serviceWorker"
-import { Global, css } from "@emotion/core"
-import emotionNormalize from "emotion-normalize"
 import "semantic-ui-css/semantic.min.css"
 import { Routes } from "components/helpers/Routes"
+import { GlobalStyles } from "components/helpers/GlobalStyles"
 import { HeaderMenu } from "components/organisms/HeaderMenu"
 import { HashRouter as Router } from "react-router-dom"
-
-const globalStyles = css`
-  ${emotionNormalize}
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-      "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
-  }
-`
 
 const App: React.FC = () => {
   return (
     <Router>
+      <GlobalStyles />
       <HeaderMenu />
-      <Global styles={globalStyles} />
       <Routes />
     </Router>
   )
