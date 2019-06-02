@@ -26,6 +26,8 @@ module.exports = {
         trailingComma: "es5",
       },
     ],
+    "react/no-array-index-key": "error",
+    "react/prop-types": "off",
 
     // constructor のショートハンド（メンバーの省略記法）を使いたいため
     "@typescript-eslint/explicit-member-accessibility": "off",

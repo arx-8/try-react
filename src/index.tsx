@@ -5,6 +5,8 @@ import { Global, css } from "@emotion/core"
 import emotionNormalize from "emotion-normalize"
 import "semantic-ui-css/semantic.min.css"
 import { Routes } from "components/helpers/Routes"
+import { HeaderMenu } from "components/organisms/HeaderMenu"
+import { HashRouter as Router } from "react-router-dom"
 
 const globalStyles = css`
   ${emotionNormalize}
@@ -25,10 +27,11 @@ const globalStyles = css`
 
 const App: React.FC = () => {
   return (
-    <>
+    <Router>
+      <HeaderMenu />
       <Global styles={globalStyles} />
       <Routes />
-    </>
+    </Router>
   )
 }
 

@@ -1,7 +1,8 @@
 import React from "react"
-import { HashRouter as Router, Route, Switch } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import { Root } from "components/pages/Root"
 import { NotFound } from "components/pages/NotFound"
+import { PATH } from "constants/Paths"
 
 type Props = {
   children?: never
@@ -9,11 +10,9 @@ type Props = {
 
 export const Routes: React.FC<Props> = () => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Root} />
-        <Route component={NotFound} />
-      </Switch>
-    </Router>
+    <Switch>
+      <Route exact path={PATH.Root} component={Root} />
+      <Route component={NotFound} />
+    </Switch>
   )
 }
