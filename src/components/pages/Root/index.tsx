@@ -3,7 +3,7 @@ import React from "react"
 import logo from "assets/logo.svg"
 import { css, jsx } from "@emotion/core"
 
-export const App: React.FC = () => {
+export const Root: React.FC = () => {
   return (
     <div css={root}>
       <header css={header}>

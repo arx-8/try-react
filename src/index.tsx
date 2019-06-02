@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { App } from "components/pages/App"
 import * as serviceWorker from "./serviceWorker"
 import { Global, css } from "@emotion/core"
 import emotionNormalize from "emotion-normalize"
 import "semantic-ui-css/semantic.min.css"
+import { Routes } from "components/helpers/Routes"
 
 const globalStyles = css`
   ${emotionNormalize}
@@ -23,16 +23,16 @@ const globalStyles = css`
   }
 `
 
-const Root: React.FC = () => {
+const App: React.FC = () => {
   return (
     <>
       <Global styles={globalStyles} />
-      <App />
+      <Routes />
     </>
   )
 }
 
-ReactDOM.render(<Root />, document.getElementById("root"))
+ReactDOM.render(<App />, document.getElementById("root"))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
