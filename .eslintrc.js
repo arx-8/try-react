@@ -34,7 +34,13 @@ module.exports = {
     "@typescript-eslint/no-parameter-properties": "off",
 
     // React Component の書き心地がとても悪くなるため
-    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        allowExpressions: true,
+        allowTypedFunctionExpressions: true,
+      },
+    ],
     "@typescript-eslint/prefer-interface": "off",
 
     // ホイスティングの許可

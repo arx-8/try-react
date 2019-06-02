@@ -108,7 +108,7 @@ describe("Comparison of toStrictEqual, toBe and toEqual", () => {
  * @see https://jestjs.io/docs/en/expect#tostrictequalvalue
  */
 describe("Exception test", () => {
-  const throwable = () => {
+  const throwable = (): never => {
     throw new Error("Lorem ipsum dolor sit amet")
   }
 
