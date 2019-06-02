@@ -4,6 +4,7 @@ import { App } from "components/pages/App"
 import * as serviceWorker from "./serviceWorker"
 import { Global, css } from "@emotion/core"
 import emotionNormalize from "emotion-normalize"
+import "semantic-ui-css/semantic.min.css"
 
 const globalStyles = css`
   ${emotionNormalize}
