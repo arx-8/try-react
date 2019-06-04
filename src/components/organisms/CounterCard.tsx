@@ -4,8 +4,8 @@ import { css, jsx } from "@emotion/core"
 import { Card, Statistic, Button } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { actions } from "ducks/counter/actions"
 import { RootState } from "ducks/store"
+import { counterActions } from "ducks/counter"
 
 type ReduxStateProps = {
   count: number
@@ -63,15 +63,15 @@ const actionsBottom = css`
 
 const mapStateToProps = (state: RootState): ReduxStateProps => {
   return {
-    count: state.counterReducer.count,
+    count: state.counter.count,
   }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
   return {
-    add: (amount) => dispatch(actions.add(amount)),
-    decrement: () => dispatch(actions.decrement()),
-    increment: () => dispatch(actions.increment()),
+    add: (amount) => dispatch(counterActions.add(amount)),
+    decrement: () => dispatch(counterActions.decrement()),
+    increment: () => dispatch(counterActions.increment()),
   }
 }
 

@@ -4,6 +4,7 @@ import { css, jsx } from "@emotion/core"
 import { SemanticCOLORS, Label } from "semantic-ui-react"
 import { RootState } from "ducks/store"
 import { connect } from "react-redux"
+import { counterSelectors } from "ducks/counter"
 
 const range = (end: number): number[] => {
   return 0 < end ? [...Array(end).keys()] : []
@@ -26,17 +27,17 @@ const COLORS: readonly SemanticCOLORS[] = [
 ]
 
 type ReduxStateProps = {
-  count: number
+  beadsCount: number
 }
 
 type Props = {
   children?: never
 } & ReduxStateProps
 
-const _ColorfulBeads: React.FC<Props> = ({ count }) => {
+const _ColorfulBeads: React.FC<Props> = ({ beadsCount }) => {
   return (
     <div css={root}>
-      {range(count).map((i) => (
+      {range(beadsCount).map((i) => (
         <Label key={i} circular color={COLORS[i % COLORS.length]} />
       ))}
     </div>
@@ -49,7 +50,7 @@ const root = css`
 
 const mapStateToProps = (state: RootState): ReduxStateProps => {
   return {
-    count: state.counterReducer.count,
+    beadsCount: counterSelectors.get10PerCount(state.counter),
   }
 }
 

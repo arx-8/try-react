@@ -1,32 +1,11 @@
-export enum CounterActionType {
-  ADD = "COUNTER/ADD",
-  DECREMENT = "COUNTER/DECREMENT",
-  INCREMENT = "COUNTER/INCREMENT",
-}
+import { createAction } from "redux-actions"
+import { CounterActionType } from "./types"
 
-export type CounterAction = {
-  type: CounterActionType
-  amount?: number
-}
-
-const add = (amount: number): CounterAction => {
-  return {
-    type: CounterActionType.ADD,
-    amount,
-  }
-}
-
-const decrement = (): CounterAction => {
-  return {
-    type: CounterActionType.DECREMENT,
-  }
-}
-
-const increment = (): CounterAction => {
-  return {
-    type: CounterActionType.INCREMENT,
-  }
-}
+const add = createAction(CounterActionType.ADD, (amount: number) => ({
+  count: amount,
+}))
+const decrement = createAction(CounterActionType.DECREMENT)
+const increment = createAction(CounterActionType.INCREMENT)
 
 export const actions = {
   add,

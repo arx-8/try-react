@@ -1,0 +1,5 @@
+export enum CounterActionType {
+  ADD = "COUNTER/ADD",
+  DECREMENT = "COUNTER/DECREMENT",
+  INCREMENT = "COUNTER/INCREMENT",
+}
