@@ -9,6 +9,7 @@ import { counterActions } from "ducks/counter"
 
 type ReduxStateProps = {
   count: number
+  defaultAmount: number
 }
 
 type ReduxDispatchProps = {
@@ -24,6 +25,7 @@ type Props = {
 
 const _CounterCard: React.FC<Props> = ({
   count,
+  defaultAmount,
   add,
   decrement,
   increment,
@@ -43,7 +45,15 @@ const _CounterCard: React.FC<Props> = ({
             +1
           </Button>
         </div>
-        <div css={actionsBottom}>
+        <div css={actionsSeparator}>
+          <Button color="red" onClick={() => add(defaultAmount * -1)}>
+            -{defaultAmount}
+          </Button>
+          <Button color="red" onClick={() => add(defaultAmount)}>
+            +{defaultAmount}
+          </Button>
+        </div>
+        <div css={actionsSeparator}>
           <Button fluid color="grey" onClick={() => add(10)}>
             +10
           </Button>
@@ -57,13 +67,14 @@ const numberBoard = css`
   margin-top: 15px !important;
 `
 
-const actionsBottom = css`
+const actionsSeparator = css`
   margin-top: 10px;
 `
 
 const mapStateToProps = (state: RootState): ReduxStateProps => {
   return {
     count: state.counter.count,
+    defaultAmount: state.counter.defaultAmount,
   }
 }
 

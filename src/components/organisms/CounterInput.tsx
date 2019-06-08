@@ -1,27 +1,41 @@
 /** @jsx jsx */
 import React from "react"
 import { Button, Input } from "semantic-ui-react"
-import { Formik, Field, FieldProps, getIn } from "formik"
+import { connect } from "react-redux"
+import { counterActions } from "ducks/counter"
 import { css, jsx } from "@emotion/core"
+import { Dispatch } from "redux"
+import { Formik, Field, FieldProps, getIn } from "formik"
+import { RootState } from "ducks/store"
+
+type ReduxStateProps = {
+  defaultAmount: number
+}
+
+type ReduxDispatchProps = {
+  changeDefaultAmount: (amount: number) => void
+}
 
 type Props = {
   children?: never
-}
+} & ReduxStateProps &
+  ReduxDispatchProps
 
 const formInitialValues = {
-  amount: "",
+  amount: "1",
 }
 
-export const CounterInput: React.FC<Props> = () => {
+const _CounterInput: React.FC<Props> = ({ changeDefaultAmount }) => {
   return (
     <Formik
       initialValues={formInitialValues}
       onSubmit={(values, actions) => {
-        // TODO connect redux
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          actions.setSubmitting(false)
-        }, 1000)
+        changeDefaultAmount(Number(values.amount))
+        actions.setSubmitting(false)
+      }}
+      onReset={(_, actions) => {
+        changeDefaultAmount(Number(formInitialValues.amount))
+        actions.resetForm()
       }}
       render={(props) => (
         <form onSubmit={props.handleSubmit}>
@@ -85,3 +99,21 @@ const errMsg = css`
   color: red;
   font-weight: bold;
 `
+
+const mapStateToProps = (state: RootState): ReduxStateProps => {
+  return {
+    defaultAmount: state.counter.defaultAmount,
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+  return {
+    changeDefaultAmount: (amount) =>
+      dispatch(counterActions.changeDefaultAmount(amount)),
+  }
+}
+
+export const CounterInput = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_CounterInput)

@@ -1,15 +1,20 @@
-import { handleActions } from "redux-actions"
+import { handleActions, ReduxCompatibleReducer } from "redux-actions"
 import { CounterActionType } from "./types"
 
 export type CounterState = {
   count: number
+  defaultAmount: number
 }
 
 const initialState: CounterState = {
   count: 0,
+  defaultAmount: 1,
 }
 
-export const reducer = handleActions(
+export const reducer: ReduxCompatibleReducer<
+  CounterState,
+  CounterState
+> = handleActions(
   {
     [CounterActionType.ADD]: (state, action) => {
       return {
@@ -27,6 +32,12 @@ export const reducer = handleActions(
       return {
         ...state,
         count: state.count + 1,
+      }
+    },
+    [CounterActionType.CHANGE_DEFAULT_AMOUNT]: (state, action) => {
+      return {
+        ...state,
+        defaultAmount: action.payload.defaultAmount,
       }
     },
   },
