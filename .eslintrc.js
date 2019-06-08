@@ -26,13 +26,21 @@ module.exports = {
         trailingComma: "es5",
       },
     ],
+    "react/no-array-index-key": "error",
+    "react/prop-types": "off",
 
     // constructor のショートハンド（メンバーの省略記法）を使いたいため
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/no-parameter-properties": "off",
 
     // React Component の書き心地がとても悪くなるため
-    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        allowExpressions: true,
+        allowTypedFunctionExpressions: true,
+      },
+    ],
     "@typescript-eslint/prefer-interface": "off",
 
     // ホイスティングの許可
