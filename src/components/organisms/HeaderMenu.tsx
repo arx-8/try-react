@@ -17,6 +17,7 @@ type MenuItems = ({
 const items: MenuItems = [
   { path: "/", name: "Top" },
   { path: "/counter", name: "Counter" },
+  { path: "/todo", name: "Todo" },
 ]
 
 const _HeaderMenu: React.FC<Props> = ({ location }) => {
