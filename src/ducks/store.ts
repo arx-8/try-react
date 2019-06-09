@@ -1,8 +1,8 @@
 import { combineReducers, createStore, Store, AnyAction } from "redux"
 import { counterReducer } from "./counter"
 import { CounterState } from "./counter/reducers"
-import { TodoState } from "./todo/reducers"
 import { todoReducer } from "./todo"
+import { TodoState } from "./todo/types"
 
 export type RootState = {
   counter: CounterState

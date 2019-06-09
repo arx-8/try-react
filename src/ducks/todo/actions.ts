@@ -1,55 +1,44 @@
-import {
-  ADD_TODO,
-  CHANGE_TODO_STATUS,
-  DELETE_TODO,
-  SET_VISIBILITY_FILTER,
-  TodoId,
-  TodoStatus,
-  VisibilityFilter,
-} from "./types"
-import { ActionWithPayload } from "types/ReduxTypes"
+import { ActionWithPayloadHandler } from "types/ReduxTypes"
+import { ActionTypes, TodoId, TodoStatus, VisibilityFilter } from "./types"
 
-type AddTodoPayload = {
-  label: string
-}
-const addTodo = (
-  payload: AddTodoPayload
-): ActionWithPayload<typeof ADD_TODO, AddTodoPayload> => ({
-  type: ADD_TODO,
+const addTodo: ActionWithPayloadHandler<
+  typeof ActionTypes.ADD_TODO,
+  {
+    label: string
+  }
+> = (payload) => ({
+  type: ActionTypes.ADD_TODO,
   payload,
 })
 
-type DeleteTodoPayload = {
-  todoId: TodoId
-}
-const deleteTodo = (
-  payload: DeleteTodoPayload
-): ActionWithPayload<typeof DELETE_TODO, DeleteTodoPayload> => ({
-  type: DELETE_TODO,
+const deleteTodo: ActionWithPayloadHandler<
+  typeof ActionTypes.DELETE_TODO,
+  {
+    todoId: TodoId
+  }
+> = (payload) => ({
+  type: ActionTypes.DELETE_TODO,
   payload,
 })
 
-type ChangeTodoStatusPayload = {
-  todoId: TodoId
-  todoStatus: TodoStatus
-}
-const changeTodoStatus = (
-  payload: ChangeTodoStatusPayload
-): ActionWithPayload<typeof CHANGE_TODO_STATUS, ChangeTodoStatusPayload> => ({
-  type: CHANGE_TODO_STATUS,
+const changeTodoStatus: ActionWithPayloadHandler<
+  typeof ActionTypes.CHANGE_TODO_STATUS,
+  {
+    todoId: TodoId
+    todoStatus: TodoStatus
+  }
+> = (payload) => ({
+  type: ActionTypes.CHANGE_TODO_STATUS,
   payload,
 })
 
-type SetVisibilityFilterPayload = {
-  visibilityFilter: VisibilityFilter
-}
-const setVisibilityFilter = (
-  payload: SetVisibilityFilterPayload
-): ActionWithPayload<
-  typeof SET_VISIBILITY_FILTER,
-  SetVisibilityFilterPayload
-> => ({
-  type: SET_VISIBILITY_FILTER,
+const setVisibilityFilter: ActionWithPayloadHandler<
+  typeof ActionTypes.SET_VISIBILITY_FILTER,
+  {
+    visibilityFilter: VisibilityFilter
+  }
+> = (payload) => ({
+  type: ActionTypes.SET_VISIBILITY_FILTER,
   payload,
 })
 

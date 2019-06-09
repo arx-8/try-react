@@ -1,5 +1,4 @@
-import { TodoState } from "./reducers"
-import { Todo } from "./types"
+import { Todo, TodoState } from "./types"
 
 const filterTodoList = (state: TodoState): Todo[] => {
   if (state.visibilityFilter === "all") {

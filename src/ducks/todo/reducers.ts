@@ -1,21 +1,8 @@
-import { Reducer } from "redux"
-import {
-  ADD_TODO,
-  CHANGE_TODO_STATUS,
-  DELETE_TODO,
-  SET_VISIBILITY_FILTER,
-  Todo,
-  VisibilityFilter,
-  TodoId,
-} from "./types"
 import { actions } from "./actions"
-import produce from "immer"
+import { Reducer } from "redux"
 import { ulid } from "ulid"
-
-export type TodoState = {
-  todoList: Todo[]
-  visibilityFilter: VisibilityFilter
-}
+import { ActionTypes, TodoId, TodoState } from "./types"
+import produce from "immer"
 
 type Action = ReturnType<
   | typeof actions.addTodo
@@ -38,7 +25,7 @@ export const reducer: Reducer<TodoState, Action> = (
   action
 ) => {
   switch (action.type) {
-    case ADD_TODO:
+    case ActionTypes.ADD_TODO:
       return produce(state, (draft) => {
         const { label } = action.payload
         draft.todoList.push({
@@ -48,19 +35,19 @@ export const reducer: Reducer<TodoState, Action> = (
         })
       })
 
-    case CHANGE_TODO_STATUS:
+    case ActionTypes.CHANGE_TODO_STATUS:
       return produce(state, (draft) => {
         const { todoId, todoStatus } = action.payload
         draft.todoList.find((t) => t.id === todoId)!.status = todoStatus
       })
 
-    case DELETE_TODO:
+    case ActionTypes.DELETE_TODO:
       return produce(state, (draft) => {
         const { todoId } = action.payload
         draft.todoList = draft.todoList.filter((t) => t.id !== todoId)
       })
 
-    case SET_VISIBILITY_FILTER:
+    case ActionTypes.SET_VISIBILITY_FILTER:
       return produce(state, (draft) => {
         const { visibilityFilter } = action.payload
         draft.visibilityFilter = visibilityFilter
