@@ -11,7 +11,7 @@ import { Provider as ReduxProvider } from "react-redux"
 import { ThemeProvider } from "@material-ui/styles"
 import { muiTheme } from "components/styles/materialUi"
 
-const reduxStore = configureStore((window as any).REDUX_INITIAL_DATA)
+const reduxStore = configureStore(window.__REDUX_INITIAL_STATE__)
 
 const App: React.FC = () => {
   return (
