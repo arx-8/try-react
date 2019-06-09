@@ -3,11 +3,14 @@ import actionCreatorFactory from "typescript-fsa"
 
 const actionCreator = actionCreatorFactory()
 
-export const clickSquare = actionCreator<{
+const clickSquare = actionCreator<{
   index: number
   value: InputValue
 }>(ActionTypes.CLICK_SQUARE)
 
+const reset = actionCreator(ActionTypes.RESET)
+
 export const actions = {
   clickSquare,
+  reset,
 }
