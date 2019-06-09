@@ -18,6 +18,7 @@ const items: MenuItems = [
   { path: "/", name: "Top" },
   { path: "/counter", name: "Counter" },
   { path: "/todo", name: "Todo" },
+  { path: "/tic-tac-toe", name: "TicTacToe" },
 ]
 
 const _HeaderMenu: React.FC<Props> = ({ location }) => {
