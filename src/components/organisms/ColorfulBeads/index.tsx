@@ -31,7 +31,7 @@ type Props = {
   children?: never
 } & ReduxStateProps
 
-const _ColorfulBeads: React.FC<Props> = ({ beadsCount }) => {
+export const _ColorfulBeads: React.FC<Props> = ({ beadsCount }) => {
   return (
     <div css={root}>
       {range(beadsCount).map((i) => (
