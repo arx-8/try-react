@@ -1,28 +1,46 @@
 /** @jsx jsx */
+import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
+import { Dispatch } from "redux"
+import { InputValue } from "ducks/tic-tac-toe/types"
+import { RootState } from "ducks/store"
+import { tttActions } from "ducks/tic-tac-toe"
 import { TTTSquare } from "./TTTSquare"
 import React from "react"
 
-type Props = {
-  children?: never
+type ReduxStateProps = {
+  currentPlayerName: InputValue
+  inputValues: InputValue[]
 }
 
-export const TTTBoard: React.FC<Props> = () => {
-  const nextPlayerName = "X"
+type ReduxDispatchProps = {
+  clickSquare: (index: number, value: InputValue) => void
+}
 
+type Props = {
+  children?: never
+} & ReduxStateProps &
+  ReduxDispatchProps
+
+const _TTTBoard: React.FC<Props> = ({
+  clickSquare,
+  currentPlayerName,
+  inputValues,
+}) => {
   return (
     <div>
-      <div css={nextPlayer}>Next player: {nextPlayerName}</div>
+      <div css={nextPlayer}>Next player: {currentPlayerName}</div>
       <div css={container}>
-        <TTTSquare value={"O"} />
-        <TTTSquare value={"1"} />
-        <TTTSquare value={"2"} />
-        <TTTSquare value={"3"} />
-        <TTTSquare value={null} />
-        <TTTSquare value={"5"} />
-        <TTTSquare value={"6"} />
-        <TTTSquare value={"7"} />
-        <TTTSquare value={"8"} />
+        {inputValues.map((v, index) => (
+          <TTTSquare
+            // 他にキーがない、固定枠のためパフォーマンス劣化もないため
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            value={v}
+            onClick={() => clickSquare(index, currentPlayerName)}
+            disabled={v !== null}
+          />
+        ))}
       </div>
     </div>
   )
@@ -34,6 +52,26 @@ const nextPlayer = css`
 
 const container = css`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 40px 40px 40px;
+  grid-template-rows: 40px 40px 40px;
 `
+
+const mapStateToProps = (state: RootState): ReduxStateProps => {
+  const { currentPlayerName, inputValues } = state.ticTacToe
+  return {
+    currentPlayerName,
+    inputValues,
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+  return {
+    clickSquare: (index, value) =>
+      dispatch(tttActions.clickSquare({ index, value })),
+  }
+}
+
+export const TTTBoard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_TTTBoard)

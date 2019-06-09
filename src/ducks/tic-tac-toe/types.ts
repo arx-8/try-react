@@ -5,5 +5,6 @@ export enum ActionTypes {
 export type InputValue = "O" | "X" | null
 
 export type TTTState = {
+  currentPlayerName: InputValue
   inputValues: InputValue[]
 }

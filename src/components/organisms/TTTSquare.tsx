@@ -5,11 +5,17 @@ import React from "react"
 
 type Props = {
   children?: never
+  disabled: boolean
+  onClick: () => void
   value: InputValue | any
 }
 
-export const TTTSquare: React.FC<Props> = ({ value }) => {
-  return <button css={root}>{value}</button>
+export const TTTSquare: React.FC<Props> = ({ disabled, value, onClick }) => {
+  return (
+    <button css={root} onClick={onClick} disabled={disabled}>
+      {value}
+    </button>
+  )
 }
 
 const root = css`
