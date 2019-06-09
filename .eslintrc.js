@@ -15,6 +15,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "react-app",
   ],
+  plugins: ["only-error"],
   rules: {
     "no-console": "off",
     "no-default-export": true,
