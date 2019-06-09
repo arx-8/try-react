@@ -15,7 +15,7 @@ const createTodoId = (): TodoId => {
   return ulid() as TodoId
 }
 
-const initialState: TodoState = {
+export const initialState: TodoState = {
   todoList: [],
   visibilityFilter: "all",
 }
