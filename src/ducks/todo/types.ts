@@ -11,6 +11,15 @@ export type TodoStatus = "active" | "completed"
 
 export type VisibilityFilter = "all" | TodoStatus
 
+export const VisibilityFilterValue: Record<
+  VisibilityFilter,
+  VisibilityFilter
+> = {
+  active: "active",
+  all: "all",
+  completed: "completed",
+}
+
 export type Todo = {
   id: TodoId
   label: string

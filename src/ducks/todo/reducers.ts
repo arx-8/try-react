@@ -57,7 +57,7 @@ export const reducer: Reducer<TodoState, Action> = (
     case DELETE_TODO:
       return produce(state, (draft) => {
         const { todoId } = action.payload
-        draft.todoList = draft.todoList.filter((t) => t.id === todoId)
+        draft.todoList = draft.todoList.filter((t) => t.id !== todoId)
       })
 
     case SET_VISIBILITY_FILTER:

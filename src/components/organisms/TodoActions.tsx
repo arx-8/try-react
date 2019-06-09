@@ -1,21 +1,36 @@
 /** @jsx jsx */
+import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
+import { Dispatch } from "redux"
+import { RootState } from "ducks/store"
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormLabel from "@material-ui/core/FormLabel"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import React from "react"
+import { todoActions } from "ducks/todo"
+import { VisibilityFilter, VisibilityFilterValue } from "ducks/todo/types"
+
+type ReduxStateProps = {
+  currentVisibilityFilter: VisibilityFilter
+}
+
+type ReduxDispatchProps = {
+  setVisibilityFilter: (visibilityFilter: VisibilityFilter) => void
+}
 
 type Props = {
   children?: never
-}
+} & ReduxStateProps &
+  ReduxDispatchProps
 
-export const TodoActions: React.FC<Props> = () => {
-  const [value, setValue] = React.useState("all")
-
+const _TodoActions: React.FC<Props> = ({
+  setVisibilityFilter,
+  currentVisibilityFilter,
+}) => {
   const onChange = (_: any, value: string): void => {
-    setValue(value)
+    setVisibilityFilter(value as VisibilityFilter)
   }
 
   return (
@@ -27,25 +42,25 @@ export const TodoActions: React.FC<Props> = () => {
           name="position"
           onChange={onChange}
           row
-          value={value}
+          value={currentVisibilityFilter}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
             label="All"
             labelPlacement="end"
-            value="all"
+            value={VisibilityFilterValue.all}
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             label="Active"
             labelPlacement="end"
-            value="active"
+            value={VisibilityFilterValue.active}
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             label="Completed"
             labelPlacement="end"
-            value="completed"
+            value={VisibilityFilterValue.completed}
           />
         </RadioGroup>
       </FormControl>
@@ -58,3 +73,21 @@ const root = css`
   margin-left: 8px;
   margin-right: 8px;
 `
+
+const mapStateToProps = (state: RootState): ReduxStateProps => {
+  return {
+    currentVisibilityFilter: state.todo.visibilityFilter,
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+  return {
+    setVisibilityFilter: (visibilityFilter) =>
+      dispatch(todoActions.setVisibilityFilter({ visibilityFilter })),
+  }
+}
+
+export const TodoActions = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_TodoActions)

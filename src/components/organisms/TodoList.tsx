@@ -1,4 +1,11 @@
+/** @jsx jsx */
+import { connect } from "react-redux"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
+import { css, jsx } from "@emotion/core"
+import { Dispatch } from "redux"
+import { RootState } from "ducks/store"
+import { Todo, TodoId, TodoStatus } from "ducks/todo/types"
+import { todoSelectors, todoActions } from "ducks/todo"
 import Checkbox from "@material-ui/core/Checkbox"
 import DeleteIcon from "@material-ui/icons/Delete"
 import IconButton from "@material-ui/core/IconButton"
@@ -9,56 +16,65 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction"
 import React from "react"
 import Typography from "@material-ui/core/Typography"
 
-type Props = {
-  children?: never
+type ReduxStateProps = {
+  todoList: Todo[]
 }
 
-export const TodoList: React.FC<Props> = () => {
+type ReduxDispatchProps = {
+  changeTodoStatus: (todoId: TodoId, todoStatus: TodoStatus) => void
+  deleteTodo: (todoId: TodoId) => void
+}
+
+type Props = {
+  children?: never
+} & ReduxStateProps &
+  ReduxDispatchProps
+
+const _TodoList: React.FC<Props> = ({
+  changeTodoStatus,
+  deleteTodo,
+  todoList,
+}) => {
   const classes = useStyles()
-  const [checked, setChecked] = React.useState([0])
 
-  const handleToggle = (value: number): void => {
-    const currentIndex = checked.indexOf(value)
-    const newChecked = [...checked]
-
-    if (currentIndex === -1) {
-      newChecked.push(value)
-    } else {
-      newChecked.splice(currentIndex, 1)
-    }
-
-    setChecked(newChecked)
+  const onToggleStatus = (todoId: TodoId): void => {
+    const status = todoList.find((t) => t.id === todoId)!.status
+    const toggled: TodoStatus = status === "active" ? "completed" : "active"
+    changeTodoStatus(todoId, toggled)
   }
 
   return (
     <List className={classes.root}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-label-${value}`
-
+      {todoList.map((t) => {
         return (
           <ListItem
-            key={value}
-            dense
+            key={t.id}
             button
-            onClick={() => handleToggle(value)}
+            dense
+            onClick={() => onToggleStatus(t.id)}
           >
             <ListItemIcon>
               <Checkbox
                 edge="start"
-                checked={checked.indexOf(value) !== -1}
+                checked={t.status === "completed"}
                 tabIndex={-1}
                 disableRipple
-                inputProps={{ "aria-labelledby": labelId }}
+                inputProps={{
+                  "aria-labelledby": `checkbox-list-label-${t.id}`,
+                }}
               />
             </ListItemIcon>
 
-            <Typography>Line item あいうえお {value + 1}</Typography>
+            <div css={t.status === "completed" && completed}>
+              <Typography>{t.label}</Typography>
+            </div>
 
             <ListItemSecondaryAction>
               <IconButton
                 edge="end"
                 className={classes.button}
                 aria-label="Delete"
+                onClick={() => deleteTodo(t.id)}
               >
                 <DeleteIcon />
               </IconButton>
@@ -80,3 +96,27 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
+const completed = css`
+  opacity: 0.3;
+  text-decoration: line-through;
+`
+
+const mapStateToProps = (state: RootState): ReduxStateProps => {
+  return {
+    todoList: todoSelectors.filterTodoList(state.todo),
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+  return {
+    changeTodoStatus: (todoId, todoStatus) =>
+      dispatch(todoActions.changeTodoStatus({ todoId, todoStatus })),
+    deleteTodo: (todoId) => dispatch(todoActions.deleteTodo({ todoId })),
+  }
+}
+
+export const TodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_TodoList)

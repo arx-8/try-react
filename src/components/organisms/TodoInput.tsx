@@ -1,23 +1,38 @@
 /** @jsx jsx */
+import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
+import { Dispatch } from "redux"
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { FormEventHandler } from "react"
 import TextField from "@material-ui/core/TextField"
+import { todoActions } from "ducks/todo"
+
+type ReduxStateProps = {}
+
+type ReduxDispatchProps = {
+  addTodo: (label: string) => void
+}
 
 type Props = {
   children?: never
-}
+} & ReduxStateProps &
+  ReduxDispatchProps
 
-export const TodoInput: React.FC<Props> = () => {
+const _TodoInput: React.FC<Props> = ({ addTodo }) => {
   const [value, setValue] = React.useState("")
   const classes = useStyles()
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault()
     setValue(e.target.value)
   }
-  const onSubmit = (): void => {
-    // TODO
-    console.log(value)
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    if (0 < value.length) {
+      addTodo(value)
+      // init input
+      setValue("")
+    }
   }
 
   return (
@@ -25,10 +40,10 @@ export const TodoInput: React.FC<Props> = () => {
       <TextField
         className={classes.textField}
         fullWidth
-        label="Task name"
+        label="Todo name"
         margin="normal"
         onChange={onChange}
-        placeholder="Input task name"
+        placeholder="Input todo name"
         value={value}
         variant="outlined"
       />
@@ -49,3 +64,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
+const mapStateToProps = (): ReduxStateProps => {
+  // NOP
+  return {}
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+  return {
+    addTodo: (label: string) => dispatch(todoActions.addTodo({ label })),
+  }
+}
+
+export const TodoInput = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_TodoInput)
