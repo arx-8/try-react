@@ -8,16 +8,20 @@ import { HeaderMenu } from "components/organisms/HeaderMenu"
 import { HashRouter as Router } from "react-router-dom"
 import { configureStore } from "ducks/store"
 import { Provider as ReduxProvider } from "react-redux"
+import { ThemeProvider } from "@material-ui/styles"
+import { muiTheme } from "components/styles/materialUi"
 
-const reduxStore = configureStore((window as any).REDUX_INITIAL_DATA)
+const reduxStore = configureStore(window.__REDUX_INITIAL_STATE__)
 
 const App: React.FC = () => {
   return (
     <ReduxProvider store={reduxStore}>
       <Router>
-        <GlobalStyles />
-        <HeaderMenu />
-        <Routes />
+        <ThemeProvider theme={muiTheme}>
+          <GlobalStyles />
+          <HeaderMenu />
+          <Routes />
+        </ThemeProvider>
       </Router>
     </ReduxProvider>
   )
