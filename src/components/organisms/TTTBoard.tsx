@@ -13,17 +13,13 @@ export const TTTBoard: React.FC<Props> = () => {
   return (
     <div>
       <div css={nextPlayer}>Next player: {nextPlayerName}</div>
-      <div css={row}>
-        <TTTSquare value={"0"} />
+      <div css={container}>
+        <TTTSquare value={"O"} />
         <TTTSquare value={"1"} />
         <TTTSquare value={"2"} />
-      </div>
-      <div css={row}>
         <TTTSquare value={"3"} />
-        <TTTSquare value={"4"} />
+        <TTTSquare value={null} />
         <TTTSquare value={"5"} />
-      </div>
-      <div css={row}>
         <TTTSquare value={"6"} />
         <TTTSquare value={"7"} />
         <TTTSquare value={"8"} />
@@ -36,8 +32,8 @@ const nextPlayer = css`
   margin-bottom: 10px;
 `
 
-const row = css`
-  clear: both;
-  content: "";
-  display: table;
+const container = css`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 `
