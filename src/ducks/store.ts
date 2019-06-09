@@ -2,11 +2,14 @@ import { combineReducers, createStore, Store, AnyAction } from "redux"
 import { counterReducer } from "./counter"
 import { CounterState } from "./counter/reducers"
 import { todoReducer } from "./todo"
+import { tttReducer } from "./tic-tac-toe"
 import { TodoState } from "./todo/types"
+import { TTTState } from "./tic-tac-toe/types"
 
 export type RootState = {
   counter: CounterState
   todo: TodoState
+  ticTacToe: TTTState
 }
 
 export const configureStore = (
@@ -15,6 +18,7 @@ export const configureStore = (
   const rootReducer = combineReducers({
     counter: counterReducer,
     todo: todoReducer,
+    ticTacToe: tttReducer,
   })
 
   return createStore(
