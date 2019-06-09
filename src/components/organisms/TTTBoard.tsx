@@ -2,15 +2,16 @@
 import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
 import { Dispatch } from "redux"
-import { InputValue } from "ducks/tic-tac-toe/types"
+import { InputValue, PlayerName } from "ducks/tic-tac-toe/types"
 import { RootState } from "ducks/store"
 import { tttActions } from "ducks/tic-tac-toe"
 import { TTTSquare } from "./TTTSquare"
 import React from "react"
 
 type ReduxStateProps = {
-  currentPlayerName: InputValue
+  currentPlayerName: PlayerName
   inputValues: InputValue[]
+  isContinue: boolean
 }
 
 type ReduxDispatchProps = {
@@ -26,6 +27,7 @@ const _TTTBoard: React.FC<Props> = ({
   clickSquare,
   currentPlayerName,
   inputValues,
+  isContinue,
 }) => {
   return (
     <div>
@@ -38,7 +40,7 @@ const _TTTBoard: React.FC<Props> = ({
             key={index}
             value={v}
             onClick={() => clickSquare(index, currentPlayerName)}
-            disabled={v !== null}
+            disabled={!isContinue || v !== null}
           />
         ))}
       </div>
@@ -57,10 +59,11 @@ const container = css`
 `
 
 const mapStateToProps = (state: RootState): ReduxStateProps => {
-  const { currentPlayerName, inputValues } = state.ticTacToe
+  const { currentPlayerName, inputValues, isContinue } = state.ticTacToe
   return {
     currentPlayerName,
     inputValues,
+    isContinue,
   }
 }
 

@@ -5,7 +5,11 @@ export enum ActionTypes {
 
 export type InputValue = "O" | "X" | null
 
+export type PlayerName = NonNullable<InputValue>
+
 export type TTTState = {
-  currentPlayerName: InputValue
+  currentPlayerName: PlayerName
+  winnerPlayerName: PlayerName | null
   inputValues: InputValue[]
+  isContinue: boolean
 }
