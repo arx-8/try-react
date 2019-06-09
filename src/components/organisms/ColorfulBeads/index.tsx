@@ -5,10 +5,7 @@ import { SemanticCOLORS, Label } from "semantic-ui-react"
 import { RootState } from "ducks/store"
 import { connect } from "react-redux"
 import { counterSelectors } from "ducks/counter"
-
-const range = (end: number): number[] => {
-  return 0 < end ? [...Array(end).keys()] : []
-}
+import { range } from "utils/ArrayUtils"
 
 const COLORS: readonly SemanticCOLORS[] = [
   "red",
@@ -34,7 +31,7 @@ type Props = {
   children?: never
 } & ReduxStateProps
 
-const _ColorfulBeads: React.FC<Props> = ({ beadsCount }) => {
+export const _ColorfulBeads: React.FC<Props> = ({ beadsCount }) => {
   return (
     <div css={root}>
       {range(beadsCount).map((i) => (

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CHANGE_DEFAULT_AMOUNT prev = edited 1`] = `
+Object {
+  "count": 10,
+  "defaultAmount": 1000,
+}
+`;
+
+exports[`CHANGE_DEFAULT_AMOUNT prev = initialState 1`] = `
+Object {
+  "count": 0,
+  "defaultAmount": 10,
+}
+`;

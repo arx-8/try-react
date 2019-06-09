@@ -1,5 +1,6 @@
-import { handleActions, ReduxCompatibleReducer } from "redux-actions"
+import { actions } from "./actions"
 import { CounterActionType } from "./types"
+import { handleActions, ReduxCompatibleReducer } from "redux-actions"
 import produce from "immer"
 
 export type CounterState = {
@@ -7,14 +8,24 @@ export type CounterState = {
   defaultAmount: number
 }
 
-const initialState: CounterState = {
+// redux-actions の型がうまく書けない。だいぶダメな感じ。
+type Action =
+  | ReturnType<
+      | typeof actions.add
+      | typeof actions.changeDefaultAmount
+      | typeof actions.decrement
+      | typeof actions.increment
+    >
+  | any
+
+export const initialState: CounterState = {
   count: 0,
   defaultAmount: 1,
 }
 
 export const reducer: ReduxCompatibleReducer<
   CounterState,
-  CounterState
+  Action
 > = handleActions(
   {
     [CounterActionType.ADD]: (state, action) => {
