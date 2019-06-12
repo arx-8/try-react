@@ -1,4 +1,5 @@
 import { Counter } from "components/pages/Counter"
+import { Members } from "components/pages/Members"
 import { NotFound } from "components/pages/NotFound"
 import { PATH } from "constants/Paths"
 import { Root } from "components/pages/Root"
@@ -18,6 +19,7 @@ export const Routes: React.FC<Props> = () => {
       <Route exact path={PATH.Counter} component={Counter} />
       <Route exact path={PATH.Todo} component={TodoPage} />
       <Route exact path={PATH.TicTacToe} component={TicTacToePage} />
+      <Route exact path={PATH.Members} component={Members} />
       <Route component={NotFound} />
     </Switch>
   )

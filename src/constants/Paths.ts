@@ -5,6 +5,7 @@ type PathDef = {
   Counter: "/counter"
   Todo: "/todo"
   TicTacToe: "/tic-tac-toe"
+  Members: "/members"
 }
 
 export type PathValueDef = ValueOf<PathDef>
@@ -14,4 +15,5 @@ export const PATH: PathDef = {
   Counter: "/counter",
   Todo: "/todo",
   TicTacToe: "/tic-tac-toe",
+  Members: "/members",
 }
