@@ -6,7 +6,7 @@ type ExWindow = Partial<{
   /**
    * @see https://github.com/zalmoxisus/redux-devtools-extension#1-with-redux
    */
-  __REDUX_DEVTOOLS_EXTENSION__: Function
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function
 
   __REDUX_INITIAL_STATE__: Record<string, any>
 }>
