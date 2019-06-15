@@ -1,16 +1,16 @@
 /** @jsx jsx */
-import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
-import { RootState } from "ducks/store"
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormLabel from "@material-ui/core/FormLabel"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
-import React from "react"
+import { RootState } from "ducks/store"
 import { todoActions } from "ducks/todo"
 import { VisibilityFilter, VisibilityFilterValue } from "ducks/todo/types"
+import React from "react"
+import { connect } from "react-redux"
+import { Dispatch } from "redux"
 
 type ReduxStateProps = {
   currentVisibilityFilter: VisibilityFilter
@@ -25,7 +25,7 @@ type Props = {
 } & ReduxStateProps &
   ReduxDispatchProps
 
-const _TodoActions: React.FC<Props> = ({
+export const _TodoActions: React.FC<Props> = ({
   setVisibilityFilter,
   currentVisibilityFilter,
 }) => {
