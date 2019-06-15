@@ -8,9 +8,8 @@ import RadioGroup from "@material-ui/core/RadioGroup"
 import { RootState } from "ducks/store"
 import { todoActions } from "ducks/todo"
 import { VisibilityFilter, VisibilityFilterValue } from "ducks/todo/types"
-import React from "react"
-import { connect } from "react-redux"
-import { Dispatch } from "redux"
+import React, { useCallback } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 type ReduxStateProps = {
   currentVisibilityFilter: VisibilityFilter
@@ -22,13 +21,11 @@ type ReduxDispatchProps = {
 
 type Props = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
 
-export const _TodoActions: React.FC<Props> = ({
-  setVisibilityFilter,
-  currentVisibilityFilter,
-}) => {
+export const _TodoActions: React.FC<
+  Props & ReduxStateProps & ReduxDispatchProps
+> = ({ setVisibilityFilter, currentVisibilityFilter }) => {
   const onChange = (_: any, value: string): void => {
     setVisibilityFilter(value as VisibilityFilter)
   }
@@ -74,20 +71,24 @@ const root = css`
   margin-right: 8px;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
-  return {
-    currentVisibilityFilter: state.todo.visibilityFilter,
-  }
-}
+export const TodoActions: React.FC<Props> = () => {
+  const dispatch = useDispatch()
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
-  return {
-    setVisibilityFilter: (visibilityFilter) =>
+  const setVisibilityFilter = useCallback(
+    (visibilityFilter) =>
       dispatch(todoActions.setVisibilityFilter({ visibilityFilter })),
-  }
-}
+    [dispatch]
+  )
 
-export const TodoActions = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_TodoActions)
+  const currentVisibilityFilter = useSelector(
+    (state: RootState) => state.todo.visibilityFilter
+  )
+
+  const C = _TodoActions
+  return (
+    <C
+      setVisibilityFilter={setVisibilityFilter}
+      currentVisibilityFilter={currentVisibilityFilter}
+    />
+  )
+}
