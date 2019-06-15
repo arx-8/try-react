@@ -1,4 +1,4 @@
-import { ActionWithPayloadHandler } from "types/ReduxTypes"
+import { ActionWithPayloadHandler, ActionHandler } from "types/ReduxTypes"
 import {
   FetchMembersParams,
   FetchMemberResponse,
@@ -9,6 +9,7 @@ export enum ActionTypes {
   FETCH_MEMBERS_START = "GITHUB/FETCH_MEMBERS_START",
   FETCH_MEMBERS_SUCCEED = "GITHUB/FETCH_MEMBERS_SUCCEED",
   FETCH_MEMBERS_FAIL = "GITHUB/FETCH_MEMBERS_FAIL",
+  INITIALIZE_MEMBERS = "GITHUB/INITIALIZE_MEMBERS",
 }
 
 const fetchMembersStart: ActionWithPayloadHandler<
@@ -35,13 +36,21 @@ const fetchMembersFail: ActionWithPayloadHandler<
   payload,
 })
 
+const initializeMembers: ActionHandler<
+  typeof ActionTypes.INITIALIZE_MEMBERS
+> = () => ({
+  type: ActionTypes.INITIALIZE_MEMBERS,
+})
+
 export const actions = {
   fetchMembersStart,
   fetchMembersSucceed,
   fetchMembersFail,
+  initializeMembers,
 }
 
 export type Action =
   | ReturnType<typeof actions.fetchMembersStart>
   | ReturnType<typeof actions.fetchMembersSucceed>
   | ReturnType<typeof actions.fetchMembersFail>
+  | ReturnType<typeof actions.initializeMembers>

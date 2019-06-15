@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { DynamicRoutePath } from "constants/Paths"
+import { DynamicRoutePath, RoutePath } from "constants/Paths"
 import { Formik, Field } from "formik"
 import * as Yup from "yup"
 import React from "react"
@@ -8,9 +8,10 @@ import useReactRouter from "use-react-router"
 
 type Props = {
   children?: never
+  onReset: () => void
 }
 
-export const InputCompanyName: React.FC<Props> = () => {
+export const InputCompanyName: React.FC<Props> = ({ onReset }) => {
   const { history } = useReactRouter()
 
   return (
@@ -23,8 +24,12 @@ export const InputCompanyName: React.FC<Props> = () => {
             DynamicRoutePath.GitHubExplorer_Members(values.companyName)
           )
         }}
-        render={({ handleSubmit, errors, touched, isValid }) => (
-          <form onSubmit={handleSubmit}>
+        onReset={() => {
+          onReset()
+          history.push(RoutePath.GitHubExplorer)
+        }}
+        render={({ errors, handleReset, handleSubmit, isValid, touched }) => (
+          <form onSubmit={handleSubmit} onReset={handleReset}>
             <div>
               <span>会社名 : </span>
               <Field name="companyName" />
@@ -33,9 +38,12 @@ export const InputCompanyName: React.FC<Props> = () => {
               )}
             </div>
 
-            <button type="submit" disabled={!isValid}>
-              Go
-            </button>
+            <div css={buttons}>
+              <button type="submit" disabled={!isValid}>
+                Go
+              </button>
+              <button type="reset">Reset</button>
+            </div>
           </form>
         )}
       />
@@ -57,4 +65,10 @@ const errMsg = css`
   padding-left: 8px;
   color: red;
   font-weight: bold;
+`
+
+const buttons = css`
+  display: grid;
+  grid-template-columns: repeat(2, 50px);
+  column-gap: 8px;
 `

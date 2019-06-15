@@ -19,6 +19,7 @@ type ReduxStateProps = {
 
 type ReduxDispatchProps = {
   fetchMembersStart: (companyName: string) => void
+  initializeMembers: () => void
 }
 
 type Props = {
@@ -26,7 +27,12 @@ type Props = {
 } & ReduxStateProps &
   ReduxDispatchProps
 
-const _Members: React.FC<Props> = ({ fetchMembersStart, isLoading, users }) => {
+const _Members: React.FC<Props> = ({
+  fetchMembersStart,
+  initializeMembers,
+  isLoading,
+  users,
+}) => {
   const { match } = useReactRouter<
     Partial<DynamicRouteParams["GitHubExplorer_Members"]>
   >()
@@ -40,7 +46,7 @@ const _Members: React.FC<Props> = ({ fetchMembersStart, isLoading, users }) => {
 
   return (
     <div css={root}>
-      <InputCompanyName />
+      <InputCompanyName onReset={initializeMembers} />
       <Header as="h2">
         {companyName
           ? `${companyName}の開発メンバー`
@@ -85,6 +91,7 @@ const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
   return {
     fetchMembersStart: (companyName) =>
       dispatch(gitHubActions.fetchMembersStart({ companyName })),
+    initializeMembers: () => dispatch(gitHubActions.initializeMembers()),
   }
 }
 

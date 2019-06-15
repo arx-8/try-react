@@ -33,6 +33,11 @@ export const reducer: Reducer<GitHubState, Action> = (
         draft.isLoading = false
       })
 
+    case ActionTypes.INITIALIZE_MEMBERS:
+      return produce(state, (draft) => {
+        draft.users = []
+      })
+
     default: {
       // case の定義忘れ防止のため
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
