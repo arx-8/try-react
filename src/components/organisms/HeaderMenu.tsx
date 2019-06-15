@@ -1,14 +1,14 @@
 /** @jsx jsx */
-import React from "react"
-import { Menu, StrictMenuItemProps } from "semantic-ui-react"
-import { withRouter, RouteComponentProps } from "react-router"
-import { Link } from "react-router-dom"
 import { css, jsx } from "@emotion/core"
+import { Link } from "react-router-dom"
+import { Menu, StrictMenuItemProps } from "semantic-ui-react"
 import { RoutePath, RoutePathType } from "constants/Paths"
+import React from "react"
+import useReactRouter from "use-react-router"
 
 type Props = {
   children?: never
-} & RouteComponentProps
+}
 
 type MenuItems = ({
   path: RoutePathType
@@ -22,7 +22,9 @@ const items: MenuItems = [
   { path: RoutePath.GitHubExplorer, name: "GitHubExplorer" },
 ]
 
-const _HeaderMenu: React.FC<Props> = ({ location }) => {
+export const HeaderMenu: React.FC<Props> = () => {
+  const { location } = useReactRouter()
+
   return (
     <Menu>
       {items.map((item) => (
@@ -40,5 +42,3 @@ const _HeaderMenu: React.FC<Props> = ({ location }) => {
 const link = css`
   cursor: pointer;
 `
-
-export const HeaderMenu = withRouter(_HeaderMenu)
