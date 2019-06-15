@@ -23,7 +23,9 @@
     "semantic-ui-react": "0.87.1",
     "typescript-fsa": "3.0.0-beta-2",
     "typescript-fsa-reducers": "1.2.1",
-    "ulid": "2.3.0"
+    "ulid": "2.3.0",
+    "use-react-router": "1.0.7",
+    "yup": "0.27.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.13",
@@ -34,6 +36,7 @@
     "@types/react-router-dom": "4.3.3",
     "@types/react-test-renderer": "16.8.1",
     "@types/redux-actions": "2.6.1",
+    "@types/yup": "0.26.16",
     "eslint-config-prettier": "4.3.0",
     "eslint-plugin-jest": "22.6.4",
     "eslint-plugin-only-error": "1.0.2",
