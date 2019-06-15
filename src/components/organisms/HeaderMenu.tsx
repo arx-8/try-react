@@ -1,10 +1,9 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { Menu, StrictMenuItemProps } from "semantic-ui-react"
 import { RoutePath, RoutePathValue } from "constants/Paths"
 import React from "react"
-import useReactRouter from "use-react-router"
 
 type Props = {
   children?: never
@@ -23,17 +22,19 @@ const items: MenuItems = [
 ]
 
 export const HeaderMenu: React.FC<Props> = () => {
-  const { location } = useReactRouter()
-
   return (
     <Menu>
       {items.map((item) => (
-        <Link key={item.path} to={item.path} css={link}>
-          <Menu.Item
-            name={item.name}
-            active={location.pathname === item.path}
-          />
-        </Link>
+        <NavLink
+          key={item.path}
+          to={item.path}
+          css={link}
+          activeStyle={{
+            background: "rgba(0, 0, 0, 0.05)",
+          }}
+        >
+          <Menu.Item name={item.name} />
+        </NavLink>
       ))}
     </Menu>
   )
