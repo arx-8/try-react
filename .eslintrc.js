@@ -29,6 +29,13 @@ module.exports = {
     ],
     "react/no-array-index-key": "error",
     "react/prop-types": "off",
+    "react/self-closing-comp": [
+      "error",
+      {
+        // empty な html が必要なケースはほとんどないため
+        html: false,
+      },
+    ],
 
     // constructor のショートハンド（メンバーの省略記法）を使いたいため
     "@typescript-eslint/explicit-member-accessibility": "off",
