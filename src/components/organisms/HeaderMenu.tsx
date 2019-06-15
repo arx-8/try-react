@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core"
 import { Link } from "react-router-dom"
 import { Menu, StrictMenuItemProps } from "semantic-ui-react"
-import { RoutePath, RoutePathType } from "constants/Paths"
+import { RoutePath, RoutePathValue } from "constants/Paths"
 import React from "react"
 import useReactRouter from "use-react-router"
 
@@ -11,7 +11,7 @@ type Props = {
 }
 
 type MenuItems = ({
-  path: RoutePathType
+  path: RoutePathValue
 } & StrictMenuItemProps)[]
 
 const items: MenuItems = [
