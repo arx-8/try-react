@@ -63,7 +63,7 @@ const _Members: React.FC<Props> = ({
               target="_blank"
             >
               <Card.Content>
-                <Image floated="right" size="mini" src={u.avatar_url}></Image>
+                <Image floated="right" size="mini" src={u.avatar_url} />
                 <Card.Header>{u.login}</Card.Header>
                 <Card.Meta>GitHub ID: {u.id}</Card.Meta>
               </Card.Content>

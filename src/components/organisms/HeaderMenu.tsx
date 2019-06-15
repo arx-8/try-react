@@ -1,17 +1,16 @@
 /** @jsx jsx */
-import React from "react"
-import { Menu, StrictMenuItemProps } from "semantic-ui-react"
-import { withRouter, RouteComponentProps } from "react-router"
-import { Link } from "react-router-dom"
 import { css, jsx } from "@emotion/core"
-import { RoutePath, RoutePathType } from "constants/Paths"
+import { NavLink } from "react-router-dom"
+import { Menu, StrictMenuItemProps } from "semantic-ui-react"
+import { RoutePath, RoutePathValue } from "constants/Paths"
+import React from "react"
 
 type Props = {
   children?: never
-} & RouteComponentProps
+}
 
 type MenuItems = ({
-  path: RoutePathType
+  path: RoutePathValue
 } & StrictMenuItemProps)[]
 
 const items: MenuItems = [
@@ -22,16 +21,20 @@ const items: MenuItems = [
   { path: RoutePath.GitHubExplorer, name: "GitHubExplorer" },
 ]
 
-const _HeaderMenu: React.FC<Props> = ({ location }) => {
+export const HeaderMenu: React.FC<Props> = () => {
   return (
     <Menu>
       {items.map((item) => (
-        <Link key={item.path} to={item.path} css={link}>
-          <Menu.Item
-            name={item.name}
-            active={location.pathname === item.path}
-          />
-        </Link>
+        <NavLink
+          key={item.path}
+          to={item.path}
+          css={link}
+          activeStyle={{
+            background: "rgba(0, 0, 0, 0.05)",
+          }}
+        >
+          <Menu.Item name={item.name} />
+        </NavLink>
       ))}
     </Menu>
   )
@@ -40,5 +43,3 @@ const _HeaderMenu: React.FC<Props> = ({ location }) => {
 const link = css`
   cursor: pointer;
 `
-
-export const HeaderMenu = withRouter(_HeaderMenu)

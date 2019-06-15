@@ -1,4 +1,4 @@
-import { Brand } from "types/Utils"
+import { Brand, ValueOf } from "types/Utils"
 
 /**
  * react-router用のパスの定義
@@ -10,13 +10,12 @@ const _RoutePath = {
   TicTacToe: "/tic-tac-toe",
   GitHubExplorer: "/github-explorer",
   GitHubExplorer_Members: "/github-explorer/:companyName/members",
-}
+} as const
 
-// Nominal Typing しつつ、key名のインテリセンスも効くようにするため
 type RoutePathKey = keyof typeof _RoutePath
 
-export type RoutePathType = Brand<RoutePathKey, "RoutePathType">
-export const RoutePath: Record<RoutePathKey, RoutePathType> = _RoutePath as any
+export type RoutePathValue = Brand<ValueOf<typeof _RoutePath>, "RoutePathValue">
+export const RoutePath: Record<RoutePathKey, RoutePathValue> = _RoutePath as any
 
 /**
  * 動的なパスの定義
@@ -25,7 +24,7 @@ export const DynamicRoutePath = {
   GitHubExplorer_Members: (companyName: string) => {
     return RoutePath.GitHubExplorer_Members.replace(":companyName", companyName)
   },
-}
+} as const
 
 export type DynamicRouteParams = {
   GitHubExplorer_Members: {

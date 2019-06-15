@@ -1,16 +1,15 @@
 /** @jsx jsx */
-import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
-import { RootState } from "ducks/store"
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormLabel from "@material-ui/core/FormLabel"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
-import React from "react"
+import { RootState } from "ducks/store"
 import { todoActions } from "ducks/todo"
 import { VisibilityFilter, VisibilityFilterValue } from "ducks/todo/types"
+import React, { useCallback } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 type ReduxStateProps = {
   currentVisibilityFilter: VisibilityFilter
@@ -22,13 +21,11 @@ type ReduxDispatchProps = {
 
 type Props = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
 
-const _TodoActions: React.FC<Props> = ({
-  setVisibilityFilter,
-  currentVisibilityFilter,
-}) => {
+export const _TodoActions: React.FC<
+  Props & ReduxStateProps & ReduxDispatchProps
+> = ({ setVisibilityFilter, currentVisibilityFilter }) => {
   const onChange = (_: any, value: string): void => {
     setVisibilityFilter(value as VisibilityFilter)
   }
@@ -74,20 +71,24 @@ const root = css`
   margin-right: 8px;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
-  return {
-    currentVisibilityFilter: state.todo.visibilityFilter,
-  }
-}
+export const TodoActions: React.FC<Props> = () => {
+  const dispatch = useDispatch()
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
-  return {
-    setVisibilityFilter: (visibilityFilter) =>
+  const setVisibilityFilter = useCallback(
+    (visibilityFilter) =>
       dispatch(todoActions.setVisibilityFilter({ visibilityFilter })),
-  }
-}
+    [dispatch]
+  )
 
-export const TodoActions = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_TodoActions)
+  const currentVisibilityFilter = useSelector(
+    (state: RootState) => state.todo.visibilityFilter
+  )
+
+  const C = _TodoActions
+  return (
+    <C
+      setVisibilityFilter={setVisibilityFilter}
+      currentVisibilityFilter={currentVisibilityFilter}
+    />
+  )
+}
