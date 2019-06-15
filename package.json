@@ -48,6 +48,7 @@
   },
   "scripts": {
     "build": "react-scripts build",
+    "eslint-print-config": "eslint --print-config src/index.tsx > eslint-print-config.json",
     "lint:eslint-dry": "eslint -c .eslintrc.js --ext .ts,.tsx src",
     "lint:eslint": "eslint -c .eslintrc.js --fix --ext .ts,.tsx src",
     "lint:tsc": "tsc --noEmit",
