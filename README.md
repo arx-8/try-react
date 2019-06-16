@@ -23,9 +23,9 @@ npm start
 |                                                                                                   |                          |
 | ------------------------------------------------------------------------------------------------- | ------------------------ |
 | [Counter](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/10-redux/03-redux)       | redux-actions            |
-| [GitHub members](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/11-async/03-saga) | Plane Redux + redux-saga |
+| [GitHub members](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/11-async/03-saga) | Plain Redux + redux-saga |
 | [TicTacToe](https://reactjs.org/tutorial/tutorial.html)                                           | typescript-fsa           |
-| [TODO](http://todomvc.com/examples/typescript-react/#/)                                           | Plane Redux              |
+| [TODO](http://todomvc.com/examples/typescript-react/#/)                                           | Plain Redux              |
 
 ### Inspired design patterns
 
