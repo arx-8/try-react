@@ -17,8 +17,8 @@ module.exports = {
   ],
   plugins: ["only-error"],
   rules: {
+    "import/no-default-export": "error",
     "no-console": "off",
-    "no-default-export": true,
     "prettier/prettier": [
       "error",
       {
