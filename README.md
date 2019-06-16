@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/arx-8/try-react.svg?style=svg)](https://circleci.com/gh/arx-8/try-react)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/31a07445-a91f-4f7c-9803-0303061225e3/deploy-status)](https://app.netlify.com/sites/try-react/deploys)
 
 ---
