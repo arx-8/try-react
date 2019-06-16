@@ -3,6 +3,11 @@
 
 ---
 
+## Textbook
+
+- [くるみ割り書房 - りあクト！ TypeScript で始めるつらくない React 開発 第 2 版](https://booth.pm/ja/items/1312652)
+  - [oukayuka/ReactBeginnersBook-2.0](https://github.com/oukayuka/ReactBeginnersBook-2.0)
+
 ## Live demo
 
 <https://try-react.netlify.com>
@@ -16,10 +21,12 @@ npm start
 
 ## Stack
 
-- TODO : Plane redux
-- Counter : redux-actions
-- TicTacToe : typescript-fsa
-- GitHub members : Plane redux + redux-saga
+|                                                                                                   |                          |
+| ------------------------------------------------------------------------------------------------- | ------------------------ |
+| [Counter](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/10-redux/03-redux)       | redux-actions            |
+| [GitHub members](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/11-async/03-saga) | Plane Redux + redux-saga |
+| [TicTacToe](https://reactjs.org/tutorial/tutorial.html)                                           | typescript-fsa           |
+| [TODO](http://todomvc.com/examples/typescript-react/#/)                                           | Plane Redux              |
 
 ### Inspired design patterns
 
