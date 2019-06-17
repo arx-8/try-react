@@ -1,5 +1,5 @@
 import { AxiosError } from "axios"
-import { User } from "types/GitHub"
+import { User } from "domain/models/GitHub"
 
 export type GitHubState = Readonly<{
   users: User[]

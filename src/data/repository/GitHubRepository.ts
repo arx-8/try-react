@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { User } from "types/GitHub"
+import { User } from "domain/models/GitHub"
 
 const BASE_URL = "https://api.github.com"
 
