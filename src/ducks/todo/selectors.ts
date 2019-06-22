@@ -1,4 +1,5 @@
-import { Todo, TodoState } from "./types"
+import { Todo } from "domain/models/Todo"
+import { TodoState } from "./types"
 
 const filterTodoList = (state: TodoState): Todo[] => {
   if (state.visibilityFilter === "all") {

@@ -7,7 +7,7 @@ import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import { RootState } from "ducks/store"
 import { todoActions } from "ducks/todo"
-import { VisibilityFilter, VisibilityFilterValue } from "ducks/todo/types"
+import { VisibilityFilter, VisibilityFilterValue } from "domain/models/Todo"
 import React, { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 

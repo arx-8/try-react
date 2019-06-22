@@ -1,7 +1,7 @@
-import { TodoId, VisibilityFilter } from "./types"
-import { initialState } from "./reducers"
-import { todoSelectors } from "."
+import { TodoId, VisibilityFilter } from "domain/models/Todo"
 import produce from "immer"
+import { todoSelectors } from "."
+import { initialState } from "./reducers"
 
 describe("filterTodoList", () => {
   it("by initialState", () => {

@@ -1,5 +1,6 @@
+import { TodoId, TodoStatus, VisibilityFilter } from "domain/models/Todo"
 import { ActionWithPayloadHandler } from "types/ReduxTypes"
-import { ActionTypes, TodoId, TodoStatus, VisibilityFilter } from "./types"
+import { ActionTypes } from "./types"
 
 const addTodo: ActionWithPayloadHandler<
   typeof ActionTypes.ADD_TODO,

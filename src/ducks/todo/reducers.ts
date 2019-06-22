@@ -1,8 +1,9 @@
-import { actions } from "./actions"
+import { TodoId } from "domain/models/Todo"
+import produce from "immer"
 import { Reducer } from "redux"
 import { ulid } from "ulid"
-import { ActionTypes, TodoId, TodoState } from "./types"
-import produce from "immer"
+import { actions } from "./actions"
+import { ActionTypes, TodoState } from "./types"
 
 type Action = ReturnType<
   | typeof actions.addTodo
