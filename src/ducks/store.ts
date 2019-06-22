@@ -7,6 +7,7 @@ import {
   Store,
 } from "redux"
 import createSagaMiddleware from "redux-saga"
+import thunkMiddleWare from "redux-thunk"
 import { counterReducer } from "./counter"
 import { CounterState } from "./counter/reducers"
 import { gitHubReducer } from "./gitHub"
@@ -44,7 +45,7 @@ export const configureStore = (
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(sagaMiddleWare))
+    composeEnhancers(applyMiddleware(sagaMiddleWare, thunkMiddleWare))
   )
 
   // Before running a Saga, you must mount the Saga middleware on the Store using applyMiddleware
