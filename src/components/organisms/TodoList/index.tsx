@@ -1,26 +1,22 @@
 /** @jsx jsx */
-import { connect } from "react-redux"
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
-import { RootState } from "ducks/store"
-import { Todo, TodoId, TodoStatus } from "domain/models/Todo"
-import { todoSelectors, todoActions } from "ducks/todo"
 import Checkbox from "@material-ui/core/Checkbox"
-import DeleteIcon from "@material-ui/icons/Delete"
 import IconButton from "@material-ui/core/IconButton"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction"
-import React from "react"
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
+import DeleteIcon from "@material-ui/icons/Delete"
+import { Todo, TodoId, TodoStatus } from "domain/models/Todo"
+import React from "react"
 
-type ReduxStateProps = {
+export type ReduxStateProps = {
   todoList: Todo[]
 }
 
-type ReduxDispatchProps = {
+export type ReduxDispatchProps = {
   changeTodoStatus: (todoId: TodoId, todoStatus: TodoStatus) => void
   deleteTodo: (todoId: TodoId) => void
 }
@@ -30,7 +26,7 @@ type Props = {
 } & ReduxStateProps &
   ReduxDispatchProps
 
-const _TodoList: React.FC<Props> = ({
+export const _TodoList: React.FC<Props> = ({
   changeTodoStatus,
   deleteTodo,
   todoList,
@@ -101,22 +97,3 @@ const completed = css`
   opacity: 0.3;
   text-decoration: line-through;
 `
-
-const mapStateToProps = (state: RootState): ReduxStateProps => {
-  return {
-    todoList: todoSelectors.filterTodoList(state.todo),
-  }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
-  return {
-    changeTodoStatus: (todoId, todoStatus) =>
-      dispatch(todoActions.changeTodoStatus({ todoId, todoStatus })),
-    deleteTodo: (todoId) => dispatch(todoActions.deleteTodo({ todoId })),
-  }
-}
-
-export const TodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_TodoList)

@@ -5,11 +5,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormLabel from "@material-ui/core/FormLabel"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
-import { RootState } from "ducks/store"
-import { todoActions } from "ducks/todo"
 import { VisibilityFilter, VisibilityFilterValue } from "domain/models/Todo"
-import React, { useCallback } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React from "react"
 
 type ReduxStateProps = {
   currentVisibilityFilter: VisibilityFilter
@@ -70,25 +67,3 @@ const root = css`
   margin-left: 8px;
   margin-right: 8px;
 `
-
-export const TodoActions: React.FC<Props> = () => {
-  const dispatch = useDispatch()
-
-  const setVisibilityFilter = useCallback(
-    (visibilityFilter) =>
-      dispatch(todoActions.setVisibilityFilter({ visibilityFilter })),
-    [dispatch]
-  )
-
-  const currentVisibilityFilter = useSelector(
-    (state: RootState) => state.todo.visibilityFilter
-  )
-
-  const C = _TodoActions
-  return (
-    <C
-      setVisibilityFilter={setVisibilityFilter}
-      currentVisibilityFilter={currentVisibilityFilter}
-    />
-  )
-}

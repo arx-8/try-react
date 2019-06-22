@@ -1,15 +1,12 @@
 /** @jsx jsx */
-import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
 import React, { FormEventHandler } from "react"
 import TextField from "@material-ui/core/TextField"
-import { todoActions } from "ducks/todo"
 
-type ReduxStateProps = {}
+export type ReduxStateProps = {}
 
-type ReduxDispatchProps = {
+export type ReduxDispatchProps = {
   addTodo: (label: string) => void
 }
 
@@ -18,7 +15,7 @@ type Props = {
 } & ReduxStateProps &
   ReduxDispatchProps
 
-const _TodoInput: React.FC<Props> = ({ addTodo }) => {
+export const _TodoInput: React.FC<Props> = ({ addTodo }) => {
   const [value, setValue] = React.useState("")
   const classes = useStyles()
 
@@ -64,19 +61,3 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
-
-const mapStateToProps = (): ReduxStateProps => {
-  // NOP
-  return {}
-}
-
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
-  return {
-    addTodo: (label: string) => dispatch(todoActions.addTodo({ label })),
-  }
-}
-
-export const TodoInput = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_TodoInput)
