@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ADD_TODO prev = initialState 1`] = `
+Object {
+  "todoList": Array [
+    Object {
+      "id": "id.length:26",
+      "label": "new task name",
+      "status": "active",
+    },
+  ],
+  "visibilityFilter": "all",
+}
+`;
+
+exports[`ADD_TODO prev = todoList 1件以上 1`] = `
+Object {
+  "todoList": Array [
+    Object {
+      "id": "id.length:3",
+      "label": "id1-label",
+      "status": "active",
+    },
+    Object {
+      "id": "id.length:3",
+      "label": "id2-label",
+      "status": "completed",
+    },
+    Object {
+      "id": "id.length:26",
+      "label": "new task name",
+      "status": "active",
+    },
+  ],
+  "visibilityFilter": "all",
+}
+`;

@@ -6,21 +6,23 @@ import {
   createStore,
   Store,
 } from "redux"
+import createSagaMiddleware from "redux-saga"
 import { counterReducer } from "./counter"
 import { CounterState } from "./counter/reducers"
 import { gitHubReducer } from "./gitHub"
+import { rootSaga } from "./gitHub/saga"
 import { GitHubState } from "./gitHub/types"
-import { todoReducer } from "./todo"
-import { TodoState } from "./todo/types"
 import { tttReducer } from "./tic-tac-toe"
 import { TTTState } from "./tic-tac-toe/types"
-import createSagaMiddleware from "redux-saga"
-import { rootSaga } from "./gitHub/saga"
+import { todoReducer } from "./todo"
+import { TodoState } from "./todo/types"
+import { todoAsyncReducer, TodoAsyncState } from "./todoAsync"
 
 export type RootState = {
   counter: CounterState
   gitHub: GitHubState
   todo: TodoState
+  todoAsync: TodoAsyncState
   ticTacToe: TTTState
 }
 
@@ -31,6 +33,7 @@ export const configureStore = (
     counter: counterReducer,
     gitHub: gitHubReducer,
     todo: todoReducer,
+    todoAsync: todoAsyncReducer,
     ticTacToe: tttReducer,
   })
 
