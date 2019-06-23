@@ -1,5 +1,5 @@
 import { RootState } from "ducks/store"
-import { todoActions } from "ducks/todo"
+import { todoAsyncActions } from "ducks/todoAsync"
 import React, { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { _TodoActions as C } from "."
@@ -13,12 +13,12 @@ export const TodoActions: React.FC<Props> = () => {
 
   const setVisibilityFilter = useCallback(
     (visibilityFilter) =>
-      dispatch(todoActions.setVisibilityFilter({ visibilityFilter })),
+      dispatch(todoAsyncActions.setVisibilityFilter({ visibilityFilter })),
     [dispatch]
   )
 
   const currentVisibilityFilter = useSelector(
-    (state: RootState) => state.todo.visibilityFilter
+    (state: RootState) => state.todoAsync.visibilityFilter
   )
 
   return (

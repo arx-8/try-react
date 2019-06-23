@@ -74,7 +74,9 @@ export const callPostTodo = async (
 /**
  * Update
  */
-export type CallPutTodoReq = Todo
+export type CallPutTodoReq = Partial<Todo> & {
+  id: TodoId
+}
 
 export const callPutTodo = async (params: CallPutTodoReq): Promise<TodoId> => {
   await sleep(3000)
@@ -85,8 +87,12 @@ export const callPutTodo = async (params: CallPutTodoReq): Promise<TodoId> => {
   const todo = todos.find((t) => t.id === params.id)!
 
   // update
-  todo.label = params.label
-  todo.status = params.status
+  if (params.label) {
+    todo.label = params.label
+  }
+  if (params.status) {
+    todo.status = params.status
+  }
 
   // write
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))

@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { TodoActions } from "components/organisms/TodoActions/AsyncContainer"
+import { TodoHeader } from "components/organisms/TodoHeader/AsyncContainer"
 import { TodoInput } from "components/organisms/TodoInput/AsyncContainer"
 import { TodoList } from "components/organisms/TodoList/AsyncContainer"
 import React from "react"
@@ -18,6 +19,7 @@ export const TodoAsyncPage: React.FC<Props> = () => {
     <Container maxWidth="sm">
       <Typography variant="h2">My TODO (Async)</Typography>
       <Paper className={classes.root}>
+        <TodoHeader />
         <TodoInput />
         <TodoList />
         <TodoActions />

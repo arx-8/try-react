@@ -25,22 +25,27 @@ const createAsync = asyncFactory<State>(create)
 
 const addTodo = createAsync<CallPostTodoReq, TodoId>(
   ActionTypes.ADD_TODO,
-  async (params) => {
-    return await callPostTodo(params)
+  async (params, dispatch) => {
+    const id = await callPostTodo(params)
+    dispatch(fetchAllTodos.action())
+    return id
   }
 )
 
 const changeTodoStatus = createAsync<CallPutTodoReq, TodoId>(
   ActionTypes.CHANGE_TODO_STATUS,
-  async (params) => {
-    return await callPutTodo(params)
+  async (params, dispatch) => {
+    const id = await callPutTodo(params)
+    dispatch(fetchAllTodos.action())
+    return id
   }
 )
 
 const deleteTodo = createAsync<CallDeleteTodoReq, void>(
   ActionTypes.DELETE_TODO,
-  async (params) => {
-    return await callDeleteTodo(params)
+  async (params, dispatch) => {
+    await callDeleteTodo(params)
+    dispatch(fetchAllTodos.action())
   }
 )
 
