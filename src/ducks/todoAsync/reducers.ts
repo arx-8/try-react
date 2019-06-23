@@ -36,14 +36,6 @@ export const reducer = reducerWithInitialState(initialState)
     })
   })
   .cases(
-    [actions.changeTodoStatus.async.started, actions.deleteTodo.async.started],
-    (state, payload) => {
-      return produce(state, (draft) => {
-        draft.loading.ids.push(payload.id)
-      })
-    }
-  )
-  .cases(
     [actions.changeTodoStatus.async.done, actions.deleteTodo.async.done],
     (state, payload) => {
       return produce(state, (draft) => {
@@ -53,6 +45,30 @@ export const reducer = reducerWithInitialState(initialState)
       })
     }
   )
+  .case(actions.changeTodoStatus.async.started, (state, payload) => {
+    return produce(state, (draft) => {
+      const { id, label, status } = payload
+      draft.loading.ids.push(id)
+
+      // Optimistic Updates
+      const t = draft.todoList.find((t) => t.id === id)!
+      if (label) {
+        t.label = label
+      }
+      if (status) {
+        t.status = status
+      }
+    })
+  })
+  .case(actions.deleteTodo.async.started, (state, payload) => {
+    return produce(state, (draft) => {
+      const { id } = payload
+      draft.loading.ids.push(id)
+
+      // Optimistic Updates
+      draft.todoList = draft.todoList.filter((t) => t.id !== id)!
+    })
+  })
   .case(actions.fetchAllTodos.async.done, (state, payload) => {
     return produce(state, (draft) => {
       const { result } = payload
