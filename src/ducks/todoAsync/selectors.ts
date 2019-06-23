@@ -8,6 +8,11 @@ const filterTodoList = (state: State): Todo[] => {
   return state.todoList.filter((t) => t.status === state.visibilityFilter)
 }
 
+const isSomeLoading = (state: State): boolean => {
+  return state.loading.all || 0 < state.loading.ids.length
+}
+
 export const selectors = {
   filterTodoList,
+  isSomeLoading,
 }
