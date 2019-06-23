@@ -3,7 +3,7 @@ import produce from "immer"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
 import { actions } from "./actions"
 
-export type State = {
+export type State = Readonly<{
   todoList: Todo[]
   visibilityFilter: VisibilityFilter
   loading: {
@@ -11,7 +11,7 @@ export type State = {
     add: boolean
     ids: TodoId[]
   }
-}
+}>
 
 export const initialState: State = {
   todoList: [],

@@ -1,3 +1,4 @@
+import { isDevelopment } from "constants/Env"
 import {
   AnyAction,
   applyMiddleware,
@@ -40,12 +41,19 @@ export const configureStore = (
 
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+  const middleWares = []
   const sagaMiddleWare = createSagaMiddleware()
+  middleWares.push(sagaMiddleWare)
+  middleWares.push(thunkMiddleWare)
+  if (isDevelopment) {
+    middleWares.push(require("redux-immutable-state-invariant").default())
+  }
 
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(sagaMiddleWare, thunkMiddleWare))
+    composeEnhancers(applyMiddleware(...middleWares))
   )
 
   // Before running a Saga, you must mount the Saga middleware on the Store using applyMiddleware
