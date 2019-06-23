@@ -1,4 +1,4 @@
-import { todoAsyncActions, TodoAsyncState } from "ducks/todoAsync"
+import { todoAsyncRequestActions, TodoAsyncState } from "ducks/todoAsync"
 import { connect } from "react-redux"
 import { AnyAction } from "redux"
 import { ThunkDispatch } from "redux-thunk"
@@ -14,7 +14,9 @@ const mapDispatchToProps = (
 ): ReduxDispatchProps => {
   return {
     addTodo: (label) =>
-      dispatch(todoAsyncActions.addTodo.action({ label, status: "active" })),
+      dispatch(
+        todoAsyncRequestActions.addTodoRequest({ label, status: "active" })
+      ),
   }
 }
 

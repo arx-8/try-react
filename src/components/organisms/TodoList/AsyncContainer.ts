@@ -1,6 +1,6 @@
 import { RootState } from "ducks/store"
 import {
-  todoAsyncActions,
+  todoAsyncRequestActions,
   todoAsyncSelectors,
   TodoAsyncState,
 } from "ducks/todoAsync"
@@ -20,8 +20,9 @@ const mapDispatchToProps = (
 ): ReduxDispatchProps => {
   return {
     changeTodoStatus: (id, status) =>
-      dispatch(todoAsyncActions.changeTodoStatus.action({ id, status })),
-    deleteTodo: (id) => dispatch(todoAsyncActions.deleteTodo.action({ id })),
+      dispatch(todoAsyncRequestActions.changeTodoStatusRequest({ id, status })),
+    deleteTodo: (id) =>
+      dispatch(todoAsyncRequestActions.deleteTodoRequest({ id })),
   }
 }
 

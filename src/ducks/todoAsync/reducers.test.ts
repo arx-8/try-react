@@ -24,7 +24,7 @@ describe("changeTodoStatus", () => {
     // ## Act ##
     const result = reducer(
       prevState,
-      actions.changeTodoStatus.async.started({
+      actions.changeTodoStatus.started({
         id: "id1" as TodoId,
         label: "NEW LABEL 1",
         status: "completed",

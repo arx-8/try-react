@@ -15,6 +15,16 @@ const sleep = (ms: number): Promise<void> => {
   })
 }
 
+/**
+ * 疑似APIエラーのため、奇数分の間Errorを投げる
+ */
+const throwErrorIfOddMinute = (): void => {
+  if (new Date().getMinutes() % 2 === 0) {
+    return
+  }
+  throw new Error("Mock API Error! Should call even number minute.")
+}
+
 const STORAGE_KEY = "todo-async/todos"
 
 /**
@@ -22,6 +32,7 @@ const STORAGE_KEY = "todo-async/todos"
  */
 export const callGetAllTodos = async (): Promise<Todo[]> => {
   await sleep(3000)
+  throwErrorIfOddMinute()
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
   return callGetAllTodosToModels(resp)
 }
@@ -54,6 +65,7 @@ export const callPostTodo = async (
   params: CallPostTodoReq
 ): Promise<TodoId> => {
   await sleep(3000)
+  throwErrorIfOddMinute()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
@@ -80,6 +92,7 @@ export type CallPutTodoReq = Partial<Todo> & {
 
 export const callPutTodo = async (params: CallPutTodoReq): Promise<TodoId> => {
   await sleep(3000)
+  throwErrorIfOddMinute()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
@@ -111,6 +124,7 @@ export const callDeleteTodo = async (
   params: CallDeleteTodoReq
 ): Promise<void> => {
   await sleep(3000)
+  throwErrorIfOddMinute()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))

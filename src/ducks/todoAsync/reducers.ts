@@ -11,6 +11,7 @@ export type State = Readonly<{
     add: boolean
     ids: TodoId[]
   }
+  errorMessage?: string
 }>
 
 export const initialState: State = {
@@ -21,6 +22,7 @@ export const initialState: State = {
     add: false,
     ids: [],
   },
+  errorMessage: undefined,
 }
 
 export const reducer = reducerWithInitialState(initialState)
@@ -28,19 +30,34 @@ export const reducer = reducerWithInitialState(initialState)
    * shared
    */
   .cases(
-    [actions.changeTodoStatus.async.done, actions.deleteTodo.async.done],
+    [actions.changeTodoStatus.done, actions.deleteTodo.done],
     (state, payload) => {
       return produce(state, (draft) => {
         draft.loading.ids = draft.loading.ids.filter(
           (id) => id !== payload.params.id
         )
+        draft.errorMessage = undefined
+      })
+    }
+  )
+  .cases(
+    [
+      actions.addTodo.failed,
+      actions.changeTodoStatus.failed,
+      actions.deleteTodo.failed,
+      actions.fetchAllTodos.failed,
+    ],
+    (state, payload) => {
+      return produce(state, (draft) => {
+        draft.loading.all = false
+        draft.errorMessage = payload.error.message
       })
     }
   )
   /**
    * changeTodoStatus
    */
-  .case(actions.changeTodoStatus.async.started, (state, payload) => {
+  .case(actions.changeTodoStatus.started, (state, payload) => {
     return produce(state, (draft) => {
       const { id, label, status } = payload
       draft.loading.ids.push(id)
@@ -58,7 +75,7 @@ export const reducer = reducerWithInitialState(initialState)
   /**
    * deleteTodo
    */
-  .case(actions.deleteTodo.async.started, (state, payload) => {
+  .case(actions.deleteTodo.started, (state, payload) => {
     return produce(state, (draft) => {
       const { id } = payload
       draft.loading.ids.push(id)
@@ -70,29 +87,31 @@ export const reducer = reducerWithInitialState(initialState)
   /**
    * addTodo
    */
-  .case(actions.addTodo.async.started, (state) => {
+  .case(actions.addTodo.started, (state) => {
     return produce(state, (draft) => {
       draft.loading.add = true
     })
   })
-  .case(actions.addTodo.async.done, (state) => {
+  .case(actions.addTodo.done, (state) => {
     return produce(state, (draft) => {
       draft.loading.add = false
+      draft.errorMessage = undefined
     })
   })
   /**
    * fetchAllTodos
    */
-  .case(actions.fetchAllTodos.async.started, (state) => {
+  .case(actions.fetchAllTodos.started, (state) => {
     return produce(state, (draft) => {
       draft.loading.all = true
     })
   })
-  .case(actions.fetchAllTodos.async.done, (state, payload) => {
+  .case(actions.fetchAllTodos.done, (state, payload) => {
     return produce(state, (draft) => {
       const { result } = payload
       draft.todoList = result
       draft.loading.all = false
+      draft.errorMessage = undefined
     })
   })
   /**

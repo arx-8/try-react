@@ -2,6 +2,7 @@
 
 exports[`changeTodoStatus changeTodoStatus 1`] = `
 Object {
+  "errorMessage": undefined,
   "loading": Object {
     "add": false,
     "all": false,

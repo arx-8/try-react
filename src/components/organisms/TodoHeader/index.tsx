@@ -6,6 +6,7 @@ import RefreshIcon from "@material-ui/icons/Refresh"
 import React from "react"
 
 export type ReduxStateProps = {
+  errorMessage?: string
   loading: boolean
 }
 
@@ -18,9 +19,14 @@ type Props = {
 } & ReduxStateProps &
   ReduxDispatchProps
 
-export const _TodoHeader: React.FC<Props> = ({ fetchAllTodos, loading }) => {
+export const _TodoHeader: React.FC<Props> = ({
+  errorMessage,
+  fetchAllTodos,
+  loading,
+}) => {
   return (
     <div>
+      <div css={errMsg}>{errorMessage}</div>
       <div css={actions}>
         <IconButton onClick={fetchAllTodos}>
           <RefreshIcon />
@@ -30,6 +36,10 @@ export const _TodoHeader: React.FC<Props> = ({ fetchAllTodos, loading }) => {
     </div>
   )
 }
+
+const errMsg = css`
+  color: red;
+`
 
 const actions = css`
   text-align: right;

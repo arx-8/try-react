@@ -7,9 +7,14 @@ import {
   callPutTodo,
   CallPutTodoReq,
 } from "data/repository/TodoRepository"
+import {
+  SerializableError,
+  toSerializableError,
+} from "domain/errors/SerializableError"
 import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
+import { AnyAction } from "redux"
+import { ThunkDispatch } from "redux-thunk"
 import actionCreatorFactory from "typescript-fsa"
-import { asyncFactory } from "typescript-fsa-redux-thunk"
 import { State } from "./reducers"
 
 export enum ActionTypes {
@@ -21,40 +26,84 @@ export enum ActionTypes {
 }
 
 const create = actionCreatorFactory()
-const createAsync = asyncFactory<State>(create)
 
-const addTodo = createAsync<CallPostTodoReq, TodoId>(
-  ActionTypes.ADD_TODO,
-  async (params, dispatch) => {
-    const id = await callPostTodo(params)
-    dispatch(fetchAllTodos.action())
-    return id
-  }
+const addTodo = create.async<CallPostTodoReq, TodoId, SerializableError>(
+  ActionTypes.ADD_TODO
 )
 
-const changeTodoStatus = createAsync<CallPutTodoReq, TodoId>(
-  ActionTypes.CHANGE_TODO_STATUS,
-  async (params, dispatch) => {
-    const id = await callPutTodo(params)
-    dispatch(fetchAllTodos.action())
-    return id
+const addTodoRequest = (
+  params: CallPostTodoReq
+): ((dispatch: ThunkDispatch<State, undefined, AnyAction>) => Promise<any>) => {
+  return async (dispatch) => {
+    dispatch(addTodo.started(params))
+    try {
+      const id = await callPostTodo(params)
+      dispatch(addTodo.done({ params, result: id }))
+      dispatch(fetchAllTodosRequest())
+    } catch (error) {
+      dispatch(addTodo.failed({ error: toSerializableError(error), params }))
+    }
   }
+}
+
+const changeTodoStatus = create.async<
+  CallPutTodoReq,
+  TodoId,
+  SerializableError
+>(ActionTypes.CHANGE_TODO_STATUS)
+
+const changeTodoStatusRequest = (
+  params: CallPutTodoReq
+): ((dispatch: ThunkDispatch<State, undefined, AnyAction>) => Promise<any>) => {
+  return async (dispatch) => {
+    dispatch(changeTodoStatus.started(params))
+    try {
+      const id = await callPutTodo(params)
+      dispatch(changeTodoStatus.done({ params, result: id }))
+      dispatch(fetchAllTodosRequest())
+    } catch (error) {
+      dispatch(
+        changeTodoStatus.failed({ error: toSerializableError(error), params })
+      )
+    }
+  }
+}
+
+const deleteTodo = create.async<CallDeleteTodoReq, void, SerializableError>(
+  ActionTypes.DELETE_TODO
 )
 
-const deleteTodo = createAsync<CallDeleteTodoReq, void>(
-  ActionTypes.DELETE_TODO,
-  async (params, dispatch) => {
-    await callDeleteTodo(params)
-    dispatch(fetchAllTodos.action())
+const deleteTodoRequest = (
+  params: CallDeleteTodoReq
+): ((dispatch: ThunkDispatch<State, undefined, AnyAction>) => Promise<any>) => {
+  return async (dispatch) => {
+    dispatch(deleteTodo.started(params))
+    try {
+      await callDeleteTodo(params)
+      dispatch(deleteTodo.done({ params }))
+      dispatch(fetchAllTodosRequest())
+    } catch (error) {
+      dispatch(deleteTodo.failed({ error: toSerializableError(error), params }))
+    }
   }
+}
+
+const fetchAllTodos = create.async<void, Todo[], SerializableError>(
+  ActionTypes.FETCH_ALL_TODOS
 )
 
-const fetchAllTodos = createAsync<void, Todo[]>(
-  ActionTypes.FETCH_ALL_TODOS,
-  async () => {
-    return await callGetAllTodos()
+const fetchAllTodosRequest = (): ((
+  dispatch: ThunkDispatch<State, undefined, AnyAction>
+) => Promise<any>) => {
+  return async (dispatch) => {
+    dispatch(fetchAllTodos.started())
+    try {
+      dispatch(fetchAllTodos.done({ result: await callGetAllTodos() }))
+    } catch (error) {
+      dispatch(fetchAllTodos.failed({ error: toSerializableError(error) }))
+    }
   }
-)
+}
 
 const setVisibilityFilter = create<{
   visibilityFilter: VisibilityFilter
@@ -66,4 +115,10 @@ export const actions = {
   deleteTodo,
   fetchAllTodos,
   setVisibilityFilter,
+}
+export const requestActions = {
+  addTodoRequest,
+  changeTodoStatusRequest,
+  deleteTodoRequest,
+  fetchAllTodosRequest,
 }
