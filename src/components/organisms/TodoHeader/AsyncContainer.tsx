@@ -4,10 +4,30 @@ import {
   todoAsyncSelectors,
   TodoAsyncState,
 } from "ducks/todoAsync"
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import { ThunkDispatch } from "redux-thunk"
 import { AnyAction } from "typescript-fsa"
-import { ReduxDispatchProps, ReduxStateProps, _TodoHeader } from "."
+import {
+  ReduxDispatchProps,
+  ReduxStateProps,
+  _TodoHeader as Presentational,
+} from "."
+
+type Props = {
+  children?: never
+} & ReduxStateProps &
+  ReduxDispatchProps
+
+const Container: React.FC<Props> = (props) => {
+  const { fetchAllTodos } = props
+
+  useEffect(() => {
+    fetchAllTodos()
+  }, [fetchAllTodos])
+
+  return <Presentational {...props} />
+}
 
 const mapStateToProps = (state: RootState): ReduxStateProps => {
   return {
@@ -28,4 +48,4 @@ const mapDispatchToProps = (
 export const TodoHeader = connect(
   mapStateToProps,
   mapDispatchToProps
-)(_TodoHeader)
+)(Container)
