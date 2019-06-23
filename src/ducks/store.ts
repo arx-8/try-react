@@ -47,7 +47,13 @@ export const configureStore = (
   middleWares.push(sagaMiddleWare)
   middleWares.push(thunkMiddleWare)
   if (isDevelopment) {
+    /* eslint-disable @typescript-eslint/no-var-requires */
     middleWares.push(require("redux-immutable-state-invariant").default())
+    const {
+      createSerializableStateInvariantMiddleware,
+    } = require("redux-starter-kit/dist/redux-starter-kit.esm")
+    middleWares.push(createSerializableStateInvariantMiddleware())
+    /* eslint-enable @typescript-eslint/no-var-requires */
   }
 
   const store = createStore(
