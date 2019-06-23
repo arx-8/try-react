@@ -8,6 +8,7 @@ export type State = {
   visibilityFilter: VisibilityFilter
   loading: {
     all: boolean
+    add: boolean
     ids: TodoId[]
   }
 }
@@ -17,24 +18,15 @@ export const initialState: State = {
   visibilityFilter: "all",
   loading: {
     all: false,
+    add: false,
     ids: [],
   },
 }
 
 export const reducer = reducerWithInitialState(initialState)
-  .cases(
-    [actions.addTodo.async.started, actions.fetchAllTodos.async.started],
-    (state) => {
-      return produce(state, (draft) => {
-        draft.loading.all = true
-      })
-    }
-  )
-  .cases([actions.addTodo.async.done], (state) => {
-    return produce(state, (draft) => {
-      draft.loading.all = false
-    })
-  })
+  /**
+   * shared
+   */
   .cases(
     [actions.changeTodoStatus.async.done, actions.deleteTodo.async.done],
     (state, payload) => {
@@ -45,6 +37,9 @@ export const reducer = reducerWithInitialState(initialState)
       })
     }
   )
+  /**
+   * changeTodoStatus
+   */
   .case(actions.changeTodoStatus.async.started, (state, payload) => {
     return produce(state, (draft) => {
       const { id, label, status } = payload
@@ -60,6 +55,9 @@ export const reducer = reducerWithInitialState(initialState)
       }
     })
   })
+  /**
+   * deleteTodo
+   */
   .case(actions.deleteTodo.async.started, (state, payload) => {
     return produce(state, (draft) => {
       const { id } = payload
@@ -69,6 +67,27 @@ export const reducer = reducerWithInitialState(initialState)
       draft.todoList = draft.todoList.filter((t) => t.id !== id)!
     })
   })
+  /**
+   * addTodo
+   */
+  .case(actions.addTodo.async.started, (state) => {
+    return produce(state, (draft) => {
+      draft.loading.add = true
+    })
+  })
+  .case(actions.addTodo.async.done, (state) => {
+    return produce(state, (draft) => {
+      draft.loading.add = false
+    })
+  })
+  /**
+   * fetchAllTodos
+   */
+  .case(actions.fetchAllTodos.async.started, (state) => {
+    return produce(state, (draft) => {
+      draft.loading.all = true
+    })
+  })
   .case(actions.fetchAllTodos.async.done, (state, payload) => {
     return produce(state, (draft) => {
       const { result } = payload
@@ -76,6 +95,9 @@ export const reducer = reducerWithInitialState(initialState)
       draft.loading.all = false
     })
   })
+  /**
+   * setVisibilityFilter
+   */
   .case(actions.setVisibilityFilter, (state, payload) => {
     return produce(state, (draft) => {
       const { visibilityFilter } = payload

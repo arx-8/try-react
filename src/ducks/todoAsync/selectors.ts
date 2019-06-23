@@ -9,7 +9,7 @@ const filterTodoList = (state: State): Todo[] => {
 }
 
 const isSomeLoading = (state: State): boolean => {
-  return state.loading.all || 0 < state.loading.ids.length
+  return state.loading.all || state.loading.add || 0 < state.loading.ids.length
 }
 
 export const selectors = {
