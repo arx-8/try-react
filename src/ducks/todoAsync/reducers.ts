@@ -41,15 +41,12 @@ export const reducer = reducerWithInitialState(initialState)
     }
   )
   .cases(
-    [
-      actions.addTodo.failed,
-      actions.changeTodoStatus.failed,
-      actions.deleteTodo.failed,
-      actions.fetchAllTodos.failed,
-    ],
+    [actions.changeTodoStatus.failed, actions.deleteTodo.failed],
     (state, payload) => {
       return produce(state, (draft) => {
-        draft.loading.all = false
+        draft.loading.ids = draft.loading.ids.filter(
+          (id) => id !== payload.params.id
+        )
         draft.errorMessage = payload.error.message
       })
     }
@@ -98,6 +95,12 @@ export const reducer = reducerWithInitialState(initialState)
       draft.errorMessage = undefined
     })
   })
+  .case(actions.addTodo.failed, (state, payload) => {
+    return produce(state, (draft) => {
+      draft.loading.add = false
+      draft.errorMessage = payload.error.message
+    })
+  })
   /**
    * fetchAllTodos
    */
@@ -112,6 +115,12 @@ export const reducer = reducerWithInitialState(initialState)
       draft.todoList = result
       draft.loading.all = false
       draft.errorMessage = undefined
+    })
+  })
+  .case(actions.fetchAllTodos.failed, (state, payload) => {
+    return produce(state, (draft) => {
+      draft.loading.all = false
+      draft.errorMessage = payload.error.message
     })
   })
   /**
