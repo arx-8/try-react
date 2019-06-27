@@ -12,10 +12,8 @@ import {
   toSerializableError,
 } from "domain/errors/SerializableError"
 import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
-import { AnyAction } from "redux"
-import { ThunkDispatch } from "redux-thunk"
 import actionCreatorFactory from "typescript-fsa"
-import { State } from "./reducers"
+import { TodoAsyncDispatch } from "./types"
 
 export enum ActionTypes {
   ADD_TODO = "TODO_ASYNC/ADD_TODO",
@@ -33,7 +31,7 @@ const addTodo = create.async<CallPostTodoReq, TodoId, SerializableError>(
 
 const addTodoRequest = (
   params: CallPostTodoReq
-): ((dispatch: ThunkDispatch<State, undefined, AnyAction>) => Promise<any>) => {
+): ((dispatch: TodoAsyncDispatch) => Promise<any>) => {
   return async (dispatch) => {
     dispatch(addTodo.started(params))
     try {
@@ -54,7 +52,7 @@ const changeTodoStatus = create.async<
 
 const changeTodoStatusRequest = (
   params: CallPutTodoReq
-): ((dispatch: ThunkDispatch<State, undefined, AnyAction>) => Promise<any>) => {
+): ((dispatch: TodoAsyncDispatch) => Promise<any>) => {
   return async (dispatch) => {
     dispatch(changeTodoStatus.started(params))
     try {
@@ -75,7 +73,7 @@ const deleteTodo = create.async<CallDeleteTodoReq, void, SerializableError>(
 
 const deleteTodoRequest = (
   params: CallDeleteTodoReq
-): ((dispatch: ThunkDispatch<State, undefined, AnyAction>) => Promise<any>) => {
+): ((dispatch: TodoAsyncDispatch) => Promise<any>) => {
   return async (dispatch) => {
     dispatch(deleteTodo.started(params))
     try {
@@ -93,7 +91,7 @@ const fetchAllTodos = create.async<void, Todo[], SerializableError>(
 )
 
 const fetchAllTodosRequest = (): ((
-  dispatch: ThunkDispatch<State, undefined, AnyAction>
+  dispatch: TodoAsyncDispatch
 ) => Promise<any>) => {
   return async (dispatch) => {
     dispatch(fetchAllTodos.started())
@@ -109,6 +107,9 @@ const setVisibilityFilter = create<{
   visibilityFilter: VisibilityFilter
 }>(ActionTypes.SET_VISIBILITY_FILTER)
 
+/**
+ * plain actions
+ */
 export const actions = {
   addTodo,
   changeTodoStatus,
@@ -116,6 +117,10 @@ export const actions = {
   fetchAllTodos,
   setVisibilityFilter,
 }
+
+/**
+ * thunk actions
+ */
 export const requestActions = {
   addTodoRequest,
   changeTodoStatusRequest,

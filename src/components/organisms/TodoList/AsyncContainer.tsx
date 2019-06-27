@@ -1,14 +1,9 @@
 import { Todo } from "domain/models/Todo"
 import { RootState } from "ducks/store"
-import {
-  todoAsyncRequestActions,
-  todoAsyncSelectors,
-  TodoAsyncState,
-} from "ducks/todoAsync"
+import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
+import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import React from "react"
 import { connect } from "react-redux"
-import { ThunkDispatch } from "redux-thunk"
-import { AnyAction } from "typescript-fsa"
 import { equals, sort } from "utils/ArrayUtils"
 import {
   ReduxDispatchProps,
@@ -53,7 +48,7 @@ const mapStateToProps = (state: RootState): ReduxStateProps => {
 }
 
 const mapDispatchToProps = (
-  dispatch: ThunkDispatch<TodoAsyncState, undefined, AnyAction>
+  dispatch: TodoAsyncDispatch
 ): ReduxDispatchProps => {
   return {
     changeTodoStatus: (id, status) =>

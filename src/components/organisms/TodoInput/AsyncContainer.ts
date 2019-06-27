@@ -1,7 +1,6 @@
-import { todoAsyncRequestActions, TodoAsyncState } from "ducks/todoAsync"
+import { todoAsyncRequestActions } from "ducks/todoAsync"
+import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import { connect } from "react-redux"
-import { AnyAction } from "redux"
-import { ThunkDispatch } from "redux-thunk"
 import { ReduxDispatchProps, ReduxStateProps, _TodoInput } from "."
 
 const mapStateToProps = (): ReduxStateProps => {
@@ -10,7 +9,7 @@ const mapStateToProps = (): ReduxStateProps => {
 }
 
 const mapDispatchToProps = (
-  dispatch: ThunkDispatch<TodoAsyncState, undefined, AnyAction>
+  dispatch: TodoAsyncDispatch
 ): ReduxDispatchProps => {
   return {
     addTodo: (label) =>
