@@ -1,14 +1,14 @@
 import { TodoId, VisibilityFilter } from "domain/models/Todo"
 import produce from "immer"
-import { todoSelectors } from "."
 import { initialState } from "./reducers"
+import { selectors } from "./selectors"
 
 describe("filterTodoList", () => {
   it("by initialState", () => {
     // ## Arrange ##
     const currentState = initialState
     // ## Act ##
-    const result = todoSelectors.filterTodoList(currentState)
+    const result = selectors.filterTodoList(currentState)
     // ## Assert ##
     expect(result).toMatchSnapshot()
   })
@@ -29,7 +29,7 @@ describe("filterTodoList", () => {
       draft.visibilityFilter = "all" as VisibilityFilter
     })
     // ## Act ##
-    const result = todoSelectors.filterTodoList(currentState)
+    const result = selectors.filterTodoList(currentState)
     // ## Assert ##
     expect(result).toMatchSnapshot()
   })
@@ -60,7 +60,7 @@ describe("filterTodoList", () => {
       draft.visibilityFilter = "completed" as VisibilityFilter
     })
     // ## Act ##
-    const result = todoSelectors.filterTodoList(currentState)
+    const result = selectors.filterTodoList(currentState)
     // ## Assert ##
     expect(result).toMatchSnapshot()
   })

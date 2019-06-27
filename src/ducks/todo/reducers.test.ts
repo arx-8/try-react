@@ -1,7 +1,8 @@
-import { ActionTypes, TodoId } from "./types"
-import { initialState } from "./reducers"
-import { todoReducer } from "."
+import { TodoId } from "domain/models/Todo"
 import produce from "immer"
+import { todoReducer } from "."
+import { initialState } from "./reducers"
+import { ActionTypes } from "./types"
 
 describe("ADD_TODO", () => {
   it("prev = initialState", () => {

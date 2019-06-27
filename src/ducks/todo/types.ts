@@ -1,4 +1,4 @@
-import { Brand } from "types/Utils"
+import { Todo, VisibilityFilter } from "domain/models/Todo"
 
 export enum ActionTypes {
   ADD_TODO = "TODO/ADD_TODO",
@@ -7,28 +7,7 @@ export enum ActionTypes {
   SET_VISIBILITY_FILTER = "TODO/SET_VISIBILITY_FILTER",
 }
 
-export type TodoId = Brand<string, "TodoId">
-
-export type TodoStatus = "active" | "completed"
-
-export type Todo = {
-  id: TodoId
-  label: string
-  status: TodoStatus
-}
-
-export type VisibilityFilter = "all" | TodoStatus
-
 export type TodoState = {
   todoList: Todo[]
   visibilityFilter: VisibilityFilter
-}
-
-export const VisibilityFilterValue: Record<
-  VisibilityFilter,
-  VisibilityFilter
-> = {
-  active: "active",
-  all: "all",
-  completed: "completed",
 }

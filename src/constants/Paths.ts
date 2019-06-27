@@ -7,6 +7,7 @@ const _RoutePath = {
   Root: "/",
   Counter: "/counter",
   Todo: "/todo",
+  TodoAsync: "/todo-async",
   TicTacToe: "/tic-tac-toe",
   GitHubExplorer: "/github-explorer",
   GitHubExplorer_Members: "/github-explorer/:companyName/members",

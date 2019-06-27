@@ -17,6 +17,7 @@ const items: MenuItems = [
   { path: RoutePath.Root, name: "Top" },
   { path: RoutePath.Counter, name: "Counter" },
   { path: RoutePath.Todo, name: "Todo" },
+  { path: RoutePath.TodoAsync, name: "TodoAsync" },
   { path: RoutePath.TicTacToe, name: "TicTacToe" },
   { path: RoutePath.GitHubExplorer, name: "GitHubExplorer" },
 ]
