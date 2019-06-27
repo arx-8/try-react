@@ -9,7 +9,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { ThunkDispatch } from "redux-thunk"
 import { AnyAction } from "typescript-fsa"
-import { equals } from "utils/ArrayUtils"
+import { equals, sort } from "utils/ArrayUtils"
 import {
   ReduxDispatchProps,
   ReduxStateProps,
@@ -23,8 +23,8 @@ type Props = {
 
 class Container extends React.Component<Props> {
   shouldComponentUpdate = (nextProps: Props) => {
-    const prevTodoList = this.props.todoList.slice().sort(sortCompareTodoId)
-    const nextTodoList = nextProps.todoList.slice().sort(sortCompareTodoId)
+    const prevTodoList = sort(this.props.todoList, sortCompareTodoId)
+    const nextTodoList = sort(nextProps.todoList, sortCompareTodoId)
     return !equals(prevTodoList, nextTodoList, predicateEqualsTodo)
   }
 
