@@ -67,6 +67,11 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `GENERATE_SOURCEMAP=true npm run analyze`
+
+Analyzing the bundle size.
+Output to `misc\source-map-explorer.html`.
+
 ## Learn More
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

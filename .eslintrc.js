@@ -19,6 +19,8 @@ module.exports = {
   rules: {
     "import/no-default-export": "error",
     "no-console": "off",
+    "no-var": "error",
+    "prefer-const": "error",
     "prettier/prettier": [
       "error",
       {
