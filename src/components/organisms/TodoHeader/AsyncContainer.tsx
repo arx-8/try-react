@@ -36,7 +36,7 @@ const mapDispatchToProps = (
 ): ReduxDispatchProps => {
   return {
     fetchAllTodos: () =>
-      dispatch(todoAsyncRequestActions.fetchAllTodosRequest()),
+      dispatch(todoAsyncRequestActions.fetchAllTodosRequestDebounce()),
   }
 }
 

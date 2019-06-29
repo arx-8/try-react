@@ -12,6 +12,8 @@ import {
   toSerializableError,
 } from "domain/errors/SerializableError"
 import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
+import debounce from "lodash/debounce"
+import { ThunkActionCreatorReturn } from "types/ReduxTypes"
 import actionCreatorFactory from "typescript-fsa"
 import { TodoAsyncDispatch } from "./types"
 
@@ -31,13 +33,13 @@ const addTodo = create.async<CallPostTodoReq, TodoId, SerializableError>(
 
 const addTodoRequest = (
   params: CallPostTodoReq
-): ((dispatch: TodoAsyncDispatch) => Promise<any>) => {
+): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
   return async (dispatch) => {
     dispatch(addTodo.started(params))
     try {
       const id = await callPostTodo(params)
       dispatch(addTodo.done({ params, result: id }))
-      dispatch(fetchAllTodosRequest())
+      dispatch(fetchAllTodosRequestDebounce())
     } catch (error) {
       dispatch(addTodo.failed({ error: toSerializableError(error), params }))
     }
@@ -52,13 +54,13 @@ const changeTodoStatus = create.async<
 
 const changeTodoStatusRequest = (
   params: CallPutTodoReq
-): ((dispatch: TodoAsyncDispatch) => Promise<any>) => {
+): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
   return async (dispatch) => {
     dispatch(changeTodoStatus.started(params))
     try {
       const id = await callPutTodo(params)
       dispatch(changeTodoStatus.done({ params, result: id }))
-      dispatch(fetchAllTodosRequest())
+      dispatch(fetchAllTodosRequestDebounce())
     } catch (error) {
       dispatch(
         changeTodoStatus.failed({ error: toSerializableError(error), params })
@@ -73,13 +75,13 @@ const deleteTodo = create.async<CallDeleteTodoReq, void, SerializableError>(
 
 const deleteTodoRequest = (
   params: CallDeleteTodoReq
-): ((dispatch: TodoAsyncDispatch) => Promise<any>) => {
+): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
   return async (dispatch) => {
     dispatch(deleteTodo.started(params))
     try {
       await callDeleteTodo(params)
       dispatch(deleteTodo.done({ params }))
-      dispatch(fetchAllTodosRequest())
+      dispatch(fetchAllTodosRequestDebounce())
     } catch (error) {
       dispatch(deleteTodo.failed({ error: toSerializableError(error), params }))
     }
@@ -90,18 +92,42 @@ const fetchAllTodos = create.async<void, Todo[], SerializableError>(
   ActionTypes.FETCH_ALL_TODOS
 )
 
-const fetchAllTodosRequest = (): ((
+/**
+ * debounceなしで実行
+ */
+const fetchAllTodosRequest = (): ThunkActionCreatorReturn<
+  TodoAsyncDispatch
+> => {
+  return fetchAllTodosRequestActInner
+}
+
+/**
+ * debounceありで実行
+ */
+const fetchAllTodosRequestDebounce = (): ThunkActionCreatorReturn<
+  TodoAsyncDispatch
+> => {
+  return fetchAllTodosRequestDebounceMemo
+}
+
+const fetchAllTodosRequestActInner = async (
   dispatch: TodoAsyncDispatch
-) => Promise<any>) => {
-  return async (dispatch) => {
-    dispatch(fetchAllTodos.started())
-    try {
-      dispatch(fetchAllTodos.done({ result: await callGetAllTodos() }))
-    } catch (error) {
-      dispatch(fetchAllTodos.failed({ error: toSerializableError(error) }))
-    }
+): Promise<any> => {
+  dispatch(fetchAllTodos.started())
+  try {
+    dispatch(fetchAllTodos.done({ result: await callGetAllTodos() }))
+  } catch (error) {
+    dispatch(fetchAllTodos.failed({ error: toSerializableError(error) }))
   }
 }
+
+/**
+ * debounce可能にするためのメモ化
+ */
+const fetchAllTodosRequestDebounceMemo = debounce(
+  fetchAllTodosRequestActInner,
+  500
+)
 
 const setVisibilityFilter = create<{
   visibilityFilter: VisibilityFilter
@@ -126,4 +152,5 @@ export const requestActions = {
   changeTodoStatusRequest,
   deleteTodoRequest,
   fetchAllTodosRequest,
+  fetchAllTodosRequestDebounce,
 }
