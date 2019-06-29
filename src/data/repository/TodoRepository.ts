@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios"
+import dayjs, { Dayjs } from "dayjs"
 import { Todo, TodoId } from "domain/models/Todo"
 import { ulid } from "ulid"
 
@@ -18,11 +19,15 @@ const sleep = (ms: number): Promise<void> => {
 /**
  * 疑似APIエラーのため、奇数分の間Errorを投げる
  */
-const throwErrorIfOddMinute = (): void => {
-  if (new Date().getMinutes() % 2 === 0) {
+const throwErrorIfErrorTime = (): void => {
+  if (!isErrorTime(dayjs())) {
     return
   }
   throw new Error("Mock API Error! Should call even number minute.")
+}
+
+export const isErrorTime = (now: Dayjs): boolean => {
+  return now.minute() % 2 !== 0
 }
 
 const STORAGE_KEY = "todo-async/todos"
@@ -32,7 +37,7 @@ const STORAGE_KEY = "todo-async/todos"
  */
 export const callGetAllTodos = async (): Promise<Todo[]> => {
   await sleep(3000)
-  throwErrorIfOddMinute()
+  throwErrorIfErrorTime()
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
   return callGetAllTodosToModels(resp)
 }
@@ -65,7 +70,7 @@ export const callPostTodo = async (
   params: CallPostTodoReq
 ): Promise<TodoId> => {
   await sleep(3000)
-  throwErrorIfOddMinute()
+  throwErrorIfErrorTime()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
@@ -92,7 +97,7 @@ export type CallPutTodoReq = Partial<Todo> & {
 
 export const callPutTodo = async (params: CallPutTodoReq): Promise<TodoId> => {
   await sleep(3000)
-  throwErrorIfOddMinute()
+  throwErrorIfErrorTime()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
@@ -124,7 +129,7 @@ export const callDeleteTodo = async (
   params: CallDeleteTodoReq
 ): Promise<void> => {
   await sleep(3000)
-  throwErrorIfOddMinute()
+  throwErrorIfErrorTime()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
