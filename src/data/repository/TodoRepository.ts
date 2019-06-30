@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios"
+import { AxiosResponse, AxiosError } from "axios"
 import dayjs, { Dayjs } from "dayjs"
 import { Todo, TodoId } from "domain/models/Todo"
 import { ulid } from "ulid"
@@ -30,6 +30,32 @@ export const isErrorTime = (now: Dayjs): boolean => {
   return now.minute() % 2 !== 0
 }
 
+const toMockAxiosResp = <T>(data: T): AxiosResponse<T> => {
+  return {
+    data,
+    status: 200,
+    statusText: "200OK",
+    headers: null,
+    config: null as any,
+  }
+}
+const toMockAxiosError = <T>(
+  request: any,
+  response: AxiosResponse<T>,
+  code: string,
+  message: string
+): AxiosError<T> => {
+  return {
+    code,
+    config: null as any,
+    isAxiosError: true,
+    message,
+    name: "AxiosError",
+    request,
+    response,
+  }
+}
+
 const STORAGE_KEY = "todo-async/todos"
 
 /**
@@ -42,16 +68,6 @@ export const callGetAllTodos = async (): Promise<Todo[]> => {
   return callGetAllTodosToModels(resp)
 }
 
-const toMockAxiosResp = <T>(data: T): AxiosResponse<T> => {
-  return {
-    data,
-    status: 200,
-    statusText: "200OK",
-    headers: null,
-    config: null as any,
-  }
-}
-
 const callGetAllTodosToModels = (
   resp: AxiosResponse<string | null>
 ): Todo[] => {
@@ -59,6 +75,24 @@ const callGetAllTodosToModels = (
     return []
   }
   return JSON.parse(resp.data)
+}
+
+export type CallGetTodoReq = {
+  id: TodoId
+}
+
+export const callGetTodo = async (params: CallGetTodoReq): Promise<Todo> => {
+  await sleep(3000)
+  throwErrorIfErrorTime()
+  const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
+  const todos = callGetAllTodosToModels(resp)
+  const t = todos.find((t) => t.id === params.id)
+  if (t == null) {
+    const resp = toMockAxiosResp(t)
+    resp.status = 404
+    throw toMockAxiosError(params, resp, "404", "Specified TODO not found")
+  }
+  return t
 }
 
 /**

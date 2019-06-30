@@ -30,7 +30,11 @@ export const reducer = reducerWithInitialState(initialState)
    * shared
    */
   .cases(
-    [actions.changeTodoStatus.done, actions.deleteTodo.done],
+    [
+      actions.changeTodoStatus.done,
+      actions.deleteTodo.done,
+      actions.fetchTodo.done,
+    ],
     (state, payload) => {
       return produce(state, (draft) => {
         draft.loading.ids = draft.loading.ids.filter(
@@ -41,7 +45,11 @@ export const reducer = reducerWithInitialState(initialState)
     }
   )
   .cases(
-    [actions.changeTodoStatus.failed, actions.deleteTodo.failed],
+    [
+      actions.changeTodoStatus.failed,
+      actions.deleteTodo.failed,
+      actions.fetchTodo.failed,
+    ],
     (state, payload) => {
       return produce(state, (draft) => {
         draft.loading.ids = draft.loading.ids.filter(
@@ -121,6 +129,23 @@ export const reducer = reducerWithInitialState(initialState)
     return produce(state, (draft) => {
       draft.loading.all = false
       draft.errorMessage = payload.error.message
+    })
+  })
+  /**
+   * fetchTodo
+   */
+  .case(actions.fetchTodo.done, (state, payload) => {
+    return produce(state, (draft) => {
+      const { result } = payload
+      const t = draft.todoList.find((t) => t.id === result.id)
+      if (t == null) {
+        draft.todoList.push(result)
+      } else {
+        t.label = result.label
+        t.status = result.status
+      }
+      draft.loading.all = false
+      draft.errorMessage = undefined
     })
   })
   /**

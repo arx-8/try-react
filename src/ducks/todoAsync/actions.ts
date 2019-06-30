@@ -2,6 +2,8 @@ import {
   callDeleteTodo,
   CallDeleteTodoReq,
   callGetAllTodos,
+  callGetTodo,
+  CallGetTodoReq,
   callPostTodo,
   CallPostTodoReq,
   callPutTodo,
@@ -22,6 +24,7 @@ export enum ActionTypes {
   CHANGE_TODO_STATUS = "TODO_ASYNC/CHANGE_TODO_STATUS",
   DELETE_TODO = "TODO_ASYNC/DELETE_TODO",
   FETCH_ALL_TODOS = "TODO_ASYNC/FETCH_ALL_TODOS",
+  FETCH_TODO = "TODO_ASYNC/FETCH_TODO",
   SET_VISIBILITY_FILTER = "TODO_ASYNC/SET_VISIBILITY_FILTER",
 }
 
@@ -88,6 +91,28 @@ const deleteTodoRequest = (
   }
 }
 
+const fetchTodo = create.async<CallGetTodoReq, Todo, SerializableError>(
+  ActionTypes.FETCH_TODO
+)
+
+const fetchTodoRequest = (
+  params: CallGetTodoReq
+): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
+  return async (dispatch) => {
+    dispatch(fetchTodo.started(params))
+    try {
+      dispatch(fetchTodo.done({ result: await callGetTodo(params), params }))
+    } catch (error) {
+      dispatch(
+        fetchTodo.failed({
+          error: toSerializableError(error, error.code),
+          params,
+        })
+      )
+    }
+  }
+}
+
 const fetchAllTodos = create.async<void, Todo[], SerializableError>(
   ActionTypes.FETCH_ALL_TODOS
 )
@@ -141,6 +166,7 @@ export const actions = {
   changeTodoStatus,
   deleteTodo,
   fetchAllTodos,
+  fetchTodo,
   setVisibilityFilter,
 }
 
@@ -153,4 +179,5 @@ export const requestActions = {
   deleteTodoRequest,
   fetchAllTodosRequest,
   fetchAllTodosRequestDebounce,
+  fetchTodoRequest,
 }
