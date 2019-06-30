@@ -19,16 +19,18 @@ import { ThunkActionCreatorReturn } from "types/ReduxTypes"
 import actionCreatorFactory from "typescript-fsa"
 import { TodoAsyncDispatch } from "./types"
 
+const TargetDomain = "TODO_ASYNC"
+
 export enum ActionTypes {
-  ADD_TODO = "TODO_ASYNC/ADD_TODO",
-  CHANGE_TODO_STATUS = "TODO_ASYNC/CHANGE_TODO_STATUS",
-  DELETE_TODO = "TODO_ASYNC/DELETE_TODO",
-  FETCH_ALL_TODOS = "TODO_ASYNC/FETCH_ALL_TODOS",
-  FETCH_TODO = "TODO_ASYNC/FETCH_TODO",
-  SET_VISIBILITY_FILTER = "TODO_ASYNC/SET_VISIBILITY_FILTER",
+  ADD_TODO = "ADD_TODO",
+  CHANGE_TODO_STATUS = "CHANGE_TODO_STATUS",
+  DELETE_TODO = "DELETE_TODO",
+  FETCH_ALL_TODOS = "FETCH_ALL_TODOS",
+  FETCH_TODO = "FETCH_TODO",
+  SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER",
 }
 
-const create = actionCreatorFactory()
+const create = actionCreatorFactory(TargetDomain)
 
 const addTodo = create.async<CallPostTodoReq, TodoId, SerializableError>(
   ActionTypes.ADD_TODO
