@@ -15,7 +15,7 @@ import { todoAsyncRequestActions } from "ducks/todoAsync"
 import { selectors } from "ducks/todoAsync/selectors"
 import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import { Field, FieldProps, Formik, getIn } from "formik"
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect } from "react"
 import { connect } from "react-redux"
 import * as Yup from "yup"
 
@@ -44,7 +44,18 @@ type Props = {
 
 const _TodoEditDialog: React.FC<
   Props & ReduxStateProps & ReduxDispatchProps & ReduxMergeProps
-> = ({ open, onClose, onSubmit, formInitialValues }) => {
+> = ({
+  editTargetId,
+  fetchEditTarget,
+  formInitialValues,
+  onClose,
+  onSubmit,
+  open,
+}) => {
+  useEffect(() => {
+    fetchEditTarget()
+  }, [editTargetId, fetchEditTarget])
+
   return (
     <Formik
       enableReinitialize

@@ -32,7 +32,7 @@ export const reducer = reducerWithInitialState(initialState)
    * shared
    */
   .cases(
-    [actions.deleteTodo.done, actions.fetchTodo.done, actions.updateTodo.done],
+    [actions.deleteTodo.done, actions.updateTodo.done],
     (state, payload) => {
       return produce(state, (draft) => {
         draft.loading.ids = draft.loading.ids.filter(
@@ -132,6 +132,11 @@ export const reducer = reducerWithInitialState(initialState)
   /**
    * fetchTodo
    */
+  .case(actions.fetchTodo.started, (state, payload) => {
+    return produce(state, (draft) => {
+      draft.loading.ids.push(payload.id)
+    })
+  })
   .case(actions.fetchTodo.done, (state, payload) => {
     return produce(state, (draft) => {
       const { result } = payload
@@ -139,10 +144,14 @@ export const reducer = reducerWithInitialState(initialState)
       if (t == null) {
         draft.todoList.push(result)
       } else {
+        // 既に保持していたら、アップデートしておく
         t.label = result.label
         t.status = result.status
       }
-      draft.loading.all = false
+
+      draft.loading.ids = draft.loading.ids.filter(
+        (id) => id !== payload.params.id
+      )
       draft.errorMessage = undefined
     })
   })
