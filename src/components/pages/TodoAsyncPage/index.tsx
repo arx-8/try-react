@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import { TodoActions } from "components/organisms/TodoActions/AsyncContainer"
 import { TodoHeader } from "components/organisms/TodoHeader/AsyncContainer"
 import { TodoInput } from "components/organisms/TodoInput/AsyncContainer"
-import { TodoList } from "components/organisms/TodoList/AsyncContainer"
+import { TodoListEditable } from "components/organisms/TodoListEditable/AsyncContainer"
 import React from "react"
 
 type Props = {
@@ -21,7 +21,7 @@ export const TodoAsyncPage: React.FC<Props> = () => {
       <Paper className={classes.root}>
         <TodoHeader />
         <TodoInput />
-        <TodoList />
+        <TodoListEditable />
         <TodoActions />
       </Paper>
     </Container>

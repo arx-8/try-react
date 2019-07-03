@@ -3,8 +3,8 @@ import { actions } from "./actions"
 import { TodoId } from "domain/models/Todo"
 import produce from "immer"
 
-describe("changeTodoStatus", () => {
-  it("changeTodoStatus", async () => {
+describe("updateTodo", () => {
+  it("updateTodo", async () => {
     // ## Arrange ##
     const prevState = produce(initialState, (draft) => {
       draft.todoList = [
@@ -24,7 +24,7 @@ describe("changeTodoStatus", () => {
     // ## Act ##
     const result = reducer(
       prevState,
-      actions.changeTodoStatus.started({
+      actions.updateTodo.started({
         id: "id1" as TodoId,
         label: "NEW LABEL 1",
         status: "completed",

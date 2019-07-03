@@ -28,6 +28,7 @@ export enum ActionTypes {
   FETCH_ALL_TODOS = "FETCH_ALL_TODOS",
   FETCH_TODO = "FETCH_TODO",
   SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER",
+  SET_EDIT_TARGET_ID = "SET_EDIT_TARGET_ID",
 }
 
 const create = actionCreatorFactory(TargetDomain)
@@ -51,25 +52,21 @@ const addTodoRequest = (
   }
 }
 
-const changeTodoStatus = create.async<
-  CallPutTodoReq,
-  TodoId,
-  SerializableError
->(ActionTypes.CHANGE_TODO_STATUS)
+const updateTodo = create.async<CallPutTodoReq, TodoId, SerializableError>(
+  ActionTypes.CHANGE_TODO_STATUS
+)
 
-const changeTodoStatusRequest = (
+const updateTodoRequest = (
   params: CallPutTodoReq
 ): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
   return async (dispatch) => {
-    dispatch(changeTodoStatus.started(params))
+    dispatch(updateTodo.started(params))
     try {
       const id = await callPutTodo(params)
-      dispatch(changeTodoStatus.done({ params, result: id }))
+      dispatch(updateTodo.done({ params, result: id }))
       dispatch(fetchAllTodosRequestDebounce())
     } catch (error) {
-      dispatch(
-        changeTodoStatus.failed({ error: toSerializableError(error), params })
-      )
+      dispatch(updateTodo.failed({ error: toSerializableError(error), params }))
     }
   }
 }
@@ -156,6 +153,10 @@ const fetchAllTodosRequestDebounceMemo = debounce(
   500
 )
 
+const setEditTargetId = create<{
+  editTargetId?: TodoId
+}>(ActionTypes.SET_EDIT_TARGET_ID)
+
 const setVisibilityFilter = create<{
   visibilityFilter: VisibilityFilter
 }>(ActionTypes.SET_VISIBILITY_FILTER)
@@ -165,11 +166,12 @@ const setVisibilityFilter = create<{
  */
 export const actions = {
   addTodo,
-  changeTodoStatus,
   deleteTodo,
   fetchAllTodos,
   fetchTodo,
+  setEditTargetId,
   setVisibilityFilter,
+  updateTodo,
 }
 
 /**
@@ -177,9 +179,9 @@ export const actions = {
  */
 export const requestActions = {
   addTodoRequest,
-  changeTodoStatusRequest,
   deleteTodoRequest,
   fetchAllTodosRequest,
   fetchAllTodosRequestDebounce,
   fetchTodoRequest,
+  updateTodoRequest,
 }

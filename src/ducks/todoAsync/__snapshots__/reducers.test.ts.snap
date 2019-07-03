@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`changeTodoStatus changeTodoStatus 1`] = `
+exports[`updateTodo updateTodo 1`] = `
 Object {
+  "editTargetId": undefined,
   "errorMessage": undefined,
   "loading": Object {
     "add": false,
