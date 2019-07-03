@@ -29,7 +29,11 @@ type ReduxDispatchProps = {
   fetchTodo: (editTargetId: TodoId) => void
 }
 
-type FormValues = Pick<Todo, "label" | "status">
+/**
+ * ユーザー入力値。
+ * IDはユーザー入力値ではないので、ここでは管理しない。
+ */
+type FormValues = Omit<Todo, "id">
 
 type Props = {
   open: boolean
