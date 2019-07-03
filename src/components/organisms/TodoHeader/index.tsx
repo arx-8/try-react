@@ -4,6 +4,7 @@ import IconButton from "@material-ui/core/IconButton"
 import LinearProgress from "@material-ui/core/LinearProgress"
 import RefreshIcon from "@material-ui/icons/Refresh"
 import React from "react"
+import { TodoAvailableTimer } from "../TodoAvailableTimer"
 
 export type ReduxStateProps = {
   errorMessage?: string
@@ -31,6 +32,7 @@ export const _TodoHeader: React.FC<Props> = ({
         <IconButton onClick={fetchAllTodos}>
           <RefreshIcon />
         </IconButton>
+        <TodoAvailableTimer />
       </div>
       <div css={loadingArea}>{loading && <LinearProgress />}</div>
     </div>

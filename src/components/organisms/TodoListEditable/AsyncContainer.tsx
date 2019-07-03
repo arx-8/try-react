@@ -1,15 +1,26 @@
-import { Todo } from "domain/models/Todo"
+import { CallPutTodoReq } from "data/repository/TodoRepository"
+import { Todo, TodoId } from "domain/models/Todo"
 import { RootState } from "ducks/store"
-import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
+import {
+  todoAsyncRequestActions,
+  todoAsyncSelectors,
+  todoAsyncActions,
+} from "ducks/todoAsync"
 import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import React from "react"
 import { connect } from "react-redux"
 import { equals, sort } from "utils/ArrayUtils"
-import {
-  ReduxDispatchProps,
-  ReduxStateProps,
-  _TodoList as Presentational,
-} from "."
+import { _TodoListEditable as Presentational } from "."
+
+export type ReduxStateProps = {
+  todoList: Todo[]
+}
+
+export type ReduxDispatchProps = {
+  deleteTodo: (todoId: TodoId) => void
+  setEditTargetId: (todoId?: TodoId) => void
+  updateTodo: (params: CallPutTodoReq) => void
+}
 
 type Props = {
   children?: never
@@ -51,14 +62,16 @@ const mapDispatchToProps = (
   dispatch: TodoAsyncDispatch
 ): ReduxDispatchProps => {
   return {
-    changeTodoStatus: (id, status) =>
-      dispatch(todoAsyncRequestActions.changeTodoStatusRequest({ id, status })),
     deleteTodo: (id) =>
       dispatch(todoAsyncRequestActions.deleteTodoRequest({ id })),
+    setEditTargetId: (editTargetId) =>
+      dispatch(todoAsyncActions.setEditTargetId({ editTargetId })),
+    updateTodo: (params) =>
+      dispatch(todoAsyncRequestActions.updateTodoRequest(params)),
   }
 }
 
-export const TodoList = connect(
+export const TodoListEditable = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Container)

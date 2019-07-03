@@ -1,4 +1,5 @@
-import { AxiosResponse } from "axios"
+import { AxiosResponse, AxiosError } from "axios"
+import dayjs, { Dayjs } from "dayjs"
 import { Todo, TodoId } from "domain/models/Todo"
 import { ulid } from "ulid"
 
@@ -18,23 +19,15 @@ const sleep = (ms: number): Promise<void> => {
 /**
  * 疑似APIエラーのため、奇数分の間Errorを投げる
  */
-const throwErrorIfOddMinute = (): void => {
-  if (new Date().getMinutes() % 2 === 0) {
+const throwErrorIfErrorTime = (): void => {
+  if (!isErrorTime(dayjs())) {
     return
   }
   throw new Error("Mock API Error! Should call even number minute.")
 }
 
-const STORAGE_KEY = "todo-async/todos"
-
-/**
- * Get
- */
-export const callGetAllTodos = async (): Promise<Todo[]> => {
-  await sleep(3000)
-  throwErrorIfOddMinute()
-  const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
-  return callGetAllTodosToModels(resp)
+export const isErrorTime = (now: Dayjs): boolean => {
+  return now.minute() % 2 !== 0
 }
 
 const toMockAxiosResp = <T>(data: T): AxiosResponse<T> => {
@@ -46,6 +39,34 @@ const toMockAxiosResp = <T>(data: T): AxiosResponse<T> => {
     config: null as any,
   }
 }
+const toMockAxiosError = <T>(
+  request: any,
+  response: AxiosResponse<T>,
+  code: string,
+  message: string
+): AxiosError<T> => {
+  return {
+    code,
+    config: null as any,
+    isAxiosError: true,
+    message,
+    name: "AxiosError",
+    request,
+    response,
+  }
+}
+
+const STORAGE_KEY = "todo-async/todos"
+
+/**
+ * Get
+ */
+export const callGetAllTodos = async (): Promise<Todo[]> => {
+  await sleep(3000)
+  throwErrorIfErrorTime()
+  const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
+  return callGetAllTodosToModels(resp)
+}
 
 const callGetAllTodosToModels = (
   resp: AxiosResponse<string | null>
@@ -54,6 +75,24 @@ const callGetAllTodosToModels = (
     return []
   }
   return JSON.parse(resp.data)
+}
+
+export type CallGetTodoReq = {
+  id: TodoId
+}
+
+export const callGetTodo = async (params: CallGetTodoReq): Promise<Todo> => {
+  await sleep(3000)
+  throwErrorIfErrorTime()
+  const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
+  const todos = callGetAllTodosToModels(resp)
+  const t = todos.find((t) => t.id === params.id)
+  if (t == null) {
+    const resp = toMockAxiosResp(t)
+    resp.status = 404
+    throw toMockAxiosError(params, resp, "404", "Specified TODO not found")
+  }
+  return t
 }
 
 /**
@@ -65,7 +104,7 @@ export const callPostTodo = async (
   params: CallPostTodoReq
 ): Promise<TodoId> => {
   await sleep(3000)
-  throwErrorIfOddMinute()
+  throwErrorIfErrorTime()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
@@ -92,7 +131,7 @@ export type CallPutTodoReq = Partial<Todo> & {
 
 export const callPutTodo = async (params: CallPutTodoReq): Promise<TodoId> => {
   await sleep(3000)
-  throwErrorIfOddMinute()
+  throwErrorIfErrorTime()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
@@ -124,7 +163,7 @@ export const callDeleteTodo = async (
   params: CallDeleteTodoReq
 ): Promise<void> => {
   await sleep(3000)
-  throwErrorIfOddMinute()
+  throwErrorIfErrorTime()
 
   // get
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
