@@ -34,7 +34,7 @@ type FormValues = Pick<Todo, "label" | "status">
 type Props = {
   open: boolean
   onClose: () => void
-  onSubmit: (values: FormValues) => void
+  onSubmit: (editTargetId: TodoId, values: FormValues) => void
   children?: never
 }
 
@@ -61,7 +61,7 @@ const _TodoEditDialog: React.FC<
       initialValues={formInitialValues}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
-        onSubmit(values)
+        onSubmit(editTargetId!, values)
         actions.setSubmitting(false)
       }}
       render={({

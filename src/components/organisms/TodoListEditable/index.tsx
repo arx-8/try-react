@@ -91,8 +91,12 @@ export const _TodoListEditable: React.FC<Props> = ({
       <TodoEditDialog
         open={isOpenTodoEditDialog}
         onClose={onCloseTodoEditDialog}
-        onSubmit={(values) => {
-          console.log(values)
+        onSubmit={(editTargetId, values) => {
+          updateTodo({
+            id: editTargetId,
+            label: values.label,
+            status: values.status,
+          })
           onCloseTodoEditDialog()
         }}
       />
