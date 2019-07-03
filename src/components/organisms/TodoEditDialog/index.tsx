@@ -11,7 +11,7 @@ import RadioGroup from "@material-ui/core/RadioGroup"
 import TextField from "@material-ui/core/TextField"
 import { Todo, TodoId, VisibilityFilterValue } from "domain/models/Todo"
 import { RootState } from "ducks/store"
-import { todoAsyncRequestActions } from "ducks/todoAsync"
+import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
 import { selectors } from "ducks/todoAsync/selectors"
 import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import { Field, FieldProps, Formik, getIn } from "formik"
@@ -22,16 +22,12 @@ import * as Yup from "yup"
 type ReduxStateProps = {
   editTargetId?: TodoId
   formInitialValues: FormValues
+  isTargetLoading: boolean
 }
 
 type ReduxDispatchProps = {
-  dispatch: TodoAsyncDispatch
+  fetchTodo: (editTargetId: TodoId) => void
 }
-
-type ReduxMergeProps = {
-  fetchEditTarget: () => void
-} & ReduxStateProps &
-  ReduxDispatchProps
 
 type FormValues = Pick<Todo, "label" | "status">
 
@@ -43,18 +39,21 @@ type Props = {
 }
 
 const _TodoEditDialog: React.FC<
-  Props & ReduxStateProps & ReduxDispatchProps & ReduxMergeProps
+  Props & ReduxStateProps & ReduxDispatchProps
 > = ({
   editTargetId,
-  fetchEditTarget,
+  fetchTodo,
   formInitialValues,
+  isTargetLoading,
   onClose,
   onSubmit,
   open,
 }) => {
   useEffect(() => {
-    fetchEditTarget()
-  }, [editTargetId, fetchEditTarget])
+    if (editTargetId) {
+      fetchTodo(editTargetId)
+    }
+  }, [editTargetId, fetchTodo])
 
   return (
     <Formik
@@ -82,6 +81,7 @@ const _TodoEditDialog: React.FC<
                 render={({ field }: FieldProps) => (
                   <TextField
                     {...field}
+                    disabled={isTargetLoading}
                     label={field.name}
                     error={!!getIn(errors, field.name)}
                     margin="normal"
@@ -106,12 +106,14 @@ const _TodoEditDialog: React.FC<
                       >
                         <FormControlLabel
                           control={<Radio color="primary" />}
+                          disabled={isTargetLoading}
                           label="Active"
                           labelPlacement="end"
                           value={VisibilityFilterValue.active}
                         />
                         <FormControlLabel
                           control={<Radio color="primary" />}
+                          disabled={isTargetLoading}
                           label="Completed"
                           labelPlacement="end"
                           value={VisibilityFilterValue.completed}
@@ -162,9 +164,14 @@ const mapStateToProps = (state: RootState): ReduxStateProps => {
         status: "active",
       } as const)
 
+  const maybeId = editTarget ? editTarget.id : undefined
   return {
-    editTargetId: editTarget ? editTarget.id : undefined,
+    editTargetId: maybeId,
     formInitialValues,
+    isTargetLoading: todoAsyncSelectors.isTargetLoading(
+      state.todoAsync,
+      maybeId
+    ),
   }
 }
 
@@ -172,32 +179,12 @@ const mapDispatchToProps = (
   dispatch: TodoAsyncDispatch
 ): ReduxDispatchProps => {
   return {
-    dispatch,
-  }
-}
-
-const mergeProps = (
-  stateProps: ReduxStateProps,
-  dispatchProps: ReduxDispatchProps,
-  ownProps: Props
-): ReduxMergeProps => {
-  const { editTargetId } = stateProps
-  const { dispatch } = dispatchProps
-
-  return {
-    ...ownProps,
-    ...dispatchProps,
-    ...stateProps,
-    fetchEditTarget: () => {
-      if (editTargetId) {
-        dispatch(todoAsyncRequestActions.fetchTodoRequest({ id: editTargetId }))
-      }
-    },
+    fetchTodo: (editTargetId) =>
+      dispatch(todoAsyncRequestActions.fetchTodoRequest({ id: editTargetId })),
   }
 }
 
 export const TodoEditDialog = connect(
   mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
+  mapDispatchToProps
 )(_TodoEditDialog)
