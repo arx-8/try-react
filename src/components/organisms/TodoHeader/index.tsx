@@ -12,7 +12,7 @@ export type ReduxStateProps = {
 }
 
 export type ReduxDispatchProps = {
-  fetchAllTodos: () => void
+  fetchAllTodos: () => Promise<void>
 }
 
 type Props = {

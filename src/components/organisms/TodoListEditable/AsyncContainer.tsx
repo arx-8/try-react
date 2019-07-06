@@ -2,9 +2,9 @@ import { CallPutTodoReq } from "data/repository/TodoRepository"
 import { Todo, TodoId } from "domain/models/Todo"
 import { RootState } from "ducks/store"
 import {
+  todoAsyncActions,
   todoAsyncRequestActions,
   todoAsyncSelectors,
-  todoAsyncActions,
 } from "ducks/todoAsync"
 import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import React from "react"
@@ -17,9 +17,9 @@ export type ReduxStateProps = {
 }
 
 export type ReduxDispatchProps = {
-  deleteTodo: (todoId: TodoId) => void
+  deleteTodo: (todoId: TodoId) => Promise<void>
   setEditTargetId: (todoId?: TodoId) => void
-  updateTodo: (params: CallPutTodoReq) => void
+  updateTodo: (params: CallPutTodoReq) => Promise<void>
 }
 
 type Props = {

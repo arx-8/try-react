@@ -15,11 +15,10 @@ import {
 } from "domain/errors/SerializableError"
 import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
 import debounce from "lodash/debounce"
-import { ThunkActionCreatorReturn } from "types/ReduxTypes"
 import actionCreatorFactory from "typescript-fsa"
-import { TodoAsyncDispatch } from "./types"
+import { TodoAsyncThunkAction } from "./types"
 
-const TargetDomain = "TODO_ASYNC"
+const DOMAIN = "TODO_ASYNC"
 
 export enum ActionTypes {
   ADD_TODO = "ADD_TODO",
@@ -31,15 +30,13 @@ export enum ActionTypes {
   SET_EDIT_TARGET_ID = "SET_EDIT_TARGET_ID",
 }
 
-const create = actionCreatorFactory(TargetDomain)
+const create = actionCreatorFactory(DOMAIN)
 
 const addTodo = create.async<CallPostTodoReq, TodoId, SerializableError>(
   ActionTypes.ADD_TODO
 )
 
-const addTodoRequest = (
-  params: CallPostTodoReq
-): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
+const addTodoRequest = (params: CallPostTodoReq): TodoAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(addTodo.started(params))
     try {
@@ -56,9 +53,7 @@ const updateTodo = create.async<CallPutTodoReq, TodoId, SerializableError>(
   ActionTypes.CHANGE_TODO_STATUS
 )
 
-const updateTodoRequest = (
-  params: CallPutTodoReq
-): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
+const updateTodoRequest = (params: CallPutTodoReq): TodoAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(updateTodo.started(params))
     try {
@@ -75,9 +70,7 @@ const deleteTodo = create.async<CallDeleteTodoReq, void, SerializableError>(
   ActionTypes.DELETE_TODO
 )
 
-const deleteTodoRequest = (
-  params: CallDeleteTodoReq
-): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
+const deleteTodoRequest = (params: CallDeleteTodoReq): TodoAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(deleteTodo.started(params))
     try {
@@ -94,9 +87,7 @@ const fetchTodo = create.async<CallGetTodoReq, Todo, SerializableError>(
   ActionTypes.FETCH_TODO
 )
 
-const fetchTodoRequest = (
-  params: CallGetTodoReq
-): ThunkActionCreatorReturn<TodoAsyncDispatch> => {
+const fetchTodoRequest = (params: CallGetTodoReq): TodoAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(fetchTodo.started(params))
     try {
@@ -119,24 +110,18 @@ const fetchAllTodos = create.async<void, Todo[], SerializableError>(
 /**
  * debounceなしで実行
  */
-const fetchAllTodosRequest = (): ThunkActionCreatorReturn<
-  TodoAsyncDispatch
-> => {
+const fetchAllTodosRequest = (): TodoAsyncThunkAction => {
   return fetchAllTodosRequestActInner
 }
 
 /**
  * debounceありで実行
  */
-const fetchAllTodosRequestDebounce = (): ThunkActionCreatorReturn<
-  TodoAsyncDispatch
-> => {
+const fetchAllTodosRequestDebounce = (): TodoAsyncThunkAction => {
   return fetchAllTodosRequestDebounceMemo
 }
 
-const fetchAllTodosRequestActInner = async (
-  dispatch: TodoAsyncDispatch
-): Promise<any> => {
+const fetchAllTodosRequestActInner: TodoAsyncThunkAction = async (dispatch) => {
   dispatch(fetchAllTodos.started())
   try {
     dispatch(fetchAllTodos.done({ result: await callGetAllTodos() }))

@@ -26,7 +26,7 @@ type ReduxStateProps = {
 }
 
 type ReduxDispatchProps = {
-  fetchTodo: (editTargetId: TodoId) => void
+  fetchTodo: (editTargetId: TodoId) => Promise<void>
 }
 
 /**
