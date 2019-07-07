@@ -72,6 +72,11 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Analyzing the bundle size.
 Output to `misc\source-map-explorer.html`.
 
+### `npm run eslint-print-config`
+
+Outputs the configuration to be used for the file passed.
+See [ESLint --print-config](https://eslint.org/docs/user-guide/command-line-interface#--print-config)
+
 ## Learn More
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
