@@ -6,7 +6,7 @@ import produce from "immer"
 export const initialState: GitHubState = {
   users: [],
   isLoading: false,
-  error: null,
+  error: undefined,
 }
 
 export const reducer: Reducer<GitHubState, Action> = (

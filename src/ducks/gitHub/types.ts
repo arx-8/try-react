@@ -1,10 +1,10 @@
-import { AxiosError } from "axios"
+import { SerializableError } from "domain/errors/SerializableError"
 import { User } from "domain/models/GitHub"
 
 export type GitHubState = Readonly<{
   users: User[]
   isLoading: boolean
-  error: AxiosError | null
+  error?: SerializableError
 }>
 
 export type FetchMembersParams = {
@@ -16,5 +16,5 @@ export type FetchMemberResponse = Readonly<{
 }>
 
 export type FetchMemberError = Readonly<{
-  error: AxiosError
+  error: SerializableError
 }>
