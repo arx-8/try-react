@@ -30,7 +30,7 @@ export type ActionWithPayloadHandler<T, P> = (
  * State と extraArgument は、applyMiddleware の時点で決定するため、決め打ち
  * Action は型定義するコスパが悪い(ActionCreatorを使うため、タイポや未定義の可能性は低い)ため、AnyAction
  */
-export type AppThunkDispatch = ThunkDispatch<RootState, void, AnyAction>
+type AppThunkDispatch = ThunkDispatch<RootState, void, AnyAction>
 
 /**
  * redux-thunk action shorthand for this application.
@@ -52,7 +52,7 @@ export type AppThunkAction<
  *
  * @see node_modules/@types/react-redux/index.d.ts
  */
-export type MapDispatchToPropsFunction<TDispatch, TOwnProps, TDispatchProps> = (
-  dispatch: TDispatch,
+export type MapThunkDispatchToPropsFunction<TDispatchProps, TOwnProps> = (
+  dispatch: AppThunkDispatch,
   ownProps: TOwnProps
 ) => TDispatchProps

@@ -16,7 +16,7 @@ import { selectors } from "ducks/todoAsync/selectors"
 import { Field, FieldProps, Formik, getIn } from "formik"
 import React, { Fragment, useEffect } from "react"
 import { connect, MapStateToProps } from "react-redux"
-import { AppThunkDispatch, MapDispatchToPropsFunction } from "types/ReduxTypes"
+import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
 import * as Yup from "yup"
 
 type ReduxStateProps = {
@@ -181,10 +181,9 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   }
 }
 
-const mapDispatchToProps: MapDispatchToPropsFunction<
-  AppThunkDispatch,
-  OwnProps,
-  ReduxDispatchProps
+const mapDispatchToProps: MapThunkDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
 > = (dispatch) => {
   return {
     fetchTodo: (editTargetId) =>

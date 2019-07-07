@@ -1,7 +1,7 @@
 import { RootState } from "ducks/store"
 import { todoAsyncRequestActions } from "ducks/todoAsync"
 import { connect, MapStateToProps } from "react-redux"
-import { AppThunkDispatch, MapDispatchToPropsFunction } from "types/ReduxTypes"
+import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
 import { OwnProps, ReduxDispatchProps, ReduxStateProps, _TodoInput } from "."
 
 const mapStateToProps: MapStateToProps<
@@ -13,10 +13,9 @@ const mapStateToProps: MapStateToProps<
   return {}
 }
 
-const mapDispatchToProps: MapDispatchToPropsFunction<
-  AppThunkDispatch,
-  OwnProps,
-  ReduxDispatchProps
+const mapDispatchToProps: MapThunkDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
 > = (dispatch) => {
   return {
     addTodo: (label) =>

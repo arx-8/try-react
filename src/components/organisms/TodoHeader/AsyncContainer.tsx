@@ -2,7 +2,7 @@ import { RootState } from "ducks/store"
 import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
 import React, { useEffect } from "react"
 import { connect, MapStateToProps } from "react-redux"
-import { AppThunkDispatch, MapDispatchToPropsFunction } from "types/ReduxTypes"
+import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
 import {
   ReduxDispatchProps,
   ReduxStateProps,
@@ -34,10 +34,9 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   }
 }
 
-const mapDispatchToProps: MapDispatchToPropsFunction<
-  AppThunkDispatch,
-  OwnProps,
-  ReduxDispatchProps
+const mapDispatchToProps: MapThunkDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
 > = (dispatch) => {
   return {
     fetchAllTodos: () =>

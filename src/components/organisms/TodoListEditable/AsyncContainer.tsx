@@ -8,7 +8,7 @@ import {
 } from "ducks/todoAsync"
 import React from "react"
 import { connect, MapStateToProps } from "react-redux"
-import { AppThunkDispatch, MapDispatchToPropsFunction } from "types/ReduxTypes"
+import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
 import { equals, sort } from "utils/ArrayUtils"
 import { OwnProps, _TodoListEditable as Presentational } from "."
 
@@ -57,10 +57,9 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   }
 }
 
-const mapDispatchToProps: MapDispatchToPropsFunction<
-  AppThunkDispatch,
-  OwnProps,
-  ReduxDispatchProps
+const mapDispatchToProps: MapThunkDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
 > = (dispatch) => {
   return {
     deleteTodo: (id) =>
