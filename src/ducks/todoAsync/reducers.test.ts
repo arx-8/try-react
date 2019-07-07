@@ -5,6 +5,7 @@ import produce from "immer"
 
 describe("updateTodo", () => {
   it("updateTodo", async () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const prevState = produce(initialState, (draft) => {
       draft.todoList = [

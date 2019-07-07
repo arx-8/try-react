@@ -4,6 +4,7 @@ import React from "react"
 
 describe("Snapshot", () => {
   it("all", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     // ## Act ##
     const result = create(

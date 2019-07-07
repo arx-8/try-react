@@ -8,7 +8,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:jest/recommended",
+    "plugin:jest/all",
     /** @see https://github.com/prettier/eslint-config-prettier#installation */
     "prettier/react",
     "prettier/@typescript-eslint",
@@ -18,6 +18,8 @@ module.exports = {
   plugins: ["only-error"],
   rules: {
     "import/no-default-export": "error",
+    "jest/lowercase-name": "off",
+    "jest/prefer-inline-snapshots": "off",
     "no-console": "off",
     "no-var": "error",
     "prefer-const": "error",

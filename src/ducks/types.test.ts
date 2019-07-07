@@ -5,6 +5,7 @@ import { toUniq } from "utils/ArrayUtils"
 
 describe("ActionType", () => {
   it("No duplicate def", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const original: string[] = [
       ...Object.values(CounterActionType),
@@ -14,6 +15,6 @@ describe("ActionType", () => {
     // ## Act ##
     const unique = toUniq(original)
     // ## Assert ##
-    expect(unique.length).toEqual(original.length)
+    expect(unique).toHaveLength(original.length)
   })
 })
