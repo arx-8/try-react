@@ -46,3 +46,13 @@ export type AppThunkAction<
   TReturn = Promise<void>,
   TAction extends Action = AnyAction
 > = ThunkAction<TReturn, RootState, void, TAction>
+
+/**
+ * redux-thunk compatible MapDispatchToPropsFunction.
+ *
+ * @see node_modules/@types/react-redux/index.d.ts
+ */
+export type MapDispatchToPropsFunction<TDispatch, TOwnProps, TDispatchProps> = (
+  dispatch: TDispatch,
+  ownProps: TOwnProps
+) => TDispatchProps

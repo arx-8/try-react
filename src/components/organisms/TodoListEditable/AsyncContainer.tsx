@@ -7,10 +7,10 @@ import {
   todoAsyncSelectors,
 } from "ducks/todoAsync"
 import React from "react"
-import { connect } from "react-redux"
-import { AppThunkDispatch } from "types/ReduxTypes"
+import { connect, MapStateToProps } from "react-redux"
+import { AppThunkDispatch, MapDispatchToPropsFunction } from "types/ReduxTypes"
 import { equals, sort } from "utils/ArrayUtils"
-import { _TodoListEditable as Presentational } from "."
+import { OwnProps, _TodoListEditable as Presentational } from "."
 
 export type ReduxStateProps = {
   todoList: Todo[]
@@ -22,10 +22,7 @@ export type ReduxDispatchProps = {
   updateTodo: (params: CallPutTodoReq) => Promise<void>
 }
 
-type Props = {
-  children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 class Container extends React.Component<Props> {
   shouldComponentUpdate = (nextProps: Props) => {
@@ -52,13 +49,19 @@ const sortCompareTodoId = (prev: Todo, next: Todo): number => {
   return 0
 }
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   return {
     todoList: todoAsyncSelectors.filterTodoList(state.todoAsync),
   }
 }
 
-const mapDispatchToProps = (dispatch: AppThunkDispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  AppThunkDispatch,
+  OwnProps,
+  ReduxDispatchProps
+> = (dispatch) => {
   return {
     deleteTodo: (id) =>
       dispatch(todoAsyncRequestActions.deleteTodoRequest({ id })),

@@ -13,10 +13,10 @@ import { Todo, TodoId, VisibilityFilterValue } from "domain/models/Todo"
 import { RootState } from "ducks/store"
 import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
 import { selectors } from "ducks/todoAsync/selectors"
-import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import { Field, FieldProps, Formik, getIn } from "formik"
 import React, { Fragment, useEffect } from "react"
-import { connect } from "react-redux"
+import { connect, MapStateToProps } from "react-redux"
+import { AppThunkDispatch, MapDispatchToPropsFunction } from "types/ReduxTypes"
 import * as Yup from "yup"
 
 type ReduxStateProps = {
@@ -35,16 +35,16 @@ type ReduxDispatchProps = {
  */
 type FormValues = Omit<Todo, "id">
 
-type Props = {
+type OwnProps = {
   open: boolean
   onClose: () => void
   onSubmit: (editTargetId: TodoId, values: FormValues) => void
   children?: never
 }
 
-const _TodoEditDialog: React.FC<
-  Props & ReduxStateProps & ReduxDispatchProps
-> = ({
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
+
+const _TodoEditDialog: React.FC<Props> = ({
   editTargetId,
   fetchTodo,
   formInitialValues,
@@ -155,7 +155,9 @@ const validationSchema = Yup.object().shape<FormValues>({
   status: Yup.string().required() as any,
 })
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   const editTarget = selectors.extractEditTarget(state.todoAsync)
 
   const formInitialValues = editTarget
@@ -179,9 +181,11 @@ const mapStateToProps = (state: RootState): ReduxStateProps => {
   }
 }
 
-const mapDispatchToProps = (
-  dispatch: TodoAsyncDispatch
-): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  AppThunkDispatch,
+  OwnProps,
+  ReduxDispatchProps
+> = (dispatch) => {
   return {
     fetchTodo: (editTargetId) =>
       dispatch(todoAsyncRequestActions.fetchTodoRequest({ id: editTargetId })),

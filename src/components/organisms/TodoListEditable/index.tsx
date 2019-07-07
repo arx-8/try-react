@@ -14,10 +14,11 @@ import React, { Fragment, useState } from "react"
 import { TodoEditDialog } from "../TodoEditDialog"
 import { ReduxDispatchProps, ReduxStateProps } from "./AsyncContainer"
 
-type Props = {
+export type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 export const _TodoListEditable: React.FC<Props> = ({
   deleteTodo,
