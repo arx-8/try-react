@@ -1,18 +1,19 @@
 import { RootState } from "ducks/store"
 import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
 import React, { useEffect } from "react"
-import { connect } from "react-redux"
-import { AppThunkDispatch } from "types/ReduxTypes"
+import { connect, MapStateToProps } from "react-redux"
+import { AppThunkDispatch, MapDispatchToPropsFunction } from "types/ReduxTypes"
 import {
   ReduxDispatchProps,
   ReduxStateProps,
   _TodoHeader as Presentational,
 } from "."
 
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const Container: React.FC<Props> = (props) => {
   const { fetchAllTodos } = props
@@ -24,14 +25,20 @@ const Container: React.FC<Props> = (props) => {
   return <Presentational {...props} />
 }
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   return {
     errorMessage: state.todoAsync.errorMessage,
     loading: todoAsyncSelectors.isSomeLoading(state.todoAsync),
   }
 }
 
-const mapDispatchToProps = (dispatch: AppThunkDispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  AppThunkDispatch,
+  OwnProps,
+  ReduxDispatchProps
+> = (dispatch) => {
   return {
     fetchAllTodos: () =>
       dispatch(todoAsyncRequestActions.fetchAllTodosRequestDebounce()),

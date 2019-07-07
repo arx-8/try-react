@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
-import React, { FormEventHandler } from "react"
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
+import React, { FormEventHandler } from "react"
 
 export type ReduxStateProps = {}
 
@@ -10,10 +10,11 @@ export type ReduxDispatchProps = {
   addTodo: (label: string) => void
 }
 
-type Props = {
+export type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 export const _TodoInput: React.FC<Props> = ({ addTodo }) => {
   const [value, setValue] = React.useState("")

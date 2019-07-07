@@ -21,10 +21,11 @@ export type ReduxDispatchProps = {
   deleteTodo: (todoId: TodoId) => void
 }
 
-type Props = {
+export type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 export const _TodoList: React.FC<Props> = ({
   changeTodoStatus,

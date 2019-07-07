@@ -1,20 +1,19 @@
 /** @jsx jsx */
-import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
 import { RootState } from "ducks/store"
-import React from "react"
 import { PlayerName } from "ducks/tic-tac-toe/types"
+import React from "react"
+import { connect, MapStateToProps } from "react-redux"
 
 type ReduxStateProps = {
   winnerPlayerName: PlayerName | null
 }
 
-type ReduxDispatchProps = {}
-
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps
 
 const _TTTGameInfo: React.FC<Props> = ({ winnerPlayerName }) => {
   return (
@@ -35,7 +34,9 @@ const winner = css`
   font-size: larger;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   const { winnerPlayerName } = state.ticTacToe
   return {
     winnerPlayerName,

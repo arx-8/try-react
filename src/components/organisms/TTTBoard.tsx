@@ -1,12 +1,15 @@
 /** @jsx jsx */
-import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
-import { InputValue, PlayerName } from "ducks/tic-tac-toe/types"
 import { RootState } from "ducks/store"
 import { tttActions } from "ducks/tic-tac-toe"
-import { TTTSquare } from "./TTTSquare"
+import { InputValue, PlayerName } from "ducks/tic-tac-toe/types"
 import React from "react"
+import {
+  connect,
+  MapDispatchToPropsFunction,
+  MapStateToProps,
+} from "react-redux"
+import { TTTSquare } from "./TTTSquare"
 
 type ReduxStateProps = {
   currentPlayerName: PlayerName
@@ -18,10 +21,11 @@ type ReduxDispatchProps = {
   clickSquare: (index: number, value: InputValue) => void
 }
 
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const _TTTBoard: React.FC<Props> = ({
   clickSquare,
@@ -58,7 +62,9 @@ const container = css`
   grid-template-rows: 40px 40px 40px;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   const { currentPlayerName, inputValues, isContinue } = state.ticTacToe
   return {
     currentPlayerName,
@@ -67,7 +73,10 @@ const mapStateToProps = (state: RootState): ReduxStateProps => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
+> = (dispatch) => {
   return {
     clickSquare: (index, value) =>
       dispatch(tttActions.clickSquare({ index, value })),

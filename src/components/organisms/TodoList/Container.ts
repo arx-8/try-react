@@ -1,16 +1,24 @@
 import { RootState } from "ducks/store"
 import { todoActions, todoSelectors } from "ducks/todo"
-import { connect } from "react-redux"
-import { Dispatch } from "redux"
-import { ReduxDispatchProps, ReduxStateProps, _TodoList } from "."
+import {
+  connect,
+  MapDispatchToPropsFunction,
+  MapStateToProps,
+} from "react-redux"
+import { OwnProps, ReduxDispatchProps, ReduxStateProps, _TodoList } from "."
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   return {
     todoList: todoSelectors.filterTodoList(state.todo),
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
+> = (dispatch) => {
   return {
     changeTodoStatus: (todoId, todoStatus) =>
       dispatch(todoActions.changeTodoStatus({ todoId, todoStatus })),

@@ -1,11 +1,14 @@
 /** @jsx jsx */
-import React from "react"
 import { css, jsx } from "@emotion/core"
-import { Card, Statistic, Button } from "semantic-ui-react"
-import { connect } from "react-redux"
-import { Dispatch } from "redux"
-import { RootState } from "ducks/store"
 import { counterActions } from "ducks/counter"
+import { RootState } from "ducks/store"
+import React from "react"
+import {
+  connect,
+  MapDispatchToPropsFunction,
+  MapStateToProps,
+} from "react-redux"
+import { Button, Card, Statistic } from "semantic-ui-react"
 
 type ReduxStateProps = {
   count: number
@@ -18,10 +21,11 @@ type ReduxDispatchProps = {
   increment: () => void
 }
 
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const _CounterCard: React.FC<Props> = ({
   count,
@@ -71,14 +75,19 @@ const actionsSeparator = css`
   margin-top: 10px;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   return {
     count: state.counter.count,
     defaultAmount: state.counter.defaultAmount,
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
+> = (dispatch) => {
   return {
     add: (amount) => dispatch(counterActions.add(amount)),
     decrement: () => dispatch(counterActions.decrement()),
