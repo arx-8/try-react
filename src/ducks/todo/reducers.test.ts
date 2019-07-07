@@ -6,6 +6,7 @@ import { ActionTypes } from "./types"
 
 describe("ADD_TODO", () => {
   it("prev = initialState", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const prevState = initialState
 
@@ -31,6 +32,7 @@ describe("ADD_TODO", () => {
   })
 
   it("prev = todoList 1件以上", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const prevState = produce(initialState, (draft) => {
       draft.todoList.push({

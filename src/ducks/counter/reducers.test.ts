@@ -5,6 +5,7 @@ import produce from "immer"
 
 describe("CHANGE_DEFAULT_AMOUNT", () => {
   it("prev = initialState", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const prevState = initialState
     // ## Act ##
@@ -19,6 +20,7 @@ describe("CHANGE_DEFAULT_AMOUNT", () => {
   })
 
   it("prev = edited", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const prevState = produce(initialState, (draft) => {
       draft.count = 10

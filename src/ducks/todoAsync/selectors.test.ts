@@ -5,6 +5,7 @@ import { selectors } from "./selectors"
 
 describe("filterTodoList", () => {
   it("by initialState", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const currentState = initialState
     // ## Act ##
@@ -14,6 +15,7 @@ describe("filterTodoList", () => {
   })
 
   it("todoList 1件以上, filter:all", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const currentState = produce(initialState, (draft) => {
       draft.todoList.push({
@@ -35,6 +37,7 @@ describe("filterTodoList", () => {
   })
 
   it("todoList 1件以上, filter:completed", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const currentState = produce(initialState, (draft) => {
       draft.todoList.push({

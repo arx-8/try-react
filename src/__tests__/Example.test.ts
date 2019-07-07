@@ -12,6 +12,7 @@ export {}
  */
 describe("Example", () => {
   it("testable", () => {
+    expect.hasAssertions()
     // ## Arrange ##
     const list: readonly number[] = [...[1, 2, 3, 4, 5]]
 
@@ -22,7 +23,7 @@ describe("Example", () => {
       .reduce((l, r) => l + r)
 
     // ## Assert ##
-    expect(result).toEqual(12)
+    expect(result).toStrictEqual(12)
   })
 })
 
@@ -40,6 +41,7 @@ describe("Comparison of toStrictEqual, toBe and toEqual", () => {
   }
 
   it("toBe は '==='", () => {
+    expect.hasAssertions()
     // Literal
     expect(2).not.toBe("2")
     expect(2).not.toBe(true)
@@ -63,6 +65,8 @@ describe("Comparison of toStrictEqual, toBe and toEqual", () => {
   })
 
   it("toEqual は deepEqual", () => {
+    /* eslint-disable jest/prefer-strict-equal */
+    expect.hasAssertions()
     // Literal
     expect(2).not.toEqual("2")
     expect(2).not.toEqual(true)
@@ -83,6 +87,7 @@ describe("Comparison of toStrictEqual, toBe and toEqual", () => {
     expect(new Human("taro", 20)).toEqual(new Human("taro", 20))
     const classInstance = new Human("taro", 20)
     expect(classInstance).toEqual(classInstance)
+    /* eslint-enable */
   })
 
   /**
@@ -98,8 +103,11 @@ describe("Comparison of toStrictEqual, toBe and toEqual", () => {
     }
 
     it("are not semantically the same", () => {
+      /* eslint-disable jest/prefer-strict-equal */
+      expect.hasAssertions()
       expect(new LaCroix("lemon")).toEqual({ flavor: "lemon" })
       expect(new LaCroix("lemon")).not.toStrictEqual({ flavor: "lemon" })
+      /* eslint-enable */
     })
   })
 })
@@ -113,6 +121,7 @@ describe("Exception test", () => {
   }
 
   it("assert exception message", () => {
+    expect.hasAssertions()
     expect(() => {
       throwable()
     }).toThrowErrorMatchingInlineSnapshot(`"Lorem ipsum dolor sit amet"`)
