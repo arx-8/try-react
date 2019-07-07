@@ -13,6 +13,7 @@ import {
   CallGetMembersResponse,
 } from "data/repository/GitHubRepository"
 import { CombinatorEffect } from "@redux-saga/types"
+import { toSerializableError } from "domain/errors/SerializableError"
 
 function* runFetchMembers(
   action: ReturnType<typeof actions.fetchMembersStart>
@@ -31,7 +32,12 @@ function* runFetchMembers(
       })
     )
   } catch (error) {
-    yield put(actions.fetchMembersFail({ companyName, error }))
+    yield put(
+      actions.fetchMembersFail({
+        companyName,
+        error: toSerializableError(error, error.response.status),
+      })
+    )
   }
 }
 
