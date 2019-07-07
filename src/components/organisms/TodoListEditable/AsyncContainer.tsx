@@ -6,9 +6,9 @@ import {
   todoAsyncRequestActions,
   todoAsyncSelectors,
 } from "ducks/todoAsync"
-import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import React from "react"
 import { connect } from "react-redux"
+import { AppThunkDispatch } from "types/ReduxTypes"
 import { equals, sort } from "utils/ArrayUtils"
 import { _TodoListEditable as Presentational } from "."
 
@@ -58,9 +58,7 @@ const mapStateToProps = (state: RootState): ReduxStateProps => {
   }
 }
 
-const mapDispatchToProps = (
-  dispatch: TodoAsyncDispatch
-): ReduxDispatchProps => {
+const mapDispatchToProps = (dispatch: AppThunkDispatch): ReduxDispatchProps => {
   return {
     deleteTodo: (id) =>
       dispatch(todoAsyncRequestActions.deleteTodoRequest({ id })),

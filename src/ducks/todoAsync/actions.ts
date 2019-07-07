@@ -15,8 +15,8 @@ import {
 } from "domain/errors/SerializableError"
 import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
 import debounce from "lodash/debounce"
+import { AppThunkAction } from "types/ReduxTypes"
 import actionCreatorFactory from "typescript-fsa"
-import { TodoAsyncThunkAction } from "./types"
 
 const DOMAIN = "TODO_ASYNC"
 
@@ -36,7 +36,7 @@ const addTodo = create.async<CallPostTodoReq, TodoId, SerializableError>(
   ActionTypes.ADD_TODO
 )
 
-const addTodoRequest = (params: CallPostTodoReq): TodoAsyncThunkAction => {
+const addTodoRequest = (params: CallPostTodoReq): AppThunkAction => {
   return async (dispatch) => {
     dispatch(addTodo.started(params))
     try {
@@ -53,7 +53,7 @@ const updateTodo = create.async<CallPutTodoReq, TodoId, SerializableError>(
   ActionTypes.CHANGE_TODO_STATUS
 )
 
-const updateTodoRequest = (params: CallPutTodoReq): TodoAsyncThunkAction => {
+const updateTodoRequest = (params: CallPutTodoReq): AppThunkAction => {
   return async (dispatch) => {
     dispatch(updateTodo.started(params))
     try {
@@ -70,7 +70,7 @@ const deleteTodo = create.async<CallDeleteTodoReq, void, SerializableError>(
   ActionTypes.DELETE_TODO
 )
 
-const deleteTodoRequest = (params: CallDeleteTodoReq): TodoAsyncThunkAction => {
+const deleteTodoRequest = (params: CallDeleteTodoReq): AppThunkAction => {
   return async (dispatch) => {
     dispatch(deleteTodo.started(params))
     try {
@@ -87,7 +87,7 @@ const fetchTodo = create.async<CallGetTodoReq, Todo, SerializableError>(
   ActionTypes.FETCH_TODO
 )
 
-const fetchTodoRequest = (params: CallGetTodoReq): TodoAsyncThunkAction => {
+const fetchTodoRequest = (params: CallGetTodoReq): AppThunkAction => {
   return async (dispatch) => {
     dispatch(fetchTodo.started(params))
     try {
@@ -110,18 +110,18 @@ const fetchAllTodos = create.async<void, Todo[], SerializableError>(
 /**
  * debounceなしで実行
  */
-const fetchAllTodosRequest = (): TodoAsyncThunkAction => {
+const fetchAllTodosRequest = (): AppThunkAction => {
   return fetchAllTodosRequestActInner
 }
 
 /**
  * debounceありで実行
  */
-const fetchAllTodosRequestDebounce = (): TodoAsyncThunkAction => {
+const fetchAllTodosRequestDebounce = (): AppThunkAction => {
   return fetchAllTodosRequestDebounceMemo
 }
 
-const fetchAllTodosRequestActInner: TodoAsyncThunkAction = async (dispatch) => {
+const fetchAllTodosRequestActInner: AppThunkAction = async (dispatch) => {
   dispatch(fetchAllTodos.started())
   try {
     dispatch(fetchAllTodos.done({ result: await callGetAllTodos() }))
