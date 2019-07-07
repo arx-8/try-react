@@ -1,14 +1,18 @@
 /** @jsx jsx */
-import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles"
-import { tttActions } from "ducks/tic-tac-toe"
-import { TTTBoard } from "components/organisms/TTTBoard"
-import { TTTGameInfo } from "components/organisms/TTTGameInfo"
 import Container from "@material-ui/core/Container"
 import Paper from "@material-ui/core/Paper"
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
+import { TTTBoard } from "components/organisms/TTTBoard"
+import { TTTGameInfo } from "components/organisms/TTTGameInfo"
+import { RootState } from "ducks/store"
+import { tttActions } from "ducks/tic-tac-toe"
 import React from "react"
+import {
+  connect,
+  MapDispatchToPropsFunction,
+  MapStateToProps,
+} from "react-redux"
 
 type ReduxStateProps = {}
 
@@ -16,10 +20,11 @@ type ReduxDispatchProps = {
   reset: () => void
 }
 
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const _TicTacToePage: React.FC<Props> = ({ reset }) => {
   const classes = useStyles()
@@ -57,12 +62,19 @@ const actions = css`
   margin-top: 8px;
 `
 
-const mapStateToProps = (): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<
+  ReduxStateProps,
+  OwnProps,
+  RootState
+> = () => {
   // NOP
   return {}
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
+> = (dispatch) => {
   return {
     reset: () => dispatch(tttActions.reset()),
   }

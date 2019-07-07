@@ -1,12 +1,15 @@
 /** @jsx jsx */
-import React from "react"
-import { Button, Input } from "semantic-ui-react"
-import { connect } from "react-redux"
-import { counterActions } from "ducks/counter"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
-import { Formik, Field, FieldProps, getIn } from "formik"
+import { counterActions } from "ducks/counter"
 import { RootState } from "ducks/store"
+import { Field, FieldProps, Formik, getIn } from "formik"
+import React from "react"
+import {
+  connect,
+  MapDispatchToPropsFunction,
+  MapStateToProps,
+} from "react-redux"
+import { Button, Input } from "semantic-ui-react"
 
 type ReduxStateProps = {
   defaultAmount: number
@@ -16,10 +19,11 @@ type ReduxDispatchProps = {
   changeDefaultAmount: (amount: number) => void
 }
 
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const formInitialValues = {
   amount: "1",
@@ -100,13 +104,18 @@ const errMsg = css`
   font-weight: bold;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   return {
     defaultAmount: state.counter.defaultAmount,
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
+> = (dispatch) => {
   return {
     changeDefaultAmount: (amount) =>
       dispatch(counterActions.changeDefaultAmount(amount)),

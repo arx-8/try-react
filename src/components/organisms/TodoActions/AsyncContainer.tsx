@@ -2,13 +2,9 @@ import { RootState } from "ducks/store"
 import { todoAsyncActions } from "ducks/todoAsync"
 import React, { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { _TodoActions as C } from "."
+import { OwnProps, _TodoActions as C } from "."
 
-type Props = {
-  children?: never
-}
-
-export const TodoActions: React.FC<Props> = () => {
+export const TodoActions: React.FC<OwnProps> = () => {
   const dispatch = useDispatch()
 
   const setVisibilityFilter = useCallback(

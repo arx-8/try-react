@@ -16,13 +16,16 @@ type ReduxDispatchProps = {
   setVisibilityFilter: (visibilityFilter: VisibilityFilter) => void
 }
 
-type Props = {
+export type OwnProps = {
   children?: never
 }
 
-export const _TodoActions: React.FC<
-  Props & ReduxStateProps & ReduxDispatchProps
-> = ({ setVisibilityFilter, currentVisibilityFilter }) => {
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
+
+export const _TodoActions: React.FC<Props> = ({
+  setVisibilityFilter,
+  currentVisibilityFilter,
+}) => {
   const onChange = (_: any, value: string): void => {
     setVisibilityFilter(value as VisibilityFilter)
   }

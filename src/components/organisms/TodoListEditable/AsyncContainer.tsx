@@ -2,30 +2,27 @@ import { CallPutTodoReq } from "data/repository/TodoRepository"
 import { Todo, TodoId } from "domain/models/Todo"
 import { RootState } from "ducks/store"
 import {
+  todoAsyncActions,
   todoAsyncRequestActions,
   todoAsyncSelectors,
-  todoAsyncActions,
 } from "ducks/todoAsync"
-import { TodoAsyncDispatch } from "ducks/todoAsync/types"
 import React from "react"
-import { connect } from "react-redux"
+import { connect, MapStateToProps } from "react-redux"
+import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
 import { equals, sort } from "utils/ArrayUtils"
-import { _TodoListEditable as Presentational } from "."
+import { OwnProps, _TodoListEditable as Presentational } from "."
 
 export type ReduxStateProps = {
   todoList: Todo[]
 }
 
 export type ReduxDispatchProps = {
-  deleteTodo: (todoId: TodoId) => void
+  deleteTodo: (todoId: TodoId) => Promise<void>
   setEditTargetId: (todoId?: TodoId) => void
-  updateTodo: (params: CallPutTodoReq) => void
+  updateTodo: (params: CallPutTodoReq) => Promise<void>
 }
 
-type Props = {
-  children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 class Container extends React.Component<Props> {
   shouldComponentUpdate = (nextProps: Props) => {
@@ -52,15 +49,18 @@ const sortCompareTodoId = (prev: Todo, next: Todo): number => {
   return 0
 }
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   return {
     todoList: todoAsyncSelectors.filterTodoList(state.todoAsync),
   }
 }
 
-const mapDispatchToProps = (
-  dispatch: TodoAsyncDispatch
-): ReduxDispatchProps => {
+const mapDispatchToProps: MapThunkDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
+> = (dispatch) => {
   return {
     deleteTodo: (id) =>
       dispatch(todoAsyncRequestActions.deleteTodoRequest({ id })),

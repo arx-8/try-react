@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import React from "react"
 import { css, jsx } from "@emotion/core"
-import { SemanticCOLORS, Label } from "semantic-ui-react"
-import { RootState } from "ducks/store"
-import { connect } from "react-redux"
 import { counterSelectors } from "ducks/counter"
+import { RootState } from "ducks/store"
+import React from "react"
+import { connect, MapStateToProps } from "react-redux"
+import { Label, SemanticCOLORS } from "semantic-ui-react"
 import { range } from "utils/ArrayUtils"
 
 const COLORS: readonly SemanticCOLORS[] = [
@@ -27,9 +27,11 @@ type ReduxStateProps = {
   beadsCount: number
 }
 
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps
+}
+
+type Props = OwnProps & ReduxStateProps
 
 export const _ColorfulBeads: React.FC<Props> = ({ beadsCount }) => {
   return (
@@ -45,7 +47,9 @@ const root = css`
   margin-top: 40px;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   return {
     beadsCount: counterSelectors.get10PerCount(state.counter),
   }

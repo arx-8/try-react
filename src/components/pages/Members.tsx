@@ -1,16 +1,19 @@
 /** @jsx jsx */
-import { Card, Header, Image } from "semantic-ui-react"
-import { connect } from "react-redux"
 import { css, jsx } from "@emotion/core"
-import { Dispatch } from "redux"
+import { Spinner } from "components/atoms/Spinner"
+import { InputCompanyName } from "components/organisms/InputCompanyName"
 import { DynamicRouteParams } from "constants/Paths"
+import { User } from "domain/models/GitHub"
 import { gitHubActions } from "ducks/gitHub"
 import { RootState } from "ducks/store"
-import { Spinner } from "components/atoms/Spinner"
-import { User } from "domain/models/GitHub"
 import React from "react"
+import {
+  connect,
+  MapDispatchToPropsFunction,
+  MapStateToProps,
+} from "react-redux"
+import { Card, Header, Image } from "semantic-ui-react"
 import useReactRouter from "use-react-router"
-import { InputCompanyName } from "components/organisms/InputCompanyName"
 
 type ReduxStateProps = {
   isLoading: boolean
@@ -22,10 +25,11 @@ type ReduxDispatchProps = {
   initializeMembers: () => void
 }
 
-type Props = {
+type OwnProps = {
   children?: never
-} & ReduxStateProps &
-  ReduxDispatchProps
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const _Members: React.FC<Props> = ({
   fetchMembersStart,
@@ -79,7 +83,9 @@ const root = css`
   margin: 2em 1.5em;
 `
 
-const mapStateToProps = (state: RootState): ReduxStateProps => {
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
   const { users, isLoading } = state.gitHub
   return {
     isLoading,
@@ -87,7 +93,10 @@ const mapStateToProps = (state: RootState): ReduxStateProps => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+  ReduxDispatchProps,
+  OwnProps
+> = (dispatch) => {
   return {
     fetchMembersStart: (companyName) =>
       dispatch(gitHubActions.fetchMembersStart({ companyName })),

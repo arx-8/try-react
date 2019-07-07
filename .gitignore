@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # misc output
-/misc
+/misc/*
+!/misc/.gitkeep

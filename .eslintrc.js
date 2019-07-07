@@ -55,7 +55,6 @@ module.exports = {
 
     // ホイスティングの許可
     "@typescript-eslint/no-use-before-define": "off",
-    "no-use-before-define": "off",
 
     // for Widening Literal Types
     "@typescript-eslint/no-object-literal-type-assertion": "off",
