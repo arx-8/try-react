@@ -1,6 +1,7 @@
 import { Counter } from "components/pages/Counter"
 import { Members } from "components/pages/Members"
 import { NotFound } from "components/pages/NotFound"
+import { RedditExample } from "components/pages/RedditExample"
 import { Root } from "components/pages/Root"
 import { TicTacToePage } from "components/pages/TicTacToePage"
 import { TodoAsyncPage } from "components/pages/TodoAsyncPage"
@@ -27,6 +28,7 @@ export const Routes: React.FC<Props> = () => {
         path={RoutePath.GitHubExplorer_Members}
         component={Members}
       />
+      <Route exact path={RoutePath.RedditExample} component={RedditExample} />
       <Route component={NotFound} />
     </Switch>
   )

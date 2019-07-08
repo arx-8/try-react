@@ -20,6 +20,7 @@ const items: MenuItems = [
   { path: RoutePath.TodoAsync, name: "TodoAsync" },
   { path: RoutePath.TicTacToe, name: "TicTacToe" },
   { path: RoutePath.GitHubExplorer, name: "GitHubExplorer" },
+  { path: RoutePath.RedditExample, name: "RedditExample" },
 ]
 
 export const HeaderMenu: React.FC<Props> = () => {

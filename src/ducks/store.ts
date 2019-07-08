@@ -14,6 +14,7 @@ import { CounterState } from "./counter/reducers"
 import { gitHubReducer } from "./gitHub"
 import { rootSaga } from "./gitHub/saga"
 import { GitHubState } from "./gitHub/types"
+import { redditReducers } from "./reddit"
 import { tttReducer } from "./tic-tac-toe"
 import { TTTState } from "./tic-tac-toe/types"
 import { todoReducer } from "./todo"
@@ -26,6 +27,8 @@ export type RootState = {
   todo: TodoState
   todoAsync: TodoAsyncState
   ticTacToe: TTTState
+  redditPostsBySubreddit: any
+  redditSelectedSubreddit: any
 }
 
 export const configureStore = (
@@ -37,6 +40,8 @@ export const configureStore = (
     todo: todoReducer,
     todoAsync: todoAsyncReducer,
     ticTacToe: tttReducer,
+    redditPostsBySubreddit: redditReducers.postsBySubreddit,
+    redditSelectedSubreddit: redditReducers.selectedSubreddit,
   })
 
   const composeEnhancers =

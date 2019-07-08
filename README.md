@@ -20,13 +20,14 @@ npm start
 
 ## Stack
 
-|                                                                                                   |                              |
-| ------------------------------------------------------------------------------------------------- | ---------------------------- |
-| [Counter](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/10-redux/03-redux)       | redux-actions                |
-| [GitHub members](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/11-async/03-saga) | Plain Redux + redux-saga     |
-| [TicTacToe](https://reactjs.org/tutorial/tutorial.html)                                           | typescript-fsa               |
-| [TODO](http://todomvc.com/examples/typescript-react/#/)                                           | Plain Redux                  |
-| TODO (Async)                                                                                      | typescript-fsa + redux-thunk |
+|                                                                                                   |                                                 |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [Counter](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/10-redux/03-redux)       | redux-actions                                   |
+| [GitHub members](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/11-async/03-saga) | Plain Redux + redux-saga                        |
+| [TicTacToe](https://reactjs.org/tutorial/tutorial.html)                                           | typescript-fsa                                  |
+| [TODO](http://todomvc.com/examples/typescript-react/#/)                                           | Plain Redux                                     |
+| TODO (Async)                                                                                      | typescript-fsa + redux-thunk                    |
+| [Reddit Example (Redux Tutorial)](https://redux.js.org/advanced/async-actions)                    | JavaScript + redux-thunk (JS & TS are mixable!) |
 
 ### Inspired design patterns
 

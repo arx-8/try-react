@@ -11,6 +11,7 @@ const _RoutePath = {
   TicTacToe: "/tic-tac-toe",
   GitHubExplorer: "/github-explorer",
   GitHubExplorer_Members: "/github-explorer/:companyName/members",
+  RedditExample: "/reddit-example",
 } as const
 
 type RoutePathKey = keyof typeof _RoutePath
@@ -33,7 +34,7 @@ export type DynamicRouteParams = {
   }
 }
 
-// インテリセンスが無効にさせないため、直接型指定できない定義の型チェック
+// インテリセンスを無効にさせたくないため、直接型指定できない定義の型チェック
 // RoutePath 存在しないパスを定義した時に、ここでエラーが発生して、定義ミスを発見できる
 type DynamicRoutePathKey = keyof typeof DynamicRoutePath
 type KeyCheck = RoutePathKey | DynamicRoutePathKey
