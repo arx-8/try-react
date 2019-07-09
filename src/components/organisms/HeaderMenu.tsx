@@ -21,6 +21,7 @@ const items: MenuItems = [
   { path: RoutePath.TicTacToe, name: "TicTacToe" },
   { path: RoutePath.GitHubExplorer, name: "GitHubExplorer" },
   { path: RoutePath.RedditExample, name: "RedditExample" },
+  { path: RoutePath.Login, name: "Login" },
 ]
 
 export const HeaderMenu: React.FC<Props> = () => {

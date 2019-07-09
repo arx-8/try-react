@@ -1,4 +1,7 @@
 import { Counter } from "components/pages/Counter"
+import { Login } from "components/pages/Login"
+import { PrivatePage } from "components/pages/Login/PrivatePage"
+import { PublicPage } from "components/pages/Login/PublicPage"
 import { Members } from "components/pages/Members"
 import { NotFound } from "components/pages/NotFound"
 import { RedditExample } from "components/pages/RedditExample"
@@ -23,6 +26,9 @@ export const Routes: React.FC<Props> = () => {
       <Route exact path={RoutePath.TodoAsync} component={TodoAsyncPage} />
       <Route exact path={RoutePath.TicTacToe} component={TicTacToePage} />
       <Route exact path={RoutePath.GitHubExplorer} component={Members} />
+      <Route exact path={RoutePath.Login} component={Login} />
+      <Route exact path={RoutePath.Public} component={PublicPage} />
+      <Route exact path={RoutePath.Private} component={PrivatePage} />
       <Route
         exact
         path={RoutePath.GitHubExplorer_Members}

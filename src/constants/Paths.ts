@@ -12,6 +12,9 @@ const _RoutePath = {
   GitHubExplorer: "/github-explorer",
   GitHubExplorer_Members: "/github-explorer/:companyName/members",
   RedditExample: "/reddit-example",
+  Login: "/login",
+  Private: "/private",
+  Public: "/public",
 } as const
 
 type RoutePathKey = keyof typeof _RoutePath
