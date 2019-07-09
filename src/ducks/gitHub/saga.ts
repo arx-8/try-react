@@ -11,7 +11,7 @@ import { actions, ActionTypes } from "./actions"
 import {
   callGetMembers,
   CallGetMembersResponse,
-} from "data/repository/GitHubRepository"
+} from "data/apis/GitHubAPIClient"
 import { CombinatorEffect } from "@redux-saga/types"
 import { toSerializableError } from "domain/errors/SerializableError"
 

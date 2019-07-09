@@ -1,4 +1,4 @@
-import { CallPutTodoReq } from "data/repository/TodoRepository"
+import { CallPutTodoReq } from "data/apis/TodoAPIClient"
 import { Todo, TodoId } from "domain/models/Todo"
 import { RootState } from "ducks/store"
 import {

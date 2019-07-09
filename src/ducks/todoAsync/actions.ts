@@ -8,7 +8,7 @@ import {
   CallPostTodoReq,
   callPutTodo,
   CallPutTodoReq,
-} from "data/repository/TodoRepository"
+} from "data/apis/TodoAPIClient"
 import {
   SerializableError,
   toSerializableError,
