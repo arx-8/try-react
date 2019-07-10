@@ -32,6 +32,7 @@ module.exports = {
       },
     ],
     "react/no-array-index-key": "error",
+    "react/no-unsafe": "error",
     "react/prop-types": "off",
     "react/self-closing-comp": [
       "error",
