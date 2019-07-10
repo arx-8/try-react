@@ -61,7 +61,7 @@
     "analyze:run": "source-map-explorer 'build/static/js/*.js' --html misc/source-map-explorer.html",
     "analyze": "npm-run-all --sequential build analyze:run",
     "build": "react-scripts build",
-    "eslint-print-config": "eslint --print-config src/index.tsx > misc/eslint-print-config.json",
+    "eslint-print-config": "eslint --print-config src > misc/eslint-print-config.json",
     "lint:eslint-dry": "eslint -c .eslintrc.js --ext .ts,.tsx src",
     "lint:eslint": "eslint -c .eslintrc.js --fix --ext .ts,.tsx src",
     "lint:tsc": "tsc --noEmit",
