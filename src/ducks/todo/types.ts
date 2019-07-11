@@ -7,7 +7,7 @@ export enum ActionTypes {
   SET_VISIBILITY_FILTER = "TODO/SET_VISIBILITY_FILTER",
 }
 
-export type TodoState = {
+export type TodoState = Readonly<{
   todoList: Todo[]
   visibilityFilter: VisibilityFilter
-}
+}>

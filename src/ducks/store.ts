@@ -21,7 +21,7 @@ import { todoReducer } from "./todo"
 import { TodoState } from "./todo/types"
 import { todoAsyncReducer, TodoAsyncState } from "./todoAsync"
 
-export type RootState = {
+export type RootState = Readonly<{
   counter: CounterState
   gitHub: GitHubState
   todo: TodoState
@@ -29,10 +29,10 @@ export type RootState = {
   ticTacToe: TTTState
   redditPostsBySubreddit: any
   redditSelectedSubreddit: any
-}
+}>
 
 export const configureStore = (
-  initialState: any = {}
+  initialState: Partial<RootState> = {}
 ): Store<RootState, AnyAction> => {
   const rootReducer = combineReducers({
     counter: counterReducer,
