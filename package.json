@@ -55,7 +55,8 @@
     "prettier": "1.18.2",
     "react-scripts": "3.0.1",
     "source-map-explorer": "2.0.1",
-    "typescript": "3.5.2"
+    "typescript": "3.5.2",
+    "typesync": "0.5.1"
   },
   "scripts": {
     "analyze:run": "source-map-explorer 'build/static/js/*.js' --html misc/source-map-explorer.html",
@@ -68,7 +69,8 @@
     "lint-dry": "npm-run-all --parallel lint:eslint-dry lint:tsc",
     "lint": "npm-run-all --parallel lint:eslint lint:tsc",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "typesync": "typesync"
   },
   "eslintConfig": {
     "extends": "react-app"
