@@ -1,7 +1,7 @@
-import { CounterState } from "./reducers"
+import { RootState } from "ducks/store"
 
-const get10PerCount = (counter: CounterState): number => {
-  return Math.ceil(counter.count / 10)
+const get10PerCount = (counter: RootState): number => {
+  return Math.ceil(counter.counter.count / 10)
 }
 
 export const selectors = {
