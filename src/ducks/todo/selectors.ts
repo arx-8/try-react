@@ -1,11 +1,13 @@
 import { Todo } from "domain/models/Todo"
-import { TodoState } from "./types"
+import { RootState } from "ducks/store"
 
-const filterTodoList = (state: TodoState): Todo[] => {
-  if (state.visibilityFilter === "all") {
-    return state.todoList
+const filterTodoList = (state: RootState): Todo[] => {
+  if (state.todo.visibilityFilter === "all") {
+    return state.todo.todoList
   }
-  return state.todoList.filter((t) => t.status === state.visibilityFilter)
+  return state.todo.todoList.filter(
+    (t) => t.status === state.todo.visibilityFilter
+  )
 }
 
 export const selectors = {

@@ -51,7 +51,7 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
   return {
-    beadsCount: counterSelectors.get10PerCount(state.counter),
+    beadsCount: counterSelectors.get10PerCount(state),
   }
 }
 

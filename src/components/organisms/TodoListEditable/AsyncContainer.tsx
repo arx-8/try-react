@@ -53,7 +53,7 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
   return {
-    todoList: todoAsyncSelectors.filterTodoList(state.todoAsync),
+    todoList: todoAsyncSelectors.filterTodoList(state),
   }
 }
 

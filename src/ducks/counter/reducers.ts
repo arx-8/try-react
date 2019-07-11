@@ -3,10 +3,10 @@ import { CounterActionType } from "./types"
 import { handleActions, ReduxCompatibleReducer } from "redux-actions"
 import produce from "immer"
 
-export type CounterState = {
+export type CounterState = Readonly<{
   count: number
   defaultAmount: number
-}
+}>
 
 // redux-actions の型がうまく書けない。だいぶダメな感じ。
 type Action =

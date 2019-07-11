@@ -7,9 +7,9 @@ export type InputValue = "O" | "X" | null
 
 export type PlayerName = NonNullable<InputValue>
 
-export type TTTState = {
+export type TTTState = Readonly<{
   currentPlayerName: PlayerName
   winnerPlayerName: PlayerName | null
   inputValues: InputValue[]
   isContinue: boolean
-}
+}>
