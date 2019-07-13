@@ -9,6 +9,7 @@ import {
 } from "redux"
 import createSagaMiddleware from "redux-saga"
 import thunkMiddleWare from "redux-thunk"
+import { authReducer, AuthState } from "./auth"
 import { counterReducer } from "./counter"
 import { CounterState } from "./counter/reducers"
 import { gitHubReducer } from "./gitHub"
@@ -22,6 +23,7 @@ import { TodoState } from "./todo/types"
 import { todoAsyncReducer, TodoAsyncState } from "./todoAsync"
 
 export type RootState = Readonly<{
+  auth: AuthState
   counter: CounterState
   gitHub: GitHubState
   todo: TodoState
@@ -34,7 +36,8 @@ export type RootState = Readonly<{
 export const configureStore = (
   initialState: Partial<RootState> = {}
 ): Store<RootState, AnyAction> => {
-  const rootReducer = combineReducers({
+  const rootReducer = combineReducers<RootState>({
+    auth: authReducer,
     counter: counterReducer,
     gitHub: gitHubReducer,
     todo: todoReducer,

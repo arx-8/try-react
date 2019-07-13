@@ -1,14 +1,20 @@
 import { RoutePath } from "constants/Paths"
+import { RootState } from "ducks/store"
 import React from "react"
+import { connect, MapStateToProps } from "react-redux"
 import { Redirect, Route, RouteProps } from "react-router-dom"
 
-type OwnProps = {
-  isAuthenticated?: boolean
+type ReduxStateProps = {
+  isAuthenticated: boolean
 }
 
-type Props = OwnProps & RouteProps
+type OwnProps = {
+  // NOP
+}
 
-export const PrivateRoute: React.FC<Props> = ({ isAuthenticated, ...rest }) => {
+type Props = OwnProps & ReduxStateProps & RouteProps
+
+const _PrivateRoute: React.FC<Props> = ({ isAuthenticated, ...rest }) => {
   if (!isAuthenticated) {
     return (
       <Redirect
@@ -22,3 +28,14 @@ export const PrivateRoute: React.FC<Props> = ({ isAuthenticated, ...rest }) => {
 
   return <Route {...rest} />
 }
+
+const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
+  state
+) => {
+  const { authToken } = state.auth
+  return {
+    isAuthenticated: !!authToken,
+  }
+}
+
+export const PrivateRoute = connect(mapStateToProps)(_PrivateRoute)
