@@ -15,6 +15,7 @@ const _RoutePath = {
   Login: "/login",
   Private: "/private",
   Public: "/public",
+  NotFound: "/notfound",
 } as const
 
 type RoutePathKey = keyof typeof _RoutePath

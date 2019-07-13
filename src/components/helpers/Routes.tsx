@@ -12,6 +12,7 @@ import { TodoPage } from "components/pages/TodoPage"
 import { RoutePath } from "constants/Paths"
 import React from "react"
 import { Route, Switch } from "react-router-dom"
+import { PrivateRoute } from "./PrivateRoute"
 
 type Props = {
   children?: never
@@ -28,13 +29,16 @@ export const Routes: React.FC<Props> = () => {
       <Route exact path={RoutePath.GitHubExplorer} component={Members} />
       <Route exact path={RoutePath.Login} component={Login} />
       <Route exact path={RoutePath.Public} component={PublicPage} />
-      <Route exact path={RoutePath.Private} component={PrivatePage} />
+      <PrivateRoute exact path={RoutePath.Private} component={PrivatePage} />
       <Route
         exact
         path={RoutePath.GitHubExplorer_Members}
         component={Members}
       />
       <Route exact path={RoutePath.RedditExample} component={RedditExample} />
+
+      {/* No route */}
+      <Route path={RoutePath.NotFound} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   )
