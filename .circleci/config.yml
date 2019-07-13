@@ -1,7 +1,6 @@
 version: 2
 
 jobs:
-
   # Check code (UnitTest, Lint)
   check_code:
     docker:
@@ -42,3 +41,4 @@ workflows:
             branches:
               only:
                 - /feature\/.*/
+                - /renovate\/.*/
