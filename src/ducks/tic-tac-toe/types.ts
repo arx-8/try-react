@@ -1,6 +1,6 @@
 export enum ActionTypes {
-  CLICK_SQUARE = "TTT/CLICK_SQUARE",
-  RESET = "TTT/RESET",
+  CLICK_SQUARE = "tic-tac-toe/CLICK_SQUARE",
+  RESET = "tic-tac-toe/RESET",
 }
 
 export type InputValue = "O" | "X" | null

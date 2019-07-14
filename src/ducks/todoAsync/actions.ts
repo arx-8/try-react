@@ -1,3 +1,4 @@
+import { APP_NAME } from "constants/App"
 import {
   callDeleteTodo,
   CallDeleteTodoReq,
@@ -18,19 +19,17 @@ import debounce from "lodash/debounce"
 import { AppThunkAction } from "types/ReduxTypes"
 import actionCreatorFactory from "typescript-fsa"
 
-const DOMAIN = "TODO_ASYNC"
-
 export enum ActionTypes {
-  ADD_TODO = "ADD_TODO",
-  CHANGE_TODO_STATUS = "CHANGE_TODO_STATUS",
-  DELETE_TODO = "DELETE_TODO",
-  FETCH_ALL_TODOS = "FETCH_ALL_TODOS",
-  FETCH_TODO = "FETCH_TODO",
-  SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER",
-  SET_EDIT_TARGET_ID = "SET_EDIT_TARGET_ID",
+  ADD_TODO = "todoAsync/ADD_TODO",
+  CHANGE_TODO_STATUS = "todoAsync/CHANGE_TODO_STATUS",
+  DELETE_TODO = "todoAsync/DELETE_TODO",
+  FETCH_ALL_TODOS = "todoAsync/FETCH_ALL_TODOS",
+  FETCH_TODO = "todoAsync/FETCH_TODO",
+  SET_VISIBILITY_FILTER = "todoAsync/SET_VISIBILITY_FILTER",
+  SET_EDIT_TARGET_ID = "todoAsync/SET_EDIT_TARGET_ID",
 }
 
-const create = actionCreatorFactory(DOMAIN)
+const create = actionCreatorFactory(APP_NAME)
 
 const addTodo = create.async<CallPostTodoReq, TodoId, SerializableError>(
   ActionTypes.ADD_TODO
