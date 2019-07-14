@@ -30,7 +30,7 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
 ) => {
   return {
     errorMessage: state.todoAsync.errorMessage,
-    loading: todoAsyncSelectors.isSomeLoading(state),
+    loading: todoAsyncSelectors.isSomeLoading(state.todoAsync),
   }
 }
 
