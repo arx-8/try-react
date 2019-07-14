@@ -158,7 +158,7 @@ const validationSchema = Yup.object().shape<FormValues>({
 const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
-  const editTarget = selectors.extractEditTarget(state)
+  const editTarget = selectors.extractEditTarget(state.todoAsync)
 
   const formInitialValues = editTarget
     ? {
@@ -174,7 +174,10 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   return {
     editTargetId: maybeId,
     formInitialValues,
-    isTargetLoading: todoAsyncSelectors.isTargetLoading(state, maybeId),
+    isTargetLoading: todoAsyncSelectors.isTargetLoading(
+      state.todoAsync,
+      maybeId
+    ),
   }
 }
 

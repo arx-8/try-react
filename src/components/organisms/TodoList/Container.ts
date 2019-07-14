@@ -11,7 +11,7 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
   return {
-    todoList: todoSelectors.filterTodoList(state),
+    todoList: todoSelectors.filterTodoList(state.todo),
   }
 }
 

@@ -1,13 +1,12 @@
+import { APP_NAME } from "constants/App"
 import actionCreatorFactory from "typescript-fsa"
 
-const DOMAIN = "auth"
-
 export enum ActionTypes {
-  LOGIN = "LOGIN",
-  LOGOUT = "LOGOUT",
+  LOGIN = "auth/LOGIN",
+  LOGOUT = "auth/LOGOUT",
 }
 
-const create = actionCreatorFactory(DOMAIN)
+const create = actionCreatorFactory(APP_NAME)
 
 const login = create(ActionTypes.LOGIN)
 const logout = create(ActionTypes.LOGOUT)
