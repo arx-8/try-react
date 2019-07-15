@@ -1,6 +1,11 @@
 import { createMuiTheme } from "@material-ui/core"
+import { deepOrange, indigo } from "@material-ui/core/colors"
 
 export const muiTheme = createMuiTheme({
+  palette: {
+    primary: indigo,
+    secondary: deepOrange,
+  },
   typography: {
     fontFamily: [
       "-apple-system",

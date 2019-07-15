@@ -1,10 +1,11 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
+import { Button } from "@material-ui/core"
 import { DynamicRoutePath, RoutePath } from "constants/Paths"
-import { Formik, Field } from "formik"
-import * as Yup from "yup"
+import { Field, Formik } from "formik"
 import React from "react"
 import useReactRouter from "use-react-router"
+import * as Yup from "yup"
 
 type Props = {
   children?: never
@@ -39,10 +40,17 @@ export const InputCompanyName: React.FC<Props> = ({ onReset }) => {
             </div>
 
             <div css={buttons}>
-              <button type="submit" disabled={!isValid}>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={!isValid}
+              >
                 Go
-              </button>
-              <button type="reset">Reset</button>
+              </Button>
+              <Button variant="contained" color="secondary" type="reset">
+                Reset
+              </Button>
             </div>
           </form>
         )}
@@ -70,5 +78,5 @@ const errMsg = css`
 const buttons = css`
   display: grid;
   grid-template-columns: repeat(2, 50px);
-  column-gap: 8px;
+  column-gap: 24px;
 `
