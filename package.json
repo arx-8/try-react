@@ -49,7 +49,7 @@
     "@types/react-test-renderer": "16.8.2",
     "@types/redux-actions": "2.6.1",
     "@types/redux-immutable-state-invariant": "2.1.1",
-    "@types/yup": "0.26.21",
+    "@types/yup": "0.26.22",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-jest": "22.7.2",
     "eslint-plugin-only-error": "1.0.2",
