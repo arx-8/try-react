@@ -1,7 +1,7 @@
-import { Todo, VisibilityFilter, TodoId } from "domain/models/Todo"
+import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
 import produce from "immer"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
-import { actions } from "./actions"
+import * as actions from "./actions"
 
 export type State = Readonly<{
   todoList: Todo[]

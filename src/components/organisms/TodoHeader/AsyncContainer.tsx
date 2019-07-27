@@ -1,5 +1,5 @@
 import { RootState } from "ducks/store"
-import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
+import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
 import React, { useEffect } from "react"
 import { connect, MapStateToProps } from "react-redux"
 import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
@@ -40,7 +40,7 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
 > = (dispatch) => {
   return {
     fetchAllTodos: () =>
-      dispatch(todoAsyncRequestActions.fetchAllTodosRequestDebounce()),
+      dispatch(todoAsyncOperations.fetchAllTodosRequestDebounce()),
   }
 }
 

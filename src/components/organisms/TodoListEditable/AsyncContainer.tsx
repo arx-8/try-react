@@ -1,11 +1,7 @@
 import { CallPutTodoReq } from "data/apis/TodoAPIClient"
 import { Todo, TodoId } from "domain/models/Todo"
 import { RootState } from "ducks/store"
-import {
-  todoAsyncActions,
-  todoAsyncRequestActions,
-  todoAsyncSelectors,
-} from "ducks/todoAsync"
+import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
 import React from "react"
 import { connect, MapStateToProps } from "react-redux"
 import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
@@ -62,12 +58,11 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
   OwnProps
 > = (dispatch) => {
   return {
-    deleteTodo: (id) =>
-      dispatch(todoAsyncRequestActions.deleteTodoRequest({ id })),
+    deleteTodo: (id) => dispatch(todoAsyncOperations.deleteTodoRequest({ id })),
     setEditTargetId: (editTargetId) =>
-      dispatch(todoAsyncActions.setEditTargetId({ editTargetId })),
+      dispatch(todoAsyncOperations.setEditTargetId({ editTargetId })),
     updateTodo: (params) =>
-      dispatch(todoAsyncRequestActions.updateTodoRequest(params)),
+      dispatch(todoAsyncOperations.updateTodoRequest(params)),
   }
 }
 

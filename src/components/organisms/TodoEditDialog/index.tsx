@@ -11,7 +11,7 @@ import RadioGroup from "@material-ui/core/RadioGroup"
 import TextField from "@material-ui/core/TextField"
 import { Todo, TodoId, VisibilityFilterValue } from "domain/models/Todo"
 import { RootState } from "ducks/store"
-import { todoAsyncRequestActions, todoAsyncSelectors } from "ducks/todoAsync"
+import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
 import { selectors } from "ducks/todoAsync/selectors"
 import { Field, FieldProps, Formik, getIn } from "formik"
 import React, { Fragment, useEffect } from "react"
@@ -187,7 +187,7 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
 > = (dispatch) => {
   return {
     fetchTodo: (editTargetId) =>
-      dispatch(todoAsyncRequestActions.fetchTodoRequest({ id: editTargetId })),
+      dispatch(todoAsyncOperations.fetchTodoRequest({ id: editTargetId })),
   }
 }
 
