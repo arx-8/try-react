@@ -68,14 +68,24 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run typesync`
+
+Install missing TypeScript typings for dependencies.
+
+If you want to install together, you can use this
+
+```sh
+npm i ${PACKAGE_NAME} && npm run typesync && npm i
+```
+
 ### `GENERATE_SOURCEMAP=true npm run analyze`
 
-Analyzing the bundle size.
+Analyzing the bundle size.<br>
 Output to `misc/source-map-explorer.html`.
 
 ### `npm run eslint-print-config`
 
-Outputs the configuration to be used for the file passed.
+Outputs the configuration to be used for the file passed.<br>
 See [`ESLint --print-config`](https://eslint.org/docs/user-guide/command-line-interface#--print-config)
 
 ## Learn More
