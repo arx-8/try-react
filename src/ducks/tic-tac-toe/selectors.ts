@@ -1,2 +1,2 @@
 // NOP
-export const selectors = {}
+export const selector = undefined

@@ -1,6 +1,6 @@
 import * as operations from "./operations"
 import { reducer, State } from "./reducers"
-import { selectors } from "./selectors"
+import * as selectors from "./selectors"
 
 export const todoAsyncOperations = operations
 export const todoAsyncReducer = reducer

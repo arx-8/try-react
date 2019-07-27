@@ -1,2 +1,2 @@
 // NOP
-export const operations = {}
+export const operation = undefined
