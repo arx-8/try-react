@@ -35,6 +35,7 @@ module.exports = {
     "react/no-access-state-in-setstate": "error",
     "react/no-array-index-key": "error",
     "react/no-unsafe": ["error", { checkAliases: true }],
+    "react/prefer-stateless-function": "error",
     "react/prop-types": "off",
     "react/self-closing-comp": [
       "error",
