@@ -21,6 +21,7 @@ import { TTTState } from "./tic-tac-toe/types"
 import { todoReducer } from "./todo"
 import { TodoState } from "./todo/types"
 import { todoAsyncReducer, TodoAsyncState } from "./todoAsync"
+import persistState from "redux-localstorage"
 
 export type RootState = Readonly<{
   auth: AuthState
@@ -67,7 +68,7 @@ export const configureStore = (
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(...middleWares))
+    composeEnhancers(applyMiddleware(...middleWares), persistState(["auth"]))
   )
 
   // Before running a Saga, you must mount the Saga middleware on the Store using applyMiddleware
