@@ -1,4 +1,4 @@
-import { actions } from "./actions"
+import * as actions from "./actions"
 import { range } from "utils/ArrayUtils"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
 import { TTTState, PlayerName, InputValue } from "./types"

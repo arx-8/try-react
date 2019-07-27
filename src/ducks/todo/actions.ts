@@ -2,7 +2,7 @@ import { TodoId, TodoStatus, VisibilityFilter } from "domain/models/Todo"
 import { ActionWithPayloadHandler } from "types/ReduxTypes"
 import { ActionTypes } from "./types"
 
-const addTodo: ActionWithPayloadHandler<
+export const addTodo: ActionWithPayloadHandler<
   typeof ActionTypes.ADD_TODO,
   {
     label: string
@@ -12,7 +12,7 @@ const addTodo: ActionWithPayloadHandler<
   payload,
 })
 
-const deleteTodo: ActionWithPayloadHandler<
+export const deleteTodo: ActionWithPayloadHandler<
   typeof ActionTypes.DELETE_TODO,
   {
     todoId: TodoId
@@ -22,7 +22,7 @@ const deleteTodo: ActionWithPayloadHandler<
   payload,
 })
 
-const changeTodoStatus: ActionWithPayloadHandler<
+export const changeTodoStatus: ActionWithPayloadHandler<
   typeof ActionTypes.CHANGE_TODO_STATUS,
   {
     todoId: TodoId
@@ -33,7 +33,7 @@ const changeTodoStatus: ActionWithPayloadHandler<
   payload,
 })
 
-const setVisibilityFilter: ActionWithPayloadHandler<
+export const setVisibilityFilter: ActionWithPayloadHandler<
   typeof ActionTypes.SET_VISIBILITY_FILTER,
   {
     visibilityFilter: VisibilityFilter
@@ -42,10 +42,3 @@ const setVisibilityFilter: ActionWithPayloadHandler<
   type: ActionTypes.SET_VISIBILITY_FILTER,
   payload,
 })
-
-export const actions = {
-  addTodo,
-  deleteTodo,
-  changeTodoStatus,
-  setVisibilityFilter,
-}

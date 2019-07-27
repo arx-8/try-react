@@ -1,7 +1,7 @@
-import { initialState, reducer } from "./reducers"
-import { actions } from "./actions"
 import { TodoId } from "domain/models/Todo"
 import produce from "immer"
+import * as actions from "./actions"
+import { initialState, reducer } from "./reducers"
 
 describe("updateTodo", () => {
   it("updateTodo", async () => {

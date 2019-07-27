@@ -4,7 +4,7 @@ import { Spinner } from "components/atoms/Spinner"
 import { InputCompanyName } from "components/organisms/InputCompanyName"
 import { DynamicRouteParams } from "constants/Paths"
 import { User } from "domain/models/GitHub"
-import { gitHubActions } from "ducks/gitHub"
+import { gitHubOperations } from "ducks/gitHub"
 import { RootState } from "ducks/store"
 import React from "react"
 import {
@@ -99,8 +99,8 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
 > = (dispatch) => {
   return {
     fetchMembersStart: (companyName) =>
-      dispatch(gitHubActions.fetchMembersStart({ companyName })),
-    initializeMembers: () => dispatch(gitHubActions.initializeMembers()),
+      dispatch(gitHubOperations.fetchMembersStart({ companyName })),
+    initializeMembers: () => dispatch(gitHubOperations.initializeMembers()),
   }
 }
 

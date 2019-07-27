@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { RoutePath } from "constants/Paths"
-import { authActions } from "ducks/auth"
+import { authOperations } from "ducks/auth"
 import { RootState } from "ducks/store"
 import React from "react"
 import {
@@ -99,8 +99,8 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   OwnProps
 > = (dispatch) => {
   return {
-    login: () => dispatch(authActions.login()),
-    logout: () => dispatch(authActions.logout()),
+    login: () => dispatch(authOperations.login()),
+    logout: () => dispatch(authOperations.logout()),
   }
 }
 

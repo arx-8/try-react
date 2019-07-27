@@ -1,5 +1,5 @@
 import { RootState } from "ducks/store"
-import { todoActions } from "ducks/todo"
+import { todoOperations } from "ducks/todo"
 import {
   connect,
   MapDispatchToPropsFunction,
@@ -21,7 +21,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   OwnProps
 > = (dispatch) => {
   return {
-    addTodo: (label: string) => dispatch(todoActions.addTodo({ label })),
+    addTodo: (label: string) => dispatch(todoOperations.addTodo({ label })),
   }
 }
 

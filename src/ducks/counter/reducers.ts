@@ -1,4 +1,4 @@
-import { actions } from "./actions"
+import * as actions from "./actions"
 import { CounterActionType } from "./types"
 import { handleActions, ReduxCompatibleReducer } from "redux-actions"
 import produce from "immer"
@@ -8,7 +8,7 @@ export type CounterState = Readonly<{
   defaultAmount: number
 }>
 
-// redux-actions の型がうまく書けない。だいぶダメな感じ。
+// redux-actions の型がうまく書けない。redux-actions はだいぶダメな感じ。
 type Action =
   | ReturnType<
       | typeof actions.add

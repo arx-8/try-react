@@ -12,7 +12,7 @@ export enum ActionTypes {
   INITIALIZE_MEMBERS = "app/gitHub/INITIALIZE_MEMBERS",
 }
 
-const fetchMembersStart: ActionWithPayloadHandler<
+export const fetchMembersStart: ActionWithPayloadHandler<
   typeof ActionTypes.FETCH_MEMBERS_START,
   FetchMembersParams
 > = (payload) => ({
@@ -20,7 +20,7 @@ const fetchMembersStart: ActionWithPayloadHandler<
   payload,
 })
 
-const fetchMembersSucceed: ActionWithPayloadHandler<
+export const fetchMembersSucceed: ActionWithPayloadHandler<
   typeof ActionTypes.FETCH_MEMBERS_SUCCEED,
   FetchMembersParams & FetchMemberResponse
 > = (payload) => ({
@@ -28,7 +28,7 @@ const fetchMembersSucceed: ActionWithPayloadHandler<
   payload,
 })
 
-const fetchMembersFail: ActionWithPayloadHandler<
+export const fetchMembersFail: ActionWithPayloadHandler<
   typeof ActionTypes.FETCH_MEMBERS_FAIL,
   FetchMembersParams & FetchMemberError
 > = (payload) => ({
@@ -36,21 +36,14 @@ const fetchMembersFail: ActionWithPayloadHandler<
   payload,
 })
 
-const initializeMembers: ActionHandler<
+export const initializeMembers: ActionHandler<
   typeof ActionTypes.INITIALIZE_MEMBERS
 > = () => ({
   type: ActionTypes.INITIALIZE_MEMBERS,
 })
 
-export const actions = {
-  fetchMembersStart,
-  fetchMembersSucceed,
-  fetchMembersFail,
-  initializeMembers,
-}
-
 export type Action =
-  | ReturnType<typeof actions.fetchMembersStart>
-  | ReturnType<typeof actions.fetchMembersSucceed>
-  | ReturnType<typeof actions.fetchMembersFail>
-  | ReturnType<typeof actions.initializeMembers>
+  | ReturnType<typeof fetchMembersStart>
+  | ReturnType<typeof fetchMembersSucceed>
+  | ReturnType<typeof fetchMembersFail>
+  | ReturnType<typeof initializeMembers>

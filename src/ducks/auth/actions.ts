@@ -8,10 +8,6 @@ export enum ActionTypes {
 
 const create = actionCreatorFactory(APP_NAME)
 
-const login = create(ActionTypes.LOGIN)
-const logout = create(ActionTypes.LOGOUT)
+export const login = create(ActionTypes.LOGIN)
 
-export const actions = {
-  login,
-  logout,
-}
+export const logout = create(ActionTypes.LOGOUT)

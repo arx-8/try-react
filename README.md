@@ -1,11 +1,11 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/31a07445-a91f-4f7c-9803-0303061225e3/deploy-status)](https://app.netlify.com/sites/try-react/deploys)
 
----
+* * *
 
 ## Textbook
 
-- [くるみ割り書房 - りあクト！ TypeScript で始めるつらくない React 開発 第 2 版](https://booth.pm/ja/items/1312652)
-  - [oukayuka/ReactBeginnersBook-2.0](https://github.com/oukayuka/ReactBeginnersBook-2.0)
+-   [くるみ割り書房 - りあクト！ TypeScript で始めるつらくない React 開発 第 2 版](https://booth.pm/ja/items/1312652)
+    -   [oukayuka/ReactBeginnersBook-2.0](https://github.com/oukayuka/ReactBeginnersBook-2.0)
 
 ## Live demo
 
@@ -20,20 +20,20 @@ npm start
 
 ## Stack
 
-|                                                                                                   |                                                  |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [Counter](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/10-redux/03-redux)       | redux-actions                                    |
-| [GitHub members](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/11-async/03-saga) | Plain Redux + redux-saga                         |
-| [TicTacToe](https://reactjs.org/tutorial/tutorial.html)                                           | typescript-fsa                                   |
-| [TODO](http://todomvc.com/examples/typescript-react/#/)                                           | Plain Redux                                      |
-| TODO (Async)                                                                                      | typescript-fsa + redux-thunk (**_Sounds good_**) |
-| [Reddit Example (Redux Tutorial)](https://redux.js.org/advanced/async-actions)                    | JavaScript + redux-thunk (JS & TS are mixable!)  |
+|                                                                                                   |                                                              |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| TODO (Async)                                                                                      | typescript-fsa + redux-thunk (**_Sounds good & Recommend_**) |
+| [Counter](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/10-redux/03-redux)       | redux-actions                                                |
+| [GitHub members](https://github.com/oukayuka/ReactBeginnersBook-2.0/tree/master/11-async/03-saga) | Plain Redux + redux-saga                                     |
+| [TicTacToe](https://reactjs.org/tutorial/tutorial.html)                                           | typescript-fsa                                               |
+| [TODO](http://todomvc.com/examples/typescript-react/#/)                                           | Plain Redux                                                  |
+| [Reddit Example (Redux Tutorial)](https://redux.js.org/advanced/async-actions)                    | JavaScript + redux-thunk (JS & TS are mixable!)              |
 
 ### Inspired design patterns
 
-- [re-ducks](https://github.com/alexnm/re-ducks)
-- [Atomic Design](https://patternlab.io/)
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+-   [re-ducks](https://github.com/alexnm/re-ducks)
+-   [Atomic Design](https://patternlab.io/)
+-   [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 ## Available Scripts
 

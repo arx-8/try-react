@@ -1,5 +1,5 @@
 import { RootState } from "ducks/store"
-import { todoActions, todoSelectors } from "ducks/todo"
+import { todoOperations, todoSelectors } from "ducks/todo"
 import {
   connect,
   MapDispatchToPropsFunction,
@@ -21,8 +21,8 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
 > = (dispatch) => {
   return {
     changeTodoStatus: (todoId, todoStatus) =>
-      dispatch(todoActions.changeTodoStatus({ todoId, todoStatus })),
-    deleteTodo: (todoId) => dispatch(todoActions.deleteTodo({ todoId })),
+      dispatch(todoOperations.changeTodoStatus({ todoId, todoStatus })),
+    deleteTodo: (todoId) => dispatch(todoOperations.deleteTodo({ todoId })),
   }
 }
 
