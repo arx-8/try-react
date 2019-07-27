@@ -23,7 +23,6 @@ type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 export const _TodoListEditable: React.FC<Props> = ({
   closeTodoEditDialog,
   deleteTodo,
-  isOpenTodoEditDialog,
   openTodoEditDialog,
   todoList,
   updateTodo,
@@ -82,8 +81,6 @@ export const _TodoListEditable: React.FC<Props> = ({
       </List>
 
       <TodoEditDialog
-        open={isOpenTodoEditDialog}
-        onClose={closeTodoEditDialog}
         onSubmit={(editTargetId, values) => {
           updateTodo({
             id: editTargetId,

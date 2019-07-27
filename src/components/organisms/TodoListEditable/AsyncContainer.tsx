@@ -9,7 +9,6 @@ import { equals, sort } from "utils/ArrayUtils"
 import { OwnProps, _TodoListEditable as Presentational } from "."
 
 export type ReduxStateProps = {
-  isOpenTodoEditDialog: boolean
   todoList: Todo[]
 }
 
@@ -51,7 +50,6 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
   return {
-    isOpenTodoEditDialog: state.todoAsync.todoEditDialog.isOpen,
     todoList: todoAsyncSelectors.filterTodoList(state.todoAsync),
   }
 }

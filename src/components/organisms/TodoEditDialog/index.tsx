@@ -22,11 +22,13 @@ import * as Yup from "yup"
 type ReduxStateProps = {
   editTargetId?: TodoId
   formInitialValues: FormValues
+  isOpenTodoEditDialog: boolean
   isTargetLoading: boolean
 }
 
 type ReduxDispatchProps = {
   fetchTodo: (editTargetId: TodoId) => Promise<void>
+  closeTodoEditDialog: () => void
 }
 
 /**
@@ -36,8 +38,6 @@ type ReduxDispatchProps = {
 type FormValues = Omit<Todo, "id">
 
 type OwnProps = {
-  open: boolean
-  onClose: () => void
   onSubmit: (editTargetId: TodoId, values: FormValues) => void
   children?: never
 }
@@ -45,13 +45,13 @@ type OwnProps = {
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const _TodoEditDialog: React.FC<Props> = ({
+  closeTodoEditDialog,
   editTargetId,
   fetchTodo,
   formInitialValues,
+  isOpenTodoEditDialog,
   isTargetLoading,
-  onClose,
   onSubmit,
-  open,
 }) => {
   useEffect(() => {
     if (editTargetId) {
@@ -76,7 +76,7 @@ const _TodoEditDialog: React.FC<Props> = ({
         isValid,
         values,
       }) => (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={isOpenTodoEditDialog} onClose={closeTodoEditDialog}>
           <DialogTitle>Edit your TODO</DialogTitle>
           <DialogContent>
             <div>
@@ -130,7 +130,7 @@ const _TodoEditDialog: React.FC<Props> = ({
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={closeTodoEditDialog}>Cancel</Button>
             <Button onClick={handleReset} disabled={!dirty}>
               Reset
             </Button>
@@ -174,6 +174,7 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   return {
     editTargetId: maybeId,
     formInitialValues,
+    isOpenTodoEditDialog: state.todoAsync.todoEditDialog.isOpen,
     isTargetLoading: todoAsyncSelectors.isTargetLoading(
       state.todoAsync,
       maybeId
@@ -188,6 +189,8 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
   return {
     fetchTodo: (editTargetId) =>
       dispatch(todoAsyncOperations.fetchTodoRequest({ id: editTargetId })),
+    closeTodoEditDialog: () =>
+      dispatch(todoAsyncOperations.closeTodoEditDialog()),
   }
 }
 
