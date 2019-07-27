@@ -71,12 +71,12 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `GENERATE_SOURCEMAP=true npm run analyze`
 
 Analyzing the bundle size.
-Output to `misc\source-map-explorer.html`.
+Output to `misc/source-map-explorer.html`.
 
 ### `npm run eslint-print-config`
 
 Outputs the configuration to be used for the file passed.
-See [ESLint --print-config](https://eslint.org/docs/user-guide/command-line-interface#--print-config)
+See [`ESLint --print-config`](https://eslint.org/docs/user-guide/command-line-interface#--print-config)
 
 ## Learn More
 

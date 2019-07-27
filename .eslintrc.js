@@ -31,8 +31,11 @@ module.exports = {
         trailingComma: "es5",
       },
     ],
+    "react/jsx-boolean-value": "error",
+    "react/no-access-state-in-setstate": "error",
     "react/no-array-index-key": "error",
-    "react/no-unsafe": "error",
+    "react/no-unsafe": ["error", { checkAliases: true }],
+    "react/prefer-stateless-function": "error",
     "react/prop-types": "off",
     "react/self-closing-comp": [
       "error",
@@ -41,6 +44,7 @@ module.exports = {
         html: false,
       },
     ],
+    "react/void-dom-elements-no-children": "error",
 
     // constructor のショートハンド（メンバーの省略記法）を使いたいため
     "@typescript-eslint/explicit-member-accessibility": "off",
