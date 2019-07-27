@@ -162,20 +162,12 @@ export const reducer = reducerWithInitialState(initialState)
     })
   })
   /**
-   * setEditTargetId
-   */
-  .case(actions.setEditTargetId, (state, payload) => {
-    return produce(state, (draft) => {
-      const { editTargetId } = payload
-      draft.todoEditDialog.editTargetId = editTargetId
-    })
-  })
-  /**
    * setOpenTodoEditDialog
    */
   .case(actions.setOpenTodoEditDialog, (state, payload) => {
     return produce(state, (draft) => {
-      const { isOpen } = payload
+      const { editTargetId, isOpen } = payload
+      draft.todoEditDialog.editTargetId = editTargetId
       draft.todoEditDialog.isOpen = isOpen
     })
   })

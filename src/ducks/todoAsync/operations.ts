@@ -123,14 +123,17 @@ export const setVisibilityFilter = actions.setVisibilityFilter
 
 export const openTodoEditDialog = (editTargetId: TodoId): AppThunkAction => {
   return (dispatch) => {
-    dispatch(actions.setEditTargetId({ editTargetId }))
-    dispatch(actions.setOpenTodoEditDialog({ isOpen: true }))
+    dispatch(
+      actions.setOpenTodoEditDialog({
+        editTargetId,
+        isOpen: true,
+      })
+    )
   }
 }
 
 export const closeTodoEditDialog = (): AppThunkAction => {
   return (dispatch) => {
-    dispatch(actions.setEditTargetId({}))
     dispatch(actions.setOpenTodoEditDialog({ isOpen: false }))
   }
 }
