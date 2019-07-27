@@ -2,7 +2,6 @@
 
 exports[`updateTodo updateTodo 1`] = `
 Object {
-  "editTargetId": undefined,
   "errorMessage": undefined,
   "loading": Object {
     "add": false,
@@ -10,6 +9,10 @@ Object {
     "ids": Array [
       "id1",
     ],
+  },
+  "todoEditDialog": Object {
+    "editTargetId": undefined,
+    "isOpen": false,
   },
   "todoList": Array [
     Object {

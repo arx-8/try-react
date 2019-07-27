@@ -10,7 +10,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { TodoId, TodoStatus } from "domain/models/Todo"
-import React, { Fragment, useState } from "react"
+import React, { Fragment } from "react"
 import { TodoEditDialog } from "../TodoEditDialog"
 import { ReduxDispatchProps, ReduxStateProps } from "./AsyncContainer"
 
@@ -21,22 +21,14 @@ export type OwnProps = {
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 export const _TodoListEditable: React.FC<Props> = ({
+  closeTodoEditDialog,
   deleteTodo,
-  setEditTargetId,
+  isOpenTodoEditDialog,
+  openTodoEditDialog,
   todoList,
   updateTodo,
 }) => {
   const classes = useStyles()
-
-  const [isOpenTodoEditDialog, setIsOpenTodoEditDialog] = useState(false)
-  const onOpenTodoEditDialog = (editTargetId: TodoId): void => {
-    setIsOpenTodoEditDialog(true)
-    setEditTargetId(editTargetId)
-  }
-  const onCloseTodoEditDialog = (): void => {
-    setIsOpenTodoEditDialog(false)
-    setEditTargetId(undefined)
-  }
 
   const onToggleStatus = (todoId: TodoId): void => {
     const status = todoList.find((t) => t.id === todoId)!.status
@@ -52,7 +44,7 @@ export const _TodoListEditable: React.FC<Props> = ({
             key={t.id}
             button
             dense
-            onClick={() => onOpenTodoEditDialog(t.id)}
+            onClick={() => openTodoEditDialog(t.id)}
           >
             <ListItemIcon>
               <Checkbox
@@ -91,14 +83,14 @@ export const _TodoListEditable: React.FC<Props> = ({
 
       <TodoEditDialog
         open={isOpenTodoEditDialog}
-        onClose={onCloseTodoEditDialog}
+        onClose={closeTodoEditDialog}
         onSubmit={(editTargetId, values) => {
           updateTodo({
             id: editTargetId,
             label: values.label,
             status: values.status,
           })
-          onCloseTodoEditDialog()
+          closeTodoEditDialog()
         }}
       />
     </Fragment>

@@ -20,7 +20,7 @@ const isTargetLoading = (state: State, targetId?: TodoId): boolean => {
 }
 
 const extractEditTarget = (state: State): Todo | undefined => {
-  const { editTargetId } = state
+  const { editTargetId } = state.todoEditDialog
   return state.todoList.find((t) => t.id === editTargetId)
 }
 

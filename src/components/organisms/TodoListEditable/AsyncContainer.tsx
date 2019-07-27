@@ -9,12 +9,14 @@ import { equals, sort } from "utils/ArrayUtils"
 import { OwnProps, _TodoListEditable as Presentational } from "."
 
 export type ReduxStateProps = {
+  isOpenTodoEditDialog: boolean
   todoList: Todo[]
 }
 
 export type ReduxDispatchProps = {
+  closeTodoEditDialog: () => void
   deleteTodo: (todoId: TodoId) => Promise<void>
-  setEditTargetId: (todoId?: TodoId) => void
+  openTodoEditDialog: (todoId: TodoId) => void
   updateTodo: (params: CallPutTodoReq) => Promise<void>
 }
 
@@ -49,6 +51,7 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
   return {
+    isOpenTodoEditDialog: state.todoAsync.todoEditDialog.isOpen,
     todoList: todoAsyncSelectors.filterTodoList(state.todoAsync),
   }
 }
@@ -59,8 +62,10 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
 > = (dispatch) => {
   return {
     deleteTodo: (id) => dispatch(todoAsyncOperations.deleteTodoRequest({ id })),
-    setEditTargetId: (editTargetId) =>
-      dispatch(todoAsyncOperations.setEditTargetId({ editTargetId })),
+    openTodoEditDialog: (editTargetId) =>
+      dispatch(todoAsyncOperations.openTodoEditDialog(editTargetId)),
+    closeTodoEditDialog: () =>
+      dispatch(todoAsyncOperations.closeTodoEditDialog()),
     updateTodo: (params) =>
       dispatch(todoAsyncOperations.updateTodoRequest(params)),
   }

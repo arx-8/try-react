@@ -10,6 +10,7 @@ import {
   CallPutTodoReq,
 } from "data/apis/TodoAPIClient"
 import { toSerializableError } from "domain/errors/SerializableError"
+import { TodoId } from "domain/models/Todo"
 import debounce from "lodash/debounce"
 import { AppAsyncThunkAction, AppThunkAction } from "types/ReduxTypes"
 import * as actions from "./actions"
@@ -120,4 +121,16 @@ export const fetchTodoRequest = (
 
 export const setVisibilityFilter = actions.setVisibilityFilter
 
-export const setEditTargetId = actions.setEditTargetId
+export const openTodoEditDialog = (editTargetId: TodoId): AppThunkAction => {
+  return (dispatch) => {
+    dispatch(actions.setEditTargetId({ editTargetId }))
+    dispatch(actions.setOpenTodoEditDialog({ isOpen: true }))
+  }
+}
+
+export const closeTodoEditDialog = (): AppThunkAction => {
+  return (dispatch) => {
+    dispatch(actions.setEditTargetId({}))
+    dispatch(actions.setOpenTodoEditDialog({ isOpen: false }))
+  }
+}
