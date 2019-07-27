@@ -59,7 +59,7 @@
     "react-scripts": "3.0.1",
     "source-map-explorer": "2.0.1",
     "typescript": "3.5.3",
-    "typesync": "0.5.1"
+    "typesync": "0.5.2"
   },
   "scripts": {
     "analyze:run": "source-map-explorer 'build/static/js/*.js' --html misc/source-map-explorer.html",
