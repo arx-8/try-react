@@ -16,7 +16,7 @@ export enum ActionTypes {
   FETCH_ALL_TODOS = "todoAsync/FETCH_ALL_TODOS",
   FETCH_TODO = "todoAsync/FETCH_TODO",
   SET_VISIBILITY_FILTER = "todoAsync/SET_VISIBILITY_FILTER",
-  SET_EDIT_TARGET_ID = "todoAsync/SET_EDIT_TARGET_ID",
+  SET_OPEN_TODO_EDIT_DIALOG = "todoAsync/SET_OPEN_TODO_EDIT_DIALOG",
 }
 
 const create = actionCreatorFactory(APP_NAME)
@@ -45,9 +45,10 @@ export const fetchAllTodos = create.async<void, Todo[], SerializableError>(
   ActionTypes.FETCH_ALL_TODOS
 )
 
-export const setEditTargetId = create<{
+export const setOpenTodoEditDialog = create<{
   editTargetId?: TodoId
-}>(ActionTypes.SET_EDIT_TARGET_ID)
+  isOpen: boolean
+}>(ActionTypes.SET_OPEN_TODO_EDIT_DIALOG)
 
 export const setVisibilityFilter = create<{
   visibilityFilter: VisibilityFilter

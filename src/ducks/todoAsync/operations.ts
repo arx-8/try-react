@@ -10,11 +10,14 @@ import {
   CallPutTodoReq,
 } from "data/apis/TodoAPIClient"
 import { toSerializableError } from "domain/errors/SerializableError"
+import { TodoId } from "domain/models/Todo"
 import debounce from "lodash/debounce"
-import { AppThunkAction } from "types/ReduxTypes"
+import { AppAsyncThunkAction, AppThunkAction } from "types/ReduxTypes"
 import * as actions from "./actions"
 
-export const addTodoRequest = (params: CallPostTodoReq): AppThunkAction => {
+export const addTodoRequest = (
+  params: CallPostTodoReq
+): AppAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(actions.addTodo.started(params))
     try {
@@ -32,18 +35,18 @@ export const addTodoRequest = (params: CallPostTodoReq): AppThunkAction => {
 /**
  * debounceなしで実行
  */
-export const fetchAllTodosRequest = (): AppThunkAction => {
+export const fetchAllTodosRequest = (): AppAsyncThunkAction => {
   return fetchAllTodosRequestActInner
 }
 
 /**
  * debounceありで実行
  */
-export const fetchAllTodosRequestDebounce = (): AppThunkAction => {
+export const fetchAllTodosRequestDebounce = (): AppAsyncThunkAction => {
   return fetchAllTodosRequestDebounceMemo
 }
 
-const fetchAllTodosRequestActInner: AppThunkAction = async (dispatch) => {
+const fetchAllTodosRequestActInner: AppAsyncThunkAction = async (dispatch) => {
   dispatch(actions.fetchAllTodos.started())
   try {
     dispatch(actions.fetchAllTodos.done({ result: await callGetAllTodos() }))
@@ -64,7 +67,7 @@ const fetchAllTodosRequestDebounceMemo = debounce(
 
 export const deleteTodoRequest = (
   params: CallDeleteTodoReq
-): AppThunkAction => {
+): AppAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(actions.deleteTodo.started(params))
     try {
@@ -79,7 +82,9 @@ export const deleteTodoRequest = (
   }
 }
 
-export const updateTodoRequest = (params: CallPutTodoReq): AppThunkAction => {
+export const updateTodoRequest = (
+  params: CallPutTodoReq
+): AppAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(actions.updateTodo.started(params))
     try {
@@ -94,7 +99,9 @@ export const updateTodoRequest = (params: CallPutTodoReq): AppThunkAction => {
   }
 }
 
-export const fetchTodoRequest = (params: CallGetTodoReq): AppThunkAction => {
+export const fetchTodoRequest = (
+  params: CallGetTodoReq
+): AppAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(actions.fetchTodo.started(params))
     try {
@@ -114,4 +121,19 @@ export const fetchTodoRequest = (params: CallGetTodoReq): AppThunkAction => {
 
 export const setVisibilityFilter = actions.setVisibilityFilter
 
-export const setEditTargetId = actions.setEditTargetId
+export const openTodoEditDialog = (editTargetId: TodoId): AppThunkAction => {
+  return (dispatch) => {
+    dispatch(
+      actions.setOpenTodoEditDialog({
+        editTargetId,
+        isOpen: true,
+      })
+    )
+  }
+}
+
+export const closeTodoEditDialog = (): AppThunkAction => {
+  return (dispatch) => {
+    dispatch(actions.setOpenTodoEditDialog({ isOpen: false }))
+  }
+}

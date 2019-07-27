@@ -22,11 +22,13 @@ import * as Yup from "yup"
 type ReduxStateProps = {
   editTargetId?: TodoId
   formInitialValues: FormValues
+  isOpenTodoEditDialog: boolean
   isTargetLoading: boolean
 }
 
 type ReduxDispatchProps = {
   fetchTodo: (editTargetId: TodoId) => Promise<void>
+  closeTodoEditDialog: () => void
 }
 
 /**
@@ -36,8 +38,6 @@ type ReduxDispatchProps = {
 type FormValues = Omit<Todo, "id">
 
 type OwnProps = {
-  open: boolean
-  onClose: () => void
   onSubmit: (editTargetId: TodoId, values: FormValues) => void
   children?: never
 }
@@ -45,13 +45,13 @@ type OwnProps = {
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const _TodoEditDialog: React.FC<Props> = ({
+  closeTodoEditDialog,
   editTargetId,
   fetchTodo,
   formInitialValues,
+  isOpenTodoEditDialog,
   isTargetLoading,
-  onClose,
   onSubmit,
-  open,
 }) => {
   useEffect(() => {
     if (editTargetId) {
@@ -76,72 +76,70 @@ const _TodoEditDialog: React.FC<Props> = ({
         isValid,
         values,
       }) => (
-        <Dialog open={open} onClose={onClose}>
-          <DialogTitle>Edit your TODO</DialogTitle>
-          <DialogContent>
-            <div>
-              <Field
-                name="label"
-                render={({ field }: FieldProps) => (
-                  <TextField
-                    {...field}
-                    disabled={isTargetLoading}
-                    label={field.name}
-                    error={!!getIn(errors, field.name)}
-                    margin="normal"
-                    value={values.label}
-                  />
-                )}
-              />
-            </div>
-            <div>
-              <Field
-                name="status"
-                render={({ field }: FieldProps) => (
-                  <Fragment>
-                    <FormControl component="fieldset">
-                      <FormLabel component="legend">Status</FormLabel>
-                      <RadioGroup
-                        {...field}
-                        aria-label={field.name}
-                        name={field.name}
-                        onChange={field.onChange}
-                        value={values.status}
-                      >
-                        <FormControlLabel
-                          control={<Radio color="primary" />}
-                          disabled={isTargetLoading}
-                          label="Active"
-                          labelPlacement="end"
-                          value={VisibilityFilterValue.active}
-                        />
-                        <FormControlLabel
-                          control={<Radio color="primary" />}
-                          disabled={isTargetLoading}
-                          label="Completed"
-                          labelPlacement="end"
-                          value={VisibilityFilterValue.completed}
-                        />
-                      </RadioGroup>
-                    </FormControl>
-                  </Fragment>
-                )}
-              />
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={handleReset} disabled={!dirty}>
-              Reset
-            </Button>
-            <Button
-              onClick={() => handleSubmit()}
-              color="primary"
-              disabled={!isValid}
-            >
-              Submit
-            </Button>
-          </DialogActions>
+        <Dialog open={isOpenTodoEditDialog} onClose={closeTodoEditDialog}>
+          <form onSubmit={handleSubmit} onReset={handleReset}>
+            <DialogTitle>Edit your TODO</DialogTitle>
+            <DialogContent>
+              <div>
+                <Field
+                  name="label"
+                  render={({ field }: FieldProps) => (
+                    <TextField
+                      {...field}
+                      disabled={isTargetLoading}
+                      label={field.name}
+                      error={!!getIn(errors, field.name)}
+                      margin="normal"
+                      value={values.label}
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <Field
+                  name="status"
+                  render={({ field }: FieldProps) => (
+                    <Fragment>
+                      <FormControl component="fieldset">
+                        <FormLabel component="legend">Status</FormLabel>
+                        <RadioGroup
+                          {...field}
+                          aria-label={field.name}
+                          name={field.name}
+                          onChange={field.onChange}
+                          value={values.status}
+                        >
+                          <FormControlLabel
+                            control={<Radio color="primary" />}
+                            disabled={isTargetLoading}
+                            label="Active"
+                            labelPlacement="end"
+                            value={VisibilityFilterValue.active}
+                          />
+                          <FormControlLabel
+                            control={<Radio color="primary" />}
+                            disabled={isTargetLoading}
+                            label="Completed"
+                            labelPlacement="end"
+                            value={VisibilityFilterValue.completed}
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </Fragment>
+                  )}
+                />
+              </div>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={closeTodoEditDialog}>Cancel</Button>
+              <Button type="reset" disabled={!dirty}>
+                Reset
+              </Button>
+              <Button type="submit" disabled={!isValid} color="primary">
+                Submit
+              </Button>
+            </DialogActions>
+          </form>
         </Dialog>
       )}
     />
@@ -174,6 +172,7 @@ const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   return {
     editTargetId: maybeId,
     formInitialValues,
+    isOpenTodoEditDialog: state.todoAsync.todoEditDialog.isOpen,
     isTargetLoading: todoAsyncSelectors.isTargetLoading(
       state.todoAsync,
       maybeId
@@ -188,6 +187,8 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
   return {
     fetchTodo: (editTargetId) =>
       dispatch(todoAsyncOperations.fetchTodoRequest({ id: editTargetId })),
+    closeTodoEditDialog: () =>
+      dispatch(todoAsyncOperations.closeTodoEditDialog()),
   }
 }
 

@@ -12,7 +12,10 @@ export type State = Readonly<{
     ids: TodoId[]
   }
   errorMessage?: string
-  editTargetId?: TodoId
+  todoEditDialog: {
+    editTargetId?: TodoId
+    isOpen: boolean
+  }
 }>
 
 export const initialState: State = {
@@ -24,7 +27,10 @@ export const initialState: State = {
     ids: [],
   },
   errorMessage: undefined,
-  editTargetId: undefined,
+  todoEditDialog: {
+    editTargetId: undefined,
+    isOpen: false,
+  },
 }
 
 export const reducer = reducerWithInitialState(initialState)
@@ -156,12 +162,13 @@ export const reducer = reducerWithInitialState(initialState)
     })
   })
   /**
-   * setEditTargetId
+   * setOpenTodoEditDialog
    */
-  .case(actions.setEditTargetId, (state, payload) => {
+  .case(actions.setOpenTodoEditDialog, (state, payload) => {
     return produce(state, (draft) => {
-      const { editTargetId } = payload
-      draft.editTargetId = editTargetId
+      const { editTargetId, isOpen } = payload
+      draft.todoEditDialog.editTargetId = editTargetId
+      draft.todoEditDialog.isOpen = isOpen
     })
   })
   /**

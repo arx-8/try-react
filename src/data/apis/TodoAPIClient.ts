@@ -62,8 +62,11 @@ const STORAGE_KEY = "todo-async/todos"
  * Get
  */
 export const callGetAllTodos = async (): Promise<Todo[]> => {
+  console.log("API call start: callGetAllTodos")
   await sleep(3000)
+  console.log("API call end: callGetAllTodos")
   throwErrorIfErrorTime()
+
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
   return callGetAllTodosToModels(resp)
 }
@@ -82,8 +85,11 @@ export type CallGetTodoReq = {
 }
 
 export const callGetTodo = async (params: CallGetTodoReq): Promise<Todo> => {
+  console.log("API call start: callGetTodo")
   await sleep(3000)
+  console.log("API call end: callGetTodo")
   throwErrorIfErrorTime()
+
   const resp = toMockAxiosResp(localStorage.getItem(STORAGE_KEY))
   const todos = callGetAllTodosToModels(resp)
   const t = todos.find((t) => t.id === params.id)
@@ -103,7 +109,9 @@ export type CallPostTodoReq = Omit<Todo, "id">
 export const callPostTodo = async (
   params: CallPostTodoReq
 ): Promise<TodoId> => {
+  console.log("API call start: callPostTodo")
   await sleep(3000)
+  console.log("API call end: callPostTodo")
   throwErrorIfErrorTime()
 
   // get
@@ -130,7 +138,9 @@ export type CallPutTodoReq = Partial<Todo> & {
 }
 
 export const callPutTodo = async (params: CallPutTodoReq): Promise<TodoId> => {
+  console.log("API call start: callPutTodo")
   await sleep(3000)
+  console.log("API call end: callPutTodo")
   throwErrorIfErrorTime()
 
   // get
@@ -162,7 +172,9 @@ export type CallDeleteTodoReq = {
 export const callDeleteTodo = async (
   params: CallDeleteTodoReq
 ): Promise<void> => {
+  console.log("API call start: callDeleteTodo")
   await sleep(3000)
+  console.log("API call end: callDeleteTodo")
   throwErrorIfErrorTime()
 
   // get
