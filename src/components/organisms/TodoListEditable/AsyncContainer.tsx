@@ -13,7 +13,6 @@ export type ReduxStateProps = {
 }
 
 export type ReduxDispatchProps = {
-  closeTodoEditDialog: () => void
   deleteTodo: (todoId: TodoId) => Promise<void>
   openTodoEditDialog: (todoId: TodoId) => void
   updateTodo: (params: CallPutTodoReq) => Promise<void>
@@ -62,8 +61,6 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
     deleteTodo: (id) => dispatch(todoAsyncOperations.deleteTodoRequest({ id })),
     openTodoEditDialog: (editTargetId) =>
       dispatch(todoAsyncOperations.openTodoEditDialog(editTargetId)),
-    closeTodoEditDialog: () =>
-      dispatch(todoAsyncOperations.closeTodoEditDialog()),
     updateTodo: (params) =>
       dispatch(todoAsyncOperations.updateTodoRequest(params)),
   }

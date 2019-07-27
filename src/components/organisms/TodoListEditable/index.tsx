@@ -21,7 +21,6 @@ export type OwnProps = {
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 export const _TodoListEditable: React.FC<Props> = ({
-  closeTodoEditDialog,
   deleteTodo,
   openTodoEditDialog,
   todoList,
@@ -87,7 +86,6 @@ export const _TodoListEditable: React.FC<Props> = ({
             label: values.label,
             status: values.status,
           })
-          closeTodoEditDialog()
         }}
       />
     </Fragment>

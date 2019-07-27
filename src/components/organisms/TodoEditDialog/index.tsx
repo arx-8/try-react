@@ -14,7 +14,7 @@ import { RootState } from "ducks/store"
 import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
 import { selectors } from "ducks/todoAsync/selectors"
 import { Field, FieldProps, Formik, getIn } from "formik"
-import React, { Fragment, useEffect } from "react"
+import React, { Fragment } from "react"
 import { connect, MapStateToProps } from "react-redux"
 import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
 import * as Yup from "yup"
@@ -27,7 +27,6 @@ type ReduxStateProps = {
 }
 
 type ReduxDispatchProps = {
-  fetchTodo: (editTargetId: TodoId) => Promise<void>
   closeTodoEditDialog: () => void
 }
 
@@ -47,18 +46,11 @@ type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 const _TodoEditDialog: React.FC<Props> = ({
   closeTodoEditDialog,
   editTargetId,
-  fetchTodo,
   formInitialValues,
   isOpenTodoEditDialog,
   isTargetLoading,
   onSubmit,
 }) => {
-  useEffect(() => {
-    if (editTargetId) {
-      fetchTodo(editTargetId)
-    }
-  }, [editTargetId, fetchTodo])
-
   return (
     <Formik
       enableReinitialize
@@ -67,6 +59,7 @@ const _TodoEditDialog: React.FC<Props> = ({
       onSubmit={(values, actions) => {
         onSubmit(editTargetId!, values)
         actions.setSubmitting(false)
+        closeTodoEditDialog()
       }}
       render={({
         dirty,
@@ -185,8 +178,6 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
   OwnProps
 > = (dispatch) => {
   return {
-    fetchTodo: (editTargetId) =>
-      dispatch(todoAsyncOperations.fetchTodoRequest({ id: editTargetId })),
     closeTodoEditDialog: () =>
       dispatch(todoAsyncOperations.closeTodoEditDialog()),
   }
