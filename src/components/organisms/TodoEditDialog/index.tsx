@@ -77,71 +77,69 @@ const _TodoEditDialog: React.FC<Props> = ({
         values,
       }) => (
         <Dialog open={isOpenTodoEditDialog} onClose={closeTodoEditDialog}>
-          <DialogTitle>Edit your TODO</DialogTitle>
-          <DialogContent>
-            <div>
-              <Field
-                name="label"
-                render={({ field }: FieldProps) => (
-                  <TextField
-                    {...field}
-                    disabled={isTargetLoading}
-                    label={field.name}
-                    error={!!getIn(errors, field.name)}
-                    margin="normal"
-                    value={values.label}
-                  />
-                )}
-              />
-            </div>
-            <div>
-              <Field
-                name="status"
-                render={({ field }: FieldProps) => (
-                  <Fragment>
-                    <FormControl component="fieldset">
-                      <FormLabel component="legend">Status</FormLabel>
-                      <RadioGroup
-                        {...field}
-                        aria-label={field.name}
-                        name={field.name}
-                        onChange={field.onChange}
-                        value={values.status}
-                      >
-                        <FormControlLabel
-                          control={<Radio color="primary" />}
-                          disabled={isTargetLoading}
-                          label="Active"
-                          labelPlacement="end"
-                          value={VisibilityFilterValue.active}
-                        />
-                        <FormControlLabel
-                          control={<Radio color="primary" />}
-                          disabled={isTargetLoading}
-                          label="Completed"
-                          labelPlacement="end"
-                          value={VisibilityFilterValue.completed}
-                        />
-                      </RadioGroup>
-                    </FormControl>
-                  </Fragment>
-                )}
-              />
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={closeTodoEditDialog}>Cancel</Button>
-            <Button onClick={handleReset} disabled={!dirty}>
-              Reset
-            </Button>
-            <Button
-              onClick={() => handleSubmit()}
-              color="primary"
-              disabled={!isValid}
-            >
-              Submit
-            </Button>
-          </DialogActions>
+          <form onSubmit={handleSubmit} onReset={handleReset}>
+            <DialogTitle>Edit your TODO</DialogTitle>
+            <DialogContent>
+              <div>
+                <Field
+                  name="label"
+                  render={({ field }: FieldProps) => (
+                    <TextField
+                      {...field}
+                      disabled={isTargetLoading}
+                      label={field.name}
+                      error={!!getIn(errors, field.name)}
+                      margin="normal"
+                      value={values.label}
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <Field
+                  name="status"
+                  render={({ field }: FieldProps) => (
+                    <Fragment>
+                      <FormControl component="fieldset">
+                        <FormLabel component="legend">Status</FormLabel>
+                        <RadioGroup
+                          {...field}
+                          aria-label={field.name}
+                          name={field.name}
+                          onChange={field.onChange}
+                          value={values.status}
+                        >
+                          <FormControlLabel
+                            control={<Radio color="primary" />}
+                            disabled={isTargetLoading}
+                            label="Active"
+                            labelPlacement="end"
+                            value={VisibilityFilterValue.active}
+                          />
+                          <FormControlLabel
+                            control={<Radio color="primary" />}
+                            disabled={isTargetLoading}
+                            label="Completed"
+                            labelPlacement="end"
+                            value={VisibilityFilterValue.completed}
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </Fragment>
+                  )}
+                />
+              </div>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={closeTodoEditDialog}>Cancel</Button>
+              <Button type="reset" disabled={!dirty}>
+                Reset
+              </Button>
+              <Button type="submit" disabled={!isValid} color="primary">
+                Submit
+              </Button>
+            </DialogActions>
+          </form>
         </Dialog>
       )}
     />
