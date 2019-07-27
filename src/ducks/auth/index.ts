@@ -1,6 +1,6 @@
 import * as operations from "./operations"
 import { reducer, State } from "./reducers"
-import { selectors } from "./selectors"
+import * as selectors from "./selectors"
 
 export const authOperations = operations
 export const authReducer = reducer

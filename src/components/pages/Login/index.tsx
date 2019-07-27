@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { RoutePath } from "constants/Paths"
-import { authOperations } from "ducks/auth"
+import { authOperations, authSelectors } from "ducks/auth"
 import { RootState } from "ducks/store"
 import React from "react"
 import {
@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom"
 
 type ReduxStateProps = {
-  isAuthed: boolean
+  isAuthenticated: boolean
 }
 
 type ReduxDispatchProps = {
@@ -26,7 +26,7 @@ type OwnProps = {
 
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
-const _Login: React.FC<Props> = ({ isAuthed, login, logout }) => {
+const _Login: React.FC<Props> = ({ isAuthenticated, login, logout }) => {
   return (
     <div css={root}>
       <h1>Login example page.</h1>
@@ -41,7 +41,7 @@ const _Login: React.FC<Props> = ({ isAuthed, login, logout }) => {
       <hr />
       <h2>Status</h2>
       <div>
-        {isAuthed ? (
+        {isAuthenticated ? (
           <span
             css={css`
               color: red;
@@ -88,9 +88,8 @@ const links = css`
 const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
-  const { authToken } = state.auth
   return {
-    isAuthed: !!authToken,
+    isAuthenticated: authSelectors.isAuthenticated(state.auth),
   }
 }
 

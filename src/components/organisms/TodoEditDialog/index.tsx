@@ -13,7 +13,6 @@ import { CallPutTodoReq } from "data/apis/TodoAPIClient"
 import { Todo, TodoId, VisibilityFilterValue } from "domain/models/Todo"
 import { RootState } from "ducks/store"
 import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
-import { selectors } from "ducks/todoAsync/selectors"
 import { Field, FieldProps, Formik, getIn } from "formik"
 import React, { Fragment } from "react"
 import { connect, MapStateToProps } from "react-redux"
@@ -155,7 +154,7 @@ const validationSchema = Yup.object().shape<FormValues>({
 const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
-  const editTarget = selectors.extractEditTarget(state.todoAsync)
+  const editTarget = todoAsyncSelectors.extractEditTarget(state.todoAsync)
 
   const formInitialValues = editTarget
     ? {

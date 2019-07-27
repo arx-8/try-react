@@ -1,2 +1,5 @@
-// NOP
-export const selectors = {}
+import { State } from "./reducers"
+
+export const isAuthenticated = (state: State): boolean => {
+  return !!state.authToken
+}

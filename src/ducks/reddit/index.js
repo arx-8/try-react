@@ -1,7 +1,7 @@
 import { actions } from "./actions"
-import { operations } from "./operations"
+import * as operations from "./operations"
 import { reducers } from "./reducers"
-import { selectors } from "./selectors"
+import * as selectors from "./selectors"
 
 export const redditActions = actions
 export const redditOperations = operations

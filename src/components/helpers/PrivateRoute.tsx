@@ -1,4 +1,5 @@
 import { RoutePath } from "constants/Paths"
+import { authSelectors } from "ducks/auth"
 import { RootState } from "ducks/store"
 import React from "react"
 import { connect, MapStateToProps } from "react-redux"
@@ -32,9 +33,8 @@ const _PrivateRoute: React.FC<Props> = ({ isAuthenticated, ...rest }) => {
 const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (
   state
 ) => {
-  const { authToken } = state.auth
   return {
-    isAuthenticated: !!authToken,
+    isAuthenticated: authSelectors.isAuthenticated(state.auth),
   }
 }
 
