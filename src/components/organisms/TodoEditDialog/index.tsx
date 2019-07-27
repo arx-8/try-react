@@ -9,6 +9,7 @@ import FormLabel from "@material-ui/core/FormLabel"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import TextField from "@material-ui/core/TextField"
+import { CallPutTodoReq } from "data/apis/TodoAPIClient"
 import { Todo, TodoId, VisibilityFilterValue } from "domain/models/Todo"
 import { RootState } from "ducks/store"
 import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
@@ -28,6 +29,7 @@ type ReduxStateProps = {
 
 type ReduxDispatchProps = {
   closeTodoEditDialog: () => void
+  updateTodo: (params: CallPutTodoReq) => Promise<void>
 }
 
 /**
@@ -37,7 +39,6 @@ type ReduxDispatchProps = {
 type FormValues = Omit<Todo, "id">
 
 type OwnProps = {
-  onSubmit: (editTargetId: TodoId, values: FormValues) => void
   children?: never
 }
 
@@ -49,7 +50,7 @@ const _TodoEditDialog: React.FC<Props> = ({
   formInitialValues,
   isOpenTodoEditDialog,
   isTargetLoading,
-  onSubmit,
+  updateTodo,
 }) => {
   return (
     <Formik
@@ -57,7 +58,12 @@ const _TodoEditDialog: React.FC<Props> = ({
       initialValues={formInitialValues}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
-        onSubmit(editTargetId!, values)
+        updateTodo({
+          // この処理に到達するまでに、確実にセットされるため
+          id: editTargetId!,
+          label: values.label,
+          status: values.status,
+        })
         actions.setSubmitting(false)
         closeTodoEditDialog()
       }}
@@ -180,6 +186,8 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
   return {
     closeTodoEditDialog: () =>
       dispatch(todoAsyncOperations.closeTodoEditDialog()),
+    updateTodo: (params) =>
+      dispatch(todoAsyncOperations.updateTodoRequest(params)),
   }
 }
 

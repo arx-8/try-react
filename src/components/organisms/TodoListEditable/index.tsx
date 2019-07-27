@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { TodoId, TodoStatus } from "domain/models/Todo"
 import React, { Fragment } from "react"
-import { TodoEditDialog } from "../TodoEditDialog"
 import { ReduxDispatchProps, ReduxStateProps } from "./AsyncContainer"
 
 export type OwnProps = {
@@ -78,16 +77,6 @@ export const _TodoListEditable: React.FC<Props> = ({
           </ListItem>
         ))}
       </List>
-
-      <TodoEditDialog
-        onSubmit={(editTargetId, values) => {
-          updateTodo({
-            id: editTargetId,
-            label: values.label,
-            status: values.status,
-          })
-        }}
-      />
     </Fragment>
   )
 }
