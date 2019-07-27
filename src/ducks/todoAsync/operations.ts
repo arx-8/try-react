@@ -99,9 +99,7 @@ export const updateTodoRequest = (
   }
 }
 
-export const fetchTodoRequest = (
-  params: CallGetTodoReq
-): AppAsyncThunkAction => {
+const fetchTodoRequest = (params: CallGetTodoReq): AppAsyncThunkAction => {
   return async (dispatch) => {
     dispatch(actions.fetchTodo.started(params))
     try {
@@ -129,6 +127,7 @@ export const openTodoEditDialog = (editTargetId: TodoId): AppThunkAction => {
         isOpen: true,
       })
     )
+    dispatch(fetchTodoRequest({ id: editTargetId }))
   }
 }
 

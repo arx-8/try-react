@@ -9,12 +9,13 @@ import FormLabel from "@material-ui/core/FormLabel"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import TextField from "@material-ui/core/TextField"
+import { CallPutTodoReq } from "data/apis/TodoAPIClient"
 import { Todo, TodoId, VisibilityFilterValue } from "domain/models/Todo"
 import { RootState } from "ducks/store"
 import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
 import { selectors } from "ducks/todoAsync/selectors"
 import { Field, FieldProps, Formik, getIn } from "formik"
-import React, { Fragment, useEffect } from "react"
+import React, { Fragment } from "react"
 import { connect, MapStateToProps } from "react-redux"
 import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
 import * as Yup from "yup"
@@ -27,8 +28,8 @@ type ReduxStateProps = {
 }
 
 type ReduxDispatchProps = {
-  fetchTodo: (editTargetId: TodoId) => Promise<void>
   closeTodoEditDialog: () => void
+  updateTodo: (params: CallPutTodoReq) => Promise<void>
 }
 
 /**
@@ -38,7 +39,6 @@ type ReduxDispatchProps = {
 type FormValues = Omit<Todo, "id">
 
 type OwnProps = {
-  onSubmit: (editTargetId: TodoId, values: FormValues) => void
   children?: never
 }
 
@@ -47,26 +47,25 @@ type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 const _TodoEditDialog: React.FC<Props> = ({
   closeTodoEditDialog,
   editTargetId,
-  fetchTodo,
   formInitialValues,
   isOpenTodoEditDialog,
   isTargetLoading,
-  onSubmit,
+  updateTodo,
 }) => {
-  useEffect(() => {
-    if (editTargetId) {
-      fetchTodo(editTargetId)
-    }
-  }, [editTargetId, fetchTodo])
-
   return (
     <Formik
       enableReinitialize
       initialValues={formInitialValues}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
-        onSubmit(editTargetId!, values)
+        updateTodo({
+          // この処理に到達するまでに、確実にセットされるため
+          id: editTargetId!,
+          label: values.label,
+          status: values.status,
+        })
         actions.setSubmitting(false)
+        closeTodoEditDialog()
       }}
       render={({
         dirty,
@@ -185,10 +184,10 @@ const mapDispatchToProps: MapThunkDispatchToPropsFunction<
   OwnProps
 > = (dispatch) => {
   return {
-    fetchTodo: (editTargetId) =>
-      dispatch(todoAsyncOperations.fetchTodoRequest({ id: editTargetId })),
     closeTodoEditDialog: () =>
       dispatch(todoAsyncOperations.closeTodoEditDialog()),
+    updateTodo: (params) =>
+      dispatch(todoAsyncOperations.updateTodoRequest(params)),
   }
 }
 

@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { TodoActions } from "components/organisms/TodoActions/AsyncContainer"
+import { TodoEditDialog } from "components/organisms/TodoEditDialog"
 import { TodoHeader } from "components/organisms/TodoHeader/AsyncContainer"
 import { TodoInput } from "components/organisms/TodoInput/AsyncContainer"
 import { TodoListEditable } from "components/organisms/TodoListEditable/AsyncContainer"
@@ -23,6 +24,7 @@ export const TodoAsyncPage: React.FC<Props> = () => {
         <TodoInput />
         <TodoListEditable />
         <TodoActions />
+        <TodoEditDialog />
       </Paper>
     </Container>
   )
