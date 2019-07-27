@@ -3,6 +3,7 @@
  * Cannot compile namespaces when the '--isolatedModules' flag is provided.
  * @see https://github.com/Microsoft/TypeScript/issues/15230
  */
+// eslint-disable-next-line jest/no-export
 export {}
 
 /**
