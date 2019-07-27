@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { RootState } from "ducks/store"
-import { tttActions } from "ducks/tic-tac-toe"
+import { tttOperations } from "ducks/tic-tac-toe"
 import { InputValue, PlayerName } from "ducks/tic-tac-toe/types"
 import React from "react"
 import {
@@ -79,7 +79,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
 > = (dispatch) => {
   return {
     clickSquare: (index, value) =>
-      dispatch(tttActions.clickSquare({ index, value })),
+      dispatch(tttOperations.clickSquare({ index, value })),
   }
 }
 

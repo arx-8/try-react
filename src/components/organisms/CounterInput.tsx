@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { counterActions } from "ducks/counter"
+import { counterOperations } from "ducks/counter"
 import { RootState } from "ducks/store"
 import { Field, FieldProps, Formik, getIn } from "formik"
 import React from "react"
@@ -118,7 +118,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
 > = (dispatch) => {
   return {
     changeDefaultAmount: (amount) =>
-      dispatch(counterActions.changeDefaultAmount(amount)),
+      dispatch(counterOperations.changeDefaultAmount(amount)),
   }
 }
 

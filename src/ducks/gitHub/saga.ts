@@ -1,19 +1,19 @@
-import {
-  all,
-  call,
-  fork,
-  put,
-  takeLatest,
-  SimpleEffect,
-  ForkEffectDescriptor,
-} from "redux-saga/effects"
-import { actions, ActionTypes } from "./actions"
+import { CombinatorEffect } from "@redux-saga/types"
 import {
   callGetMembers,
   CallGetMembersResponse,
 } from "data/apis/GitHubAPIClient"
-import { CombinatorEffect } from "@redux-saga/types"
 import { toSerializableError } from "domain/errors/SerializableError"
+import {
+  all,
+  call,
+  fork,
+  ForkEffectDescriptor,
+  put,
+  SimpleEffect,
+  takeLatest,
+} from "redux-saga/effects"
+import * as actions from "./actions"
 
 function* runFetchMembers(
   action: ReturnType<typeof actions.fetchMembersStart>
@@ -44,7 +44,7 @@ function* runFetchMembers(
 function* watchFetchMembers(): IterableIterator<
   SimpleEffect<"FORK", ForkEffectDescriptor>
 > {
-  yield takeLatest(ActionTypes.FETCH_MEMBERS_START, runFetchMembers)
+  yield takeLatest(actions.ActionTypes.FETCH_MEMBERS_START, runFetchMembers)
 }
 
 export function* rootSaga(): IterableIterator<

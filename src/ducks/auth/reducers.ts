@@ -1,7 +1,7 @@
 import { AuthToken } from "domain/models/Auth"
 import produce from "immer"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
-import { actions } from "./actions"
+import * as actions from "./actions"
 
 export type State = Readonly<{
   authToken?: AuthToken

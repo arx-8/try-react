@@ -1,5 +1,5 @@
 import { RootState } from "ducks/store"
-import { todoActions } from "ducks/todo"
+import { todoOperations } from "ducks/todo"
 import React, { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { OwnProps, _TodoActions as C } from "."
@@ -9,7 +9,7 @@ export const TodoActions: React.FC<OwnProps> = () => {
 
   const setVisibilityFilter = useCallback(
     (visibilityFilter) =>
-      dispatch(todoActions.setVisibilityFilter({ visibilityFilter })),
+      dispatch(todoOperations.setVisibilityFilter({ visibilityFilter })),
     [dispatch]
   )
 

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { counterActions } from "ducks/counter"
+import { counterOperations } from "ducks/counter"
 import { RootState } from "ducks/store"
 import React from "react"
 import {
@@ -89,9 +89,9 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   OwnProps
 > = (dispatch) => {
   return {
-    add: (amount) => dispatch(counterActions.add(amount)),
-    decrement: () => dispatch(counterActions.decrement()),
-    increment: () => dispatch(counterActions.increment()),
+    add: (amount) => dispatch(counterOperations.add(amount)),
+    decrement: () => dispatch(counterOperations.decrement()),
+    increment: () => dispatch(counterOperations.increment()),
   }
 }
 

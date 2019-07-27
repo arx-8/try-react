@@ -4,14 +4,9 @@ import { ActionTypes, InputValue } from "./types"
 
 const actionCreator = actionCreatorFactory(APP_NAME)
 
-const clickSquare = actionCreator<{
+export const clickSquare = actionCreator<{
   index: number
   value: InputValue
 }>(ActionTypes.CLICK_SQUARE)
 
-const reset = actionCreator(ActionTypes.RESET)
-
-export const actions = {
-  clickSquare,
-  reset,
-}
+export const reset = actionCreator(ActionTypes.RESET)

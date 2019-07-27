@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import { TTTBoard } from "components/organisms/TTTBoard"
 import { TTTGameInfo } from "components/organisms/TTTGameInfo"
 import { RootState } from "ducks/store"
-import { tttActions } from "ducks/tic-tac-toe"
+import { tttOperations } from "ducks/tic-tac-toe"
 import React from "react"
 import {
   connect,
@@ -76,7 +76,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   OwnProps
 > = (dispatch) => {
   return {
-    reset: () => dispatch(tttActions.reset()),
+    reset: () => dispatch(tttOperations.reset()),
   }
 }
 
