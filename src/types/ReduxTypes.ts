@@ -33,7 +33,7 @@ export type ActionWithPayloadHandler<T, P> = (
 type AppThunkDispatch = ThunkDispatch<RootState, void, AnyAction>
 
 /**
- * redux-thunk action shorthand for this application.
+ * redux-thunk ASYNC action shorthand for this application.
  *
  * ThunkAction の <R> を Promise<void> をデフォルトにしてる理由は下記。
  * - 複雑化を避けるため、thunk を使う action は非同期処理のみとするため
@@ -42,8 +42,16 @@ type AppThunkDispatch = ThunkDispatch<RootState, void, AnyAction>
  * @template TReturn type of return
  * @template TAction acceptable action type
  */
-export type AppThunkAction<
+export type AppAsyncThunkAction<
   TReturn = Promise<void>,
+  TAction extends Action = AnyAction
+> = ThunkAction<TReturn, RootState, void, TAction>
+
+/**
+ * redux-thunk SYNC action shorthand for this application.
+ */
+export type AppThunkAction<
+  TReturn = void,
   TAction extends Action = AnyAction
 > = ThunkAction<TReturn, RootState, void, TAction>
 
