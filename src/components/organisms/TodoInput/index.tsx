@@ -2,7 +2,12 @@
 import { css, jsx } from "@emotion/core"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
-import React, { FormEventHandler } from "react"
+import React, {
+  ChangeEventHandler,
+  FormEventHandler,
+  useCallback,
+  useState,
+} from "react"
 
 export type ReduxStateProps = {}
 
@@ -16,22 +21,28 @@ export type OwnProps = {
 
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
+const INITIAL_INPUT_VALUE = ""
+
 export const _TodoInput: React.FC<Props> = ({ addTodo }) => {
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = useState(INITIAL_INPUT_VALUE)
   const classes = useStyles()
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     e.preventDefault()
     setValue(e.target.value)
-  }
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault()
-    if (0 < value.length) {
-      addTodo(value)
-      // init input
-      setValue("")
-    }
-  }
+  }, [])
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
+    (e) => {
+      e.preventDefault()
+      if (0 < value.length) {
+        addTodo(value)
+        // reset input
+        setValue(INITIAL_INPUT_VALUE)
+      }
+    },
+    [addTodo, value]
+  )
 
   return (
     <form css={root} noValidate autoComplete="off" onSubmit={onSubmit}>

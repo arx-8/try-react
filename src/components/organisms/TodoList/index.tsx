@@ -10,7 +10,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { Todo, TodoId, TodoStatus } from "domain/models/Todo"
-import React from "react"
+import React, { useCallback } from "react"
 
 export type ReduxStateProps = {
   todoList: Todo[]
@@ -34,11 +34,14 @@ export const _TodoList: React.FC<Props> = ({
 }) => {
   const classes = useStyles()
 
-  const onToggleStatus = (todoId: TodoId): void => {
-    const status = todoList.find((t) => t.id === todoId)!.status
-    const toggled: TodoStatus = status === "active" ? "completed" : "active"
-    changeTodoStatus(todoId, toggled)
-  }
+  const onToggleStatus = useCallback(
+    (todoId: TodoId): void => {
+      const status = todoList.find((t) => t.id === todoId)!.status
+      const toggled: TodoStatus = status === "active" ? "completed" : "active"
+      changeTodoStatus(todoId, toggled)
+    },
+    [changeTodoStatus, todoList]
+  )
 
   return (
     <List className={classes.root}>

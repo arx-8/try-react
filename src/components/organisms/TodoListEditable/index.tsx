@@ -10,7 +10,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { TodoId, TodoStatus } from "domain/models/Todo"
-import React, { Fragment } from "react"
+import React, { Fragment, useCallback } from "react"
 import { ReduxDispatchProps, ReduxStateProps } from "./AsyncContainer"
 
 export type OwnProps = {
@@ -27,11 +27,14 @@ export const _TodoListEditable: React.FC<Props> = ({
 }) => {
   const classes = useStyles()
 
-  const onToggleStatus = (todoId: TodoId): void => {
-    const status = todoList.find((t) => t.id === todoId)!.status
-    const toggled: TodoStatus = status === "active" ? "completed" : "active"
-    updateTodo({ id: todoId, status: toggled })
-  }
+  const onToggleStatus = useCallback(
+    (todoId: TodoId): void => {
+      const status = todoList.find((t) => t.id === todoId)!.status
+      const toggled: TodoStatus = status === "active" ? "completed" : "active"
+      updateTodo({ id: todoId, status: toggled })
+    },
+    [todoList, updateTodo]
+  )
 
   return (
     <Fragment>

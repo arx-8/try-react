@@ -6,7 +6,7 @@ import { DynamicRouteParams } from "constants/Paths"
 import { User } from "domain/models/GitHub"
 import { gitHubOperations } from "ducks/gitHub"
 import { RootState } from "ducks/store"
-import React from "react"
+import React, { useEffect } from "react"
 import Helmet from "react-helmet"
 import {
   connect,
@@ -43,7 +43,8 @@ const _Members: React.FC<Props> = ({
   >()
   const { companyName } = match.params
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // 空検索（例えばページの初期表示）はしないため
     if (companyName) {
       fetchMembersStart(companyName)
     }
