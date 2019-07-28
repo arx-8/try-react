@@ -7,6 +7,7 @@ import { User } from "domain/models/GitHub"
 import { gitHubOperations } from "ducks/gitHub"
 import { RootState } from "ducks/store"
 import React from "react"
+import Helmet from "react-helmet"
 import {
   connect,
   MapDispatchToPropsFunction,
@@ -49,33 +50,39 @@ const _Members: React.FC<Props> = ({
   }, [companyName, fetchMembersStart])
 
   return (
-    <div css={root}>
-      <InputCompanyName onReset={initializeMembers} />
-      <Header as="h2">
-        {companyName
-          ? `${companyName}の開発メンバー`
-          : `会社名を入力してください`}
-      </Header>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <Card.Group>
-          {users.map((u) => (
-            <Card
-              key={u.id}
-              href={`https://github.com/${u.login}`}
-              target="_blank"
-            >
-              <Card.Content>
-                <Image floated="right" size="mini" src={u.avatar_url} />
-                <Card.Header>{u.login}</Card.Header>
-                <Card.Meta>GitHub ID: {u.id}</Card.Meta>
-              </Card.Content>
-            </Card>
-          ))}
-        </Card.Group>
-      )}
-    </div>
+    <React.Fragment>
+      <Helmet>
+        <title>GitHubExplorer App</title>
+      </Helmet>
+
+      <div css={root}>
+        <InputCompanyName onReset={initializeMembers} />
+        <Header as="h2">
+          {companyName
+            ? `${companyName}の開発メンバー`
+            : `会社名を入力してください`}
+        </Header>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <Card.Group>
+            {users.map((u) => (
+              <Card
+                key={u.id}
+                href={`https://github.com/${u.login}`}
+                target="_blank"
+              >
+                <Card.Content>
+                  <Image floated="right" size="mini" src={u.avatar_url} />
+                  <Card.Header>{u.login}</Card.Header>
+                  <Card.Meta>GitHub ID: {u.id}</Card.Meta>
+                </Card.Content>
+              </Card>
+            ))}
+          </Card.Group>
+        )}
+      </div>
+    </React.Fragment>
   )
 }
 

@@ -4,6 +4,7 @@ import { RoutePath } from "constants/Paths"
 import { authOperations, authSelectors } from "ducks/auth"
 import { RootState } from "ducks/store"
 import React from "react"
+import Helmet from "react-helmet"
 import {
   connect,
   MapDispatchToPropsFunction,
@@ -28,45 +29,51 @@ type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 const _Login: React.FC<Props> = ({ isAuthenticated, login, logout }) => {
   return (
-    <div css={root}>
-      <h1>Login example page.</h1>
+    <React.Fragment>
+      <Helmet>
+        <title>Login App</title>
+      </Helmet>
 
-      <hr />
-      <h2>Actions</h2>
-      <div css={actions}>
-        <button onClick={login}>Login</button>
-        <button onClick={logout}>Logout</button>
-      </div>
+      <div css={root}>
+        <h1>Login example page.</h1>
 
-      <hr />
-      <h2>Status</h2>
-      <div>
-        {isAuthenticated ? (
-          <span
-            css={css`
-              color: red;
-            `}
-          >
-            Login
-          </span>
-        ) : (
-          <span>Logout</span>
-        )}
-      </div>
+        <hr />
+        <h2>Actions</h2>
+        <div css={actions}>
+          <button onClick={login}>Login</button>
+          <button onClick={logout}>Logout</button>
+        </div>
 
-      <hr />
-      <h2>Links</h2>
-      <div css={links}>
-        <ul>
-          <li>
-            <Link to={RoutePath.Public}>Public Page</Link>
-          </li>
-          <li>
-            <Link to={RoutePath.Private}>Private Page</Link>
-          </li>
-        </ul>
+        <hr />
+        <h2>Status</h2>
+        <div>
+          {isAuthenticated ? (
+            <span
+              css={css`
+                color: red;
+              `}
+            >
+              Login
+            </span>
+          ) : (
+            <span>Logout</span>
+          )}
+        </div>
+
+        <hr />
+        <h2>Links</h2>
+        <div css={links}>
+          <ul>
+            <li>
+              <Link to={RoutePath.Public}>Public Page</Link>
+            </li>
+            <li>
+              <Link to={RoutePath.Private}>Private Page</Link>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   )
 }
 

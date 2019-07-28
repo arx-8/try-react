@@ -8,6 +8,7 @@ import { TTTGameInfo } from "components/organisms/TTTGameInfo"
 import { RootState } from "ducks/store"
 import { tttOperations } from "ducks/tic-tac-toe"
 import React from "react"
+import Helmet from "react-helmet"
 import {
   connect,
   MapDispatchToPropsFunction,
@@ -30,17 +31,23 @@ const _TicTacToePage: React.FC<Props> = ({ reset }) => {
   const classes = useStyles()
 
   return (
-    <Container maxWidth="sm">
-      <Paper className={classes.root}>
-        <div css={root}>
-          <TTTBoard />
-          <TTTGameInfo />
-        </div>
-        <div css={actions}>
-          <button onClick={reset}>Reset</button>
-        </div>
-      </Paper>
-    </Container>
+    <React.Fragment>
+      <Helmet>
+        <title>TicTacToe App</title>
+      </Helmet>
+
+      <Container maxWidth="sm">
+        <Paper className={classes.root}>
+          <div css={root}>
+            <TTTBoard />
+            <TTTGameInfo />
+          </div>
+          <div css={actions}>
+            <button onClick={reset}>Reset</button>
+          </div>
+        </Paper>
+      </Container>
+    </React.Fragment>
   )
 }
 

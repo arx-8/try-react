@@ -8,6 +8,7 @@ import { TodoHeader } from "components/organisms/TodoHeader/AsyncContainer"
 import { TodoInput } from "components/organisms/TodoInput/AsyncContainer"
 import { TodoListEditable } from "components/organisms/TodoListEditable/AsyncContainer"
 import React from "react"
+import Helmet from "react-helmet"
 
 type Props = {
   children?: never
@@ -17,16 +18,22 @@ export const TodoAsyncPage: React.FC<Props> = () => {
   const classes = useStyles()
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h2">My TODO (Async)</Typography>
-      <Paper className={classes.root}>
-        <TodoHeader />
-        <TodoInput />
-        <TodoListEditable />
-        <TodoActions />
-        <TodoEditDialog />
-      </Paper>
-    </Container>
+    <React.Fragment>
+      <Helmet>
+        <title>Todo App Async</title>
+      </Helmet>
+
+      <Container maxWidth="sm">
+        <Typography variant="h2">My TODO (Async)</Typography>
+        <Paper className={classes.root}>
+          <TodoHeader />
+          <TodoInput />
+          <TodoListEditable />
+          <TodoActions />
+          <TodoEditDialog />
+        </Paper>
+      </Container>
+    </React.Fragment>
   )
 }
 
