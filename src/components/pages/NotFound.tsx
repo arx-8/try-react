@@ -1,18 +1,25 @@
 /** @jsx jsx */
-import React from "react"
 import { css, jsx } from "@emotion/core"
+import React from "react"
+import Helmet from "react-helmet"
 import { Link } from "react-router-dom"
 
 export const NotFound: React.FC = () => {
   return (
-    <div css={root}>
-      <div css={header}>
-        <p>Page not found.</p>
-        <Link css={link} to="/">
-          Go to Top
-        </Link>
+    <React.Fragment>
+      <Helmet>
+        <title>Page not found</title>
+      </Helmet>
+
+      <div css={root}>
+        <div css={header}>
+          <p>Page not found.</p>
+          <Link css={link} to="/">
+            Go to Top
+          </Link>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   )
 }
 

@@ -1,26 +1,33 @@
 /** @jsx jsx */
-import React from "react"
-import logo from "assets/logo.svg"
 import { css, jsx } from "@emotion/core"
+import logo from "assets/logo.svg"
+import React from "react"
+import Helmet from "react-helmet"
 
 export const Root: React.FC = () => {
   return (
-    <div css={root}>
-      <header css={header}>
-        <img css={logoCss} src={logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          css={link}
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Helmet>
+        <title>Top</title>
+      </Helmet>
+
+      <div css={root}>
+        <header css={header}>
+          <img css={logoCss} src={logo} alt="logo" />
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <a
+            css={link}
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+      </div>
+    </React.Fragment>
   )
 }
 

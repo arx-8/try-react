@@ -1,6 +1,7 @@
 import { redditActions } from "ducks/reddit"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
+import Helmet from "react-helmet"
 import { connect } from "react-redux"
 import { Picker } from "./Picker"
 import { Posts } from "./Posts"
@@ -49,6 +50,10 @@ class _RedditExample extends Component {
     } = this.props
     return (
       <div>
+        <Helmet>
+          <title>Reddit App</title>
+        </Helmet>
+
         <Picker
           value={redditSelectedSubreddit}
           onChange={this.handleChange}
