@@ -17,6 +17,7 @@ import { Field, FieldProps, Formik, getIn } from "formik"
 import React, { Fragment } from "react"
 import { connect, MapStateToProps } from "react-redux"
 import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
+import { AllowedAny } from "types/Utils"
 import * as Yup from "yup"
 
 type ReduxStateProps = {
@@ -148,7 +149,7 @@ const validationSchema = Yup.object().shape<FormValues>({
   label: Yup.string()
     .min(2, "2文字以上で入力してください")
     .required("入力してください"),
-  status: Yup.string().required() as any,
+  status: Yup.string().required() as AllowedAny,
 })
 
 const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (

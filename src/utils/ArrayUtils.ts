@@ -1,4 +1,4 @@
-import { Brand } from "types/Utils"
+import { Brand, CastAny } from "types/Utils"
 
 /**
  * lodash 使うまでもない Array 関係の Util
@@ -44,5 +44,5 @@ export const sort = <T>(
   arr: T[],
   compareFn: (a: T, b: T) => number
 ): SortedArray<T> => {
-  return arr.slice().sort(compareFn) as any
+  return arr.slice().sort(compareFn) as CastAny
 }

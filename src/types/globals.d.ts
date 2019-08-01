@@ -1,3 +1,5 @@
+import { AllowedAny } from "./Utils"
+
 /**
  * 全体で使う型定義
  */
@@ -8,7 +10,7 @@ type ExWindow = Partial<{
    */
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function
 
-  __REDUX_INITIAL_STATE__: Record<string, any>
+  __REDUX_INITIAL_STATE__: Record<string, AllowedAny>
 }>
 
 export declare global {

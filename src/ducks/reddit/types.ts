@@ -1,7 +1,9 @@
+import { FixMeAny } from "types/Utils"
+
 export type PostsBySubredditState = {
   isFetching: boolean
   didInvalidate: boolean
-  items: any[]
+  items: FixMeAny[]
 }
 
 export type SelectedSubredditState = string

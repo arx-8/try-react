@@ -7,7 +7,7 @@ type Props = {
   children?: never
   disabled: boolean
   onClick: () => void
-  value: InputValue | any
+  value: InputValue
 }
 
 export const TTTSquare: React.FC<Props> = ({ disabled, value, onClick }) => {

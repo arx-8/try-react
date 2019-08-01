@@ -7,6 +7,7 @@ import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import { VisibilityFilter, VisibilityFilterValue } from "domain/models/Todo"
 import React, { useCallback } from "react"
+import { AllowedAny } from "types/Utils"
 
 type ReduxStateProps = {
   currentVisibilityFilter: VisibilityFilter
@@ -27,7 +28,7 @@ export const _TodoActions: React.FC<Props> = ({
   currentVisibilityFilter,
 }) => {
   const onChange = useCallback(
-    (_: any, value: string): void => {
+    (_: AllowedAny, value: string): void => {
       setVisibilityFilter(value as VisibilityFilter)
     },
     [setVisibilityFilter]

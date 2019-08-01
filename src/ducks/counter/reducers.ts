@@ -1,7 +1,8 @@
+import produce from "immer"
+import { handleActions, ReduxCompatibleReducer } from "redux-actions"
+import { AllowedAny } from "types/Utils"
 import * as actions from "./actions"
 import { CounterActionType } from "./types"
-import { handleActions, ReduxCompatibleReducer } from "redux-actions"
-import produce from "immer"
 
 export type CounterState = Readonly<{
   count: number
@@ -16,7 +17,7 @@ type Action =
       | typeof actions.decrement
       | typeof actions.increment
     >
-  | any
+  | AllowedAny
 
 export const initialState: CounterState = {
   count: 0,
