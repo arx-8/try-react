@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios"
 import dayjs, { Dayjs } from "dayjs"
 import { Todo, TodoId } from "domain/models/Todo"
+import { AllowedAny } from "types/Utils"
 import { ulid } from "ulid"
 
 const createTodoId = (): TodoId => {
@@ -36,18 +37,18 @@ const toMockAxiosResp = <T>(data: T): AxiosResponse<T> => {
     status: 200,
     statusText: "200OK",
     headers: null,
-    config: null as any,
+    config: null as AllowedAny,
   }
 }
 const toMockAxiosError = <T>(
-  request: any,
+  request: AllowedAny,
   response: AxiosResponse<T>,
   code: string,
   message: string
 ): AxiosError<T> => {
   return {
     code,
-    config: null as any,
+    config: null as AllowedAny,
     isAxiosError: true,
     message,
     name: "AxiosError",

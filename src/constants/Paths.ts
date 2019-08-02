@@ -1,4 +1,4 @@
-import { Brand, ValueOf } from "types/Utils"
+import { Brand, CastAny, ValueOf } from "types/Utils"
 
 /**
  * react-router用のパスの定義
@@ -21,7 +21,10 @@ const _RoutePath = {
 type RoutePathKey = keyof typeof _RoutePath
 
 export type RoutePathValue = Brand<ValueOf<typeof _RoutePath>, "RoutePathValue">
-export const RoutePath: Record<RoutePathKey, RoutePathValue> = _RoutePath as any
+export const RoutePath: Record<
+  RoutePathKey,
+  RoutePathValue
+> = _RoutePath as CastAny
 
 /**
  * 動的なパスの定義
@@ -43,9 +46,9 @@ export type DynamicRouteParams = {
 type DynamicRoutePathKey = keyof typeof DynamicRoutePath
 type KeyCheck = RoutePathKey | DynamicRoutePathKey
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _: RoutePathKey = (null as any) as KeyCheck
+const _: RoutePathKey = (null as CastAny) as KeyCheck
 
 type DynamicRouteParamsKey = keyof DynamicRouteParams
 type KeyCheck2 = RoutePathKey | DynamicRouteParamsKey
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _2: RoutePathKey = (null as any) as KeyCheck2
+const _2: RoutePathKey = (null as CastAny) as KeyCheck2

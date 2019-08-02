@@ -7,8 +7,10 @@ import {
   createStore,
   Store,
 } from "redux"
+import persistState from "redux-localstorage"
 import createSagaMiddleware from "redux-saga"
 import thunkMiddleWare from "redux-thunk"
+import { FixMeAny } from "types/Utils"
 import { authReducer, AuthState } from "./auth"
 import { counterReducer } from "./counter"
 import { CounterState } from "./counter/reducers"
@@ -21,7 +23,6 @@ import { TTTState } from "./tic-tac-toe/types"
 import { todoReducer } from "./todo"
 import { TodoState } from "./todo/types"
 import { todoAsyncReducer, TodoAsyncState } from "./todoAsync"
-import persistState from "redux-localstorage"
 
 export type RootState = Readonly<{
   auth: AuthState
@@ -30,8 +31,8 @@ export type RootState = Readonly<{
   todo: TodoState
   todoAsync: TodoAsyncState
   ticTacToe: TTTState
-  redditPostsBySubreddit: any
-  redditSelectedSubreddit: any
+  redditPostsBySubreddit: FixMeAny
+  redditSelectedSubreddit: FixMeAny
 }>
 
 export const configureStore = (

@@ -13,11 +13,12 @@ import {
   SimpleEffect,
   takeLatest,
 } from "redux-saga/effects"
+import { AllowedAny } from "types/Utils"
 import * as actions from "./actions"
 
 function* runFetchMembers(
   action: ReturnType<typeof actions.fetchMembersStart>
-): any {
+): AllowedAny {
   const { companyName } = action.payload
 
   try {
