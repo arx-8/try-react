@@ -14,7 +14,7 @@
     "dayjs": "1.8.15",
     "emotion-normalize": "10.1.0",
     "formik": "1.5.8",
-    "immer": "3.1.3",
+    "immer": "3.2.0",
     "jest-emotion": "10.0.14",
     "lodash": "4.17.15",
     "react": "16.8.6",
