@@ -4,7 +4,7 @@ import * as actions from "./actions"
 import { initialState, reducer } from "./reducers"
 
 describe("updateTodo", () => {
-  it("updateTodo", async () => {
+  it("updateTodo", () => {
     expect.hasAssertions()
     // ## Arrange ##
     const prevState = produce(initialState, (draft) => {
