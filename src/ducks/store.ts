@@ -7,8 +7,10 @@ import {
   createStore,
   Store,
 } from "redux"
+import immutableStateInvariantMiddleware from "redux-immutable-state-invariant"
 import persistState from "redux-localstorage"
 import createSagaMiddleware from "redux-saga"
+import { createSerializableStateInvariantMiddleware } from "redux-starter-kit"
 import thunkMiddleWare from "redux-thunk"
 import { FixMeAny } from "types/Utils"
 import { authReducer, AuthState } from "./auth"
@@ -49,6 +51,7 @@ export const configureStore = (
     redditSelectedSubreddit: redditReducers.selectedSubreddit,
   })
 
+  // Connect Chrome Redux DevTools, if installed.
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -57,13 +60,8 @@ export const configureStore = (
   middleWares.push(sagaMiddleWare)
   middleWares.push(thunkMiddleWare)
   if (isDevelopment) {
-    /* eslint-disable @typescript-eslint/no-var-requires */
-    middleWares.push(require("redux-immutable-state-invariant").default())
-    const {
-      createSerializableStateInvariantMiddleware,
-    } = require("redux-starter-kit/dist/redux-starter-kit.esm")
+    middleWares.push(immutableStateInvariantMiddleware())
     middleWares.push(createSerializableStateInvariantMiddleware())
-    /* eslint-enable @typescript-eslint/no-var-requires */
   }
 
   const store = createStore(
