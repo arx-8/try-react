@@ -12,12 +12,10 @@ import {
 import { toSerializableError } from "domain/errors/SerializableError"
 import { TodoId } from "domain/models/Todo"
 import debounce from "lodash/debounce"
-import { AppAsyncThunkAction, AppThunkAction } from "types/ReduxTypes"
+import { AppThunkAction } from "types/ReduxTypes"
 import * as actions from "./actions"
 
-export const addTodoRequest = (
-  params: CallPostTodoReq
-): AppAsyncThunkAction => {
+export const addTodoRequest = (params: CallPostTodoReq): AppThunkAction => {
   return async (dispatch) => {
     dispatch(actions.addTodo.started(params))
     try {
@@ -35,18 +33,18 @@ export const addTodoRequest = (
 /**
  * debounceなしで実行
  */
-export const fetchAllTodosRequest = (): AppAsyncThunkAction => {
+export const fetchAllTodosRequest = (): AppThunkAction => {
   return fetchAllTodosRequestActInner
 }
 
 /**
  * debounceありで実行
  */
-export const fetchAllTodosRequestDebounce = (): AppAsyncThunkAction => {
+export const fetchAllTodosRequestDebounce = (): AppThunkAction => {
   return fetchAllTodosRequestDebounceMemo
 }
 
-const fetchAllTodosRequestActInner: AppAsyncThunkAction = async (dispatch) => {
+const fetchAllTodosRequestActInner: AppThunkAction = async (dispatch) => {
   dispatch(actions.fetchAllTodos.started())
   try {
     dispatch(actions.fetchAllTodos.done({ result: await callGetAllTodos() }))
@@ -67,7 +65,7 @@ const fetchAllTodosRequestDebounceMemo = debounce(
 
 export const deleteTodoRequest = (
   params: CallDeleteTodoReq
-): AppAsyncThunkAction => {
+): AppThunkAction => {
   return async (dispatch) => {
     dispatch(actions.deleteTodo.started(params))
     try {
@@ -82,9 +80,7 @@ export const deleteTodoRequest = (
   }
 }
 
-export const updateTodoRequest = (
-  params: CallPutTodoReq
-): AppAsyncThunkAction => {
+export const updateTodoRequest = (params: CallPutTodoReq): AppThunkAction => {
   return async (dispatch) => {
     dispatch(actions.updateTodo.started(params))
     try {
@@ -99,7 +95,7 @@ export const updateTodoRequest = (
   }
 }
 
-const fetchTodoRequest = (params: CallGetTodoReq): AppAsyncThunkAction => {
+const fetchTodoRequest = (params: CallGetTodoReq): AppThunkAction => {
   return async (dispatch) => {
     dispatch(actions.fetchTodo.started(params))
     try {
