@@ -13,9 +13,9 @@ export type ReduxStateProps = {
 }
 
 export type ReduxDispatchProps = {
-  deleteTodo: (todoId: TodoId) => Promise<void>
+  deleteTodo: (todoId: TodoId) => void
   openTodoEditDialog: (todoId: TodoId) => void
-  updateTodo: (params: CallPutTodoReq) => Promise<void>
+  updateTodo: (params: CallPutTodoReq) => void
 }
 
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps

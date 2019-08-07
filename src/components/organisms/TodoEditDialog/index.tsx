@@ -29,7 +29,7 @@ type ReduxStateProps = {
 
 type ReduxDispatchProps = {
   closeTodoEditDialog: () => void
-  updateTodo: (params: CallPutTodoReq) => Promise<void>
+  updateTodo: (params: CallPutTodoReq) => void
 }
 
 /**
