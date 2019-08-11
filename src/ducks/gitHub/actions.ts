@@ -5,12 +5,12 @@ import {
   FetchMemberError,
 } from "./types"
 
-export enum ActionTypes {
-  FETCH_MEMBERS_START = "app/gitHub/FETCH_MEMBERS_START",
-  FETCH_MEMBERS_SUCCEED = "app/gitHub/FETCH_MEMBERS_SUCCEED",
-  FETCH_MEMBERS_FAIL = "app/gitHub/FETCH_MEMBERS_FAIL",
-  INITIALIZE_MEMBERS = "app/gitHub/INITIALIZE_MEMBERS",
-}
+export const ActionTypes = {
+  FETCH_MEMBERS_START: "app/gitHub/FETCH_MEMBERS_START",
+  FETCH_MEMBERS_SUCCEED: "app/gitHub/FETCH_MEMBERS_SUCCEED",
+  FETCH_MEMBERS_FAIL: "app/gitHub/FETCH_MEMBERS_FAIL",
+  INITIALIZE_MEMBERS: "app/gitHub/INITIALIZE_MEMBERS",
+} as const
 
 export const fetchMembersStart: ActionWithPayloadHandler<
   typeof ActionTypes.FETCH_MEMBERS_START,
