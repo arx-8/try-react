@@ -34,7 +34,7 @@ describe("Example", () => {
  */
 describe("Comparison of toStrictEqual, toBe and toEqual", () => {
   class Human {
-    constructor(private name: string, private age: number) {}
+    constructor(private readonly name: string, private readonly age: number) {}
 
     public getGreet(): string {
       return `My name is ${this.name}. ${this.age} years old`

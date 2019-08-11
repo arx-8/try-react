@@ -1,7 +1,7 @@
-export enum ActionTypes {
-  CLICK_SQUARE = "tic-tac-toe/CLICK_SQUARE",
-  RESET = "tic-tac-toe/RESET",
-}
+export const ActionTypes = {
+  CLICK_SQUARE: "tic-tac-toe/CLICK_SQUARE",
+  RESET: "tic-tac-toe/RESET",
+} as const
 
 export type InputValue = "O" | "X" | null
 

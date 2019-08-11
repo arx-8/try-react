@@ -9,14 +9,14 @@ import { SerializableError } from "domain/errors/SerializableError"
 import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
 import actionCreatorFactory from "typescript-fsa"
 
-export enum ActionTypes {
-  ADD_TODO = "todoAsync/ADD_TODO",
-  CHANGE_TODO_STATUS = "todoAsync/CHANGE_TODO_STATUS",
-  DELETE_TODO = "todoAsync/DELETE_TODO",
-  FETCH_ALL_TODOS = "todoAsync/FETCH_ALL_TODOS",
-  FETCH_TODO = "todoAsync/FETCH_TODO",
-  SET_VISIBILITY_FILTER = "todoAsync/SET_VISIBILITY_FILTER",
-  SET_OPEN_TODO_EDIT_DIALOG = "todoAsync/SET_OPEN_TODO_EDIT_DIALOG",
+export const ActionTypes = {
+  ADD_TODO: "todoAsync/ADD_TODO",
+  CHANGE_TODO_STATUS: "todoAsync/CHANGE_TODO_STATUS",
+  DELETE_TODO: "todoAsync/DELETE_TODO",
+  FETCH_ALL_TODOS: "todoAsync/FETCH_ALL_TODOS",
+  FETCH_TODO: "todoAsync/FETCH_TODO",
+  SET_VISIBILITY_FILTER: "todoAsync/SET_VISIBILITY_FILTER",
+  SET_OPEN_TODO_EDIT_DIALOG: "todoAsync/SET_OPEN_TODO_EDIT_DIALOG",
 }
 
 const create = actionCreatorFactory(APP_NAME)
