@@ -15,13 +15,23 @@ module.exports = {
     "plugin:prettier/recommended",
     "react-app",
   ],
-  plugins: ["only-error"],
+  plugins: [
+    // CircleCI で warn も検知可能にするため、全て error にする
+    "only-error",
+  ],
   rules: {
     "import/no-default-export": "error",
     "jest/lowercase-name": "off",
     "jest/prefer-inline-snapshots": "off",
-    "no-console": "off",
     "no-var": "error",
+    "no-restricted-syntax": [
+      "error",
+      {
+        selector: "TSEnumDeclaration",
+        message:
+          "Do not declare enums. Use `Plain Object` or `Literal Types` instead.",
+      },
+    ],
     "prefer-const": "error",
     "prettier/prettier": [
       "error",
@@ -48,13 +58,12 @@ module.exports = {
       },
     ],
     "react/void-dom-elements-no-children": "error",
-    "require-await": "error",
 
-    // constructor のショートハンド（メンバーの省略記法）を使いたいため
+    // constructor のショートハンド（メンバーの省略記法）を許可
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/no-parameter-properties": "off",
 
-    // React Component の書き心地がとても悪くなるため
+    // React Component のボイラープレートコードを減らすため
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
@@ -64,14 +73,19 @@ module.exports = {
     ],
     "@typescript-eslint/prefer-interface": "off",
 
-    // ホイスティングの許可
-    "@typescript-eslint/no-use-before-define": "off",
-
     // for Widening Literal Types
     "@typescript-eslint/no-object-literal-type-assertion": "off",
 
-    // しょうがない
+    // 有用なケースがあるため
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+
+    // Other
+    "@typescript-eslint/no-misused-promises": "error",
+    "@typescript-eslint/prefer-readonly": "error",
+
+    // note you must disable the base rule as it can report incorrect errors
+    "require-await": "off",
+    "@typescript-eslint/require-await": "error",
   },
 }
