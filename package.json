@@ -77,7 +77,7 @@
     "lint": "npm-run-all --parallel lint:eslint lint:tsc",
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "typesync": "typesync"
+    "typesync": "typesync --ignoredeps=dev"
   },
   "eslintConfig": {
     "extends": "react-app"
