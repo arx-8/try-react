@@ -71,8 +71,8 @@
     "lint:eslint-dry": "eslint -c .eslintrc.js --ext .ts,.tsx,.js,.jsx src",
     "lint:eslint": "eslint -c .eslintrc.js --fix --ext .ts,.tsx,.js,.jsx src",
     "lint:tsc": "tsc --noEmit",
-    "lint-dry": "npm-run-all --parallel lint:eslint-dry lint:tsc",
-    "lint": "npm-run-all --parallel lint:eslint lint:tsc",
+    "lint-dry": "npm-run-all --parallel --continue-on-error lint:eslint-dry lint:tsc",
+    "lint": "npm-run-all --parallel --continue-on-error lint:eslint lint:tsc",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "typesync": "typesync --ignoredeps=dev"
