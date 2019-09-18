@@ -45,6 +45,15 @@ exports[`Snapshot all 1`] = `
           <span
             className="MuiIconButton-label"
           >
+            <input
+              checked={true}
+              className="PrivateSwitchBase-input-28"
+              disabled={false}
+              name="position"
+              onChange={[Function]}
+              type="radio"
+              value="all"
+            />
             <div
               className="PrivateRadioButtonIcon-root-41 PrivateRadioButtonIcon-checked-43"
             >
@@ -71,15 +80,6 @@ exports[`Snapshot all 1`] = `
                 />
               </svg>
             </div>
-            <input
-              checked={true}
-              className="PrivateSwitchBase-input-28"
-              disabled={false}
-              name="position"
-              onChange={[Function]}
-              type="radio"
-              value="all"
-            />
           </span>
         </span>
         <span
@@ -110,6 +110,15 @@ exports[`Snapshot all 1`] = `
           <span
             className="MuiIconButton-label"
           >
+            <input
+              checked={false}
+              className="PrivateSwitchBase-input-28"
+              disabled={false}
+              name="position"
+              onChange={[Function]}
+              type="radio"
+              value="active"
+            />
             <div
               className="PrivateRadioButtonIcon-root-41"
             >
@@ -136,15 +145,6 @@ exports[`Snapshot all 1`] = `
                 />
               </svg>
             </div>
-            <input
-              checked={false}
-              className="PrivateSwitchBase-input-28"
-              disabled={false}
-              name="position"
-              onChange={[Function]}
-              type="radio"
-              value="active"
-            />
           </span>
         </span>
         <span
@@ -175,6 +175,15 @@ exports[`Snapshot all 1`] = `
           <span
             className="MuiIconButton-label"
           >
+            <input
+              checked={false}
+              className="PrivateSwitchBase-input-28"
+              disabled={false}
+              name="position"
+              onChange={[Function]}
+              type="radio"
+              value="completed"
+            />
             <div
               className="PrivateRadioButtonIcon-root-41"
             >
@@ -201,15 +210,6 @@ exports[`Snapshot all 1`] = `
                 />
               </svg>
             </div>
-            <input
-              checked={false}
-              className="PrivateSwitchBase-input-28"
-              disabled={false}
-              name="position"
-              onChange={[Function]}
-              type="radio"
-              value="completed"
-            />
           </span>
         </span>
         <span
