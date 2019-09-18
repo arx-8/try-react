@@ -2,6 +2,7 @@ import { Counter } from "components/pages/Counter"
 import { Login } from "components/pages/Login"
 import { PrivatePage } from "components/pages/Login/PrivatePage"
 import { PublicPage } from "components/pages/Login/PublicPage"
+import { LoginWithAmplify } from "components/pages/LoginWithAmplify"
 import { Members } from "components/pages/Members"
 import { NotFound } from "components/pages/NotFound"
 import { RedditExample } from "components/pages/RedditExample"
@@ -30,6 +31,11 @@ export const Routes: React.FC<Props> = () => {
       <Route exact path={RoutePath.Login} component={Login} />
       <Route exact path={RoutePath.Public} component={PublicPage} />
       <PrivateRoute exact path={RoutePath.Private} component={PrivatePage} />
+      <Route
+        exact
+        path={RoutePath.LoginWithAmplify}
+        component={LoginWithAmplify}
+      />
       <Route
         exact
         path={RoutePath.GitHubExplorer_Members}
