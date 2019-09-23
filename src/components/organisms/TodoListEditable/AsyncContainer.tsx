@@ -21,7 +21,7 @@ export type ReduxDispatchProps = {
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps
 
 class Container extends React.Component<Props> {
-  shouldComponentUpdate = (nextProps: Props) => {
+  shouldComponentUpdate = (nextProps: Props): boolean => {
     const prevTodoList = sort(this.props.todoList, sortCompareTodoId)
     const nextTodoList = sort(nextProps.todoList, sortCompareTodoId)
     return !equals(prevTodoList, nextTodoList, predicateEqualsTodo)

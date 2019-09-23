@@ -63,14 +63,10 @@ module.exports = {
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/no-parameter-properties": "off",
 
+    // disable the rule for all files. (js,jsx ファイルまで対象になってしまうため)
+    "@typescript-eslint/explicit-function-return-type": "off",
+
     // React Component のボイラープレートコードを減らすため
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        allowExpressions: true,
-        allowTypedFunctionExpressions: true,
-      },
-    ],
     "@typescript-eslint/prefer-interface": "off",
 
     // for Widening Literal Types
@@ -88,4 +84,21 @@ module.exports = {
     "require-await": "off",
     "@typescript-eslint/require-await": "error",
   },
+  overrides: [
+    {
+      // enable the rule specifically for TypeScript files
+      files: ["*.ts", "*.tsx"],
+      rules: {
+        // React Component のボイラープレートコードを減らすため
+        // @see https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            allowExpressions: true,
+            allowTypedFunctionExpressions: true,
+          },
+        ],
+      },
+    },
+  ],
 }
