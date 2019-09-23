@@ -13,6 +13,7 @@ const _RoutePath = {
   GitHubExplorer_Members: "/github-explorer/:companyName/members",
   RedditExample: "/reddit-example",
   Login: "/login",
+  LoginWithAmplify: "/login-with-amplify",
   Private: "/private",
   Public: "/public",
   NotFound: "/notfound",

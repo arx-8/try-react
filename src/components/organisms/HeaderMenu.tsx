@@ -22,6 +22,7 @@ const items: MenuItems = [
   { path: RoutePath.GitHubExplorer, name: "GitHubExplorer" },
   { path: RoutePath.RedditExample, name: "RedditExample" },
   { path: RoutePath.Login, name: "Login" },
+  { path: RoutePath.LoginWithAmplify, name: "LoginWithAmplify" },
 ]
 
 export const HeaderMenu: React.FC<Props> = () => {
