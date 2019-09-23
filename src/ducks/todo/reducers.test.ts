@@ -19,7 +19,7 @@ describe("ADD_TODO", () => {
     })
 
     // ## Assert ##
-    expect(result.todoList.length).toStrictEqual(1)
+    expect(result.todoList).toHaveLength(1)
     expect(result.todoList[0].id).not.toBeNull()
 
     // ランダムな ulid のテストが面倒なため置き換える
@@ -56,7 +56,7 @@ describe("ADD_TODO", () => {
     })
 
     // ## Assert ##
-    expect(result.todoList.length).toStrictEqual(3)
+    expect(result.todoList).toHaveLength(3)
     expect(result.todoList[2].id).not.toBeNull()
 
     // ランダムな ulid のテストが面倒なため置き換える
