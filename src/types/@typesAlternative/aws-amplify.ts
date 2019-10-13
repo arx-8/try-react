@@ -1,3 +1,7 @@
+/**
+ * 公式の型がまだ不完全なため、より安全に aws-amplify を実装するための型を定義する
+ */
+
 export type AmplifyConfig = {
   Auth: {
     identityPoolId: string
