@@ -30,7 +30,7 @@
     "redux-immutable-state-invariant": "2.1.0",
     "redux-localstorage": "0.4.1",
     "redux-saga": "1.1.1",
-    "redux-starter-kit": "0.7.0",
+    "redux-starter-kit": "0.9.1",
     "redux-thunk": "2.3.0",
     "semantic-ui-css": "2.4.1",
     "semantic-ui-react": "0.88.1",
