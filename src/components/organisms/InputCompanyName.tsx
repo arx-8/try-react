@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core"
 import { DynamicRoutePath, RoutePath } from "constants/Paths"
 import { Field, Formik } from "formik"
 import React from "react"
-import useReactRouter from "use-react-router"
+import { useHistory } from "react-router"
 import * as Yup from "yup"
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const InputCompanyName: React.FC<Props> = ({ onReset }) => {
-  const { history } = useReactRouter()
+  const history = useHistory()
 
   return (
     <div>
