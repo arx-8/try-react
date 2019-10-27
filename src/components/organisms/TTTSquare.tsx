@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { InputValue } from "ducks/tic-tac-toe/types"
 import React from "react"
+import { InputValue } from "src/ducks/tic-tac-toe/types"
 
 type Props = {
   children?: never

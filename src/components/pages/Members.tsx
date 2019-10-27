@@ -1,11 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { Spinner } from "components/atoms/Spinner"
-import { InputCompanyName } from "components/organisms/InputCompanyName"
-import { DynamicRouteParams } from "constants/Paths"
-import { User } from "domain/models/GitHub"
-import { gitHubOperations } from "ducks/gitHub"
-import { RootState } from "ducks/store"
 import React, { useEffect } from "react"
 import Helmet from "react-helmet"
 import {
@@ -15,6 +9,12 @@ import {
 } from "react-redux"
 import { useParams } from "react-router"
 import { Card, Header, Image } from "semantic-ui-react"
+import { Spinner } from "src/components/atoms/Spinner"
+import { InputCompanyName } from "src/components/organisms/InputCompanyName"
+import { DynamicRouteParams } from "src/constants/Paths"
+import { User } from "src/domain/models/GitHub"
+import { gitHubOperations } from "src/ducks/gitHub"
+import { RootState } from "src/ducks/store"
 
 type ReduxStateProps = {
   isLoading: boolean

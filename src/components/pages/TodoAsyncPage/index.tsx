@@ -2,13 +2,13 @@ import Container from "@material-ui/core/Container"
 import Paper from "@material-ui/core/Paper"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
-import { TodoActions } from "components/organisms/TodoActions/AsyncContainer"
-import { TodoEditDialog } from "components/organisms/TodoEditDialog"
-import { TodoHeader } from "components/organisms/TodoHeader/AsyncContainer"
-import { TodoInput } from "components/organisms/TodoInput/AsyncContainer"
-import { TodoListEditable } from "components/organisms/TodoListEditable/AsyncContainer"
 import React from "react"
 import Helmet from "react-helmet"
+import { TodoActions } from "src/components/organisms/TodoActions/AsyncContainer"
+import { TodoEditDialog } from "src/components/organisms/TodoEditDialog"
+import { TodoHeader } from "src/components/organisms/TodoHeader/AsyncContainer"
+import { TodoInput } from "src/components/organisms/TodoInput/AsyncContainer"
+import { TodoListEditable } from "src/components/organisms/TodoListEditable/AsyncContainer"
 
 type Props = {
   children?: never

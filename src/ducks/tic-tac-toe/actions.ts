@@ -1,4 +1,4 @@
-import { APP_NAME } from "constants/App"
+import { APP_NAME } from "src/constants/App"
 import actionCreatorFactory from "typescript-fsa"
 import { ActionTypes, InputValue } from "./types"
 

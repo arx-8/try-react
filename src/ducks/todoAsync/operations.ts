@@ -1,3 +1,4 @@
+import debounce from "lodash/debounce"
 import {
   callDeleteTodo,
   CallDeleteTodoReq,
@@ -8,11 +9,10 @@ import {
   CallPostTodoReq,
   callPutTodo,
   CallPutTodoReq,
-} from "data/apis/TodoAPIClient"
-import { toSerializableError } from "domain/errors/SerializableError"
-import { TodoId } from "domain/models/Todo"
-import debounce from "lodash/debounce"
-import { AppThunkAction } from "types/ReduxTypes"
+} from "src/data/apis/TodoAPIClient"
+import { toSerializableError } from "src/domain/errors/SerializableError"
+import { TodoId } from "src/domain/models/Todo"
+import { AppThunkAction } from "src/types/ReduxTypes"
 import * as actions from "./actions"
 
 export const addTodoRequest = (params: CallPostTodoReq): AppThunkAction => {

@@ -1,7 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { counterOperations } from "ducks/counter"
-import { RootState } from "ducks/store"
 import { Field, FieldProps, Formik, getIn } from "formik"
 import React from "react"
 import {
@@ -10,6 +8,8 @@ import {
   MapStateToProps,
 } from "react-redux"
 import { Button, Input } from "semantic-ui-react"
+import { counterOperations } from "src/ducks/counter"
+import { RootState } from "src/ducks/store"
 
 type ReduxStateProps = {
   defaultAmount: number

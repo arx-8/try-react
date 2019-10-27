@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { RootState } from "ducks/store"
-import { PlayerName } from "ducks/tic-tac-toe/types"
 import React from "react"
 import { connect, MapStateToProps } from "react-redux"
+import { RootState } from "src/ducks/store"
+import { PlayerName } from "src/ducks/tic-tac-toe/types"
 
 type ReduxStateProps = {
   winnerPlayerName: PlayerName | null

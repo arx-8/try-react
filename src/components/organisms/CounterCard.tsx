@@ -1,7 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { counterOperations } from "ducks/counter"
-import { RootState } from "ducks/store"
 import React from "react"
 import {
   connect,
@@ -9,6 +7,8 @@ import {
   MapStateToProps,
 } from "react-redux"
 import { Button, Card, Statistic } from "semantic-ui-react"
+import { counterOperations } from "src/ducks/counter"
+import { RootState } from "src/ducks/store"
 
 type ReduxStateProps = {
   count: number

@@ -1,5 +1,5 @@
-import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
 import produce from "immer"
+import { Todo, TodoId, VisibilityFilter } from "src/domain/models/Todo"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
 import * as actions from "./actions"
 

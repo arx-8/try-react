@@ -1,4 +1,4 @@
-import { Todo, VisibilityFilter } from "domain/models/Todo"
+import { Todo, VisibilityFilter } from "src/domain/models/Todo"
 
 export const ActionTypes = {
   ADD_TODO: "app/todo/ADD_TODO",

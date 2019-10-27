@@ -1,8 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { RoutePath } from "constants/Paths"
-import { authOperations, authSelectors } from "ducks/auth"
-import { RootState } from "ducks/store"
 import React from "react"
 import Helmet from "react-helmet"
 import {
@@ -11,6 +8,9 @@ import {
   MapStateToProps,
 } from "react-redux"
 import { Link } from "react-router-dom"
+import { RoutePath } from "src/constants/Paths"
+import { authOperations, authSelectors } from "src/ducks/auth"
+import { RootState } from "src/ducks/store"
 
 type ReduxStateProps = {
   isAuthenticated: boolean

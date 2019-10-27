@@ -1,10 +1,5 @@
 import { CombinatorEffect } from "@redux-saga/types"
 import {
-  callGetMembers,
-  CallGetMembersResponse,
-} from "data/apis/GitHubAPIClient"
-import { toSerializableError } from "domain/errors/SerializableError"
-import {
   all,
   call,
   fork,
@@ -13,7 +8,12 @@ import {
   SimpleEffect,
   takeLatest,
 } from "redux-saga/effects"
-import { AllowedAny } from "types/Utils"
+import {
+  callGetMembers,
+  CallGetMembersResponse,
+} from "src/data/apis/GitHubAPIClient"
+import { toSerializableError } from "src/domain/errors/SerializableError"
+import { AllowedAny } from "src/types/Utils"
 import * as actions from "./actions"
 
 function* runFetchMembers(

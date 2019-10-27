@@ -1,4 +1,4 @@
-import { Todo } from "domain/models/Todo"
+import { Todo } from "src/domain/models/Todo"
 import { TodoState } from "./types"
 
 export const filterTodoList = (state: TodoState): Todo[] => {

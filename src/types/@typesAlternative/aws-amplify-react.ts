@@ -1,5 +1,5 @@
 import { Component, FC } from "react"
-import { FixMeAny } from "types/Utils"
+import { FixMeAny } from "src/types/Utils"
 
 /**
  * 公式の型がまだ不完全なため、より安全に aws-amplify を実装するための型を定義する

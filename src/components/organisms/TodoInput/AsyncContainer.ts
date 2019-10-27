@@ -1,7 +1,7 @@
-import { RootState } from "ducks/store"
-import { todoAsyncOperations } from "ducks/todoAsync"
 import { connect, MapStateToProps } from "react-redux"
-import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
+import { RootState } from "src/ducks/store"
+import { todoAsyncOperations } from "src/ducks/todoAsync"
+import { MapThunkDispatchToPropsFunction } from "src/types/ReduxTypes"
 import { OwnProps, ReduxDispatchProps, ReduxStateProps, _TodoInput } from "."
 
 const mapStateToProps: MapStateToProps<

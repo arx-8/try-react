@@ -1,9 +1,9 @@
-import { ColorfulBeads } from "components/organisms/ColorfulBeads"
-import { CounterCard } from "components/organisms/CounterCard"
-import { CounterInput } from "components/organisms/CounterInput"
 import React from "react"
 import Helmet from "react-helmet"
 import { Container } from "semantic-ui-react"
+import { ColorfulBeads } from "src/components/organisms/ColorfulBeads"
+import { CounterCard } from "src/components/organisms/CounterCard"
+import { CounterInput } from "src/components/organisms/CounterInput"
 
 type Props = {
   children?: never

@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
+import React from "react"
 import { NavLink } from "react-router-dom"
 import { Menu, StrictMenuItemProps } from "semantic-ui-react"
-import { RoutePath, RoutePathValue } from "constants/Paths"
-import React from "react"
+import { RoutePath, RoutePathValue } from "src/constants/Paths"
 
 type Props = {
   children?: never

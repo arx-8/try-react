@@ -3,10 +3,6 @@ import { css, jsx } from "@emotion/core"
 import Container from "@material-ui/core/Container"
 import Paper from "@material-ui/core/Paper"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
-import { TTTBoard } from "components/organisms/TTTBoard"
-import { TTTGameInfo } from "components/organisms/TTTGameInfo"
-import { RootState } from "ducks/store"
-import { tttOperations } from "ducks/tic-tac-toe"
 import React from "react"
 import Helmet from "react-helmet"
 import {
@@ -14,6 +10,10 @@ import {
   MapDispatchToPropsFunction,
   MapStateToProps,
 } from "react-redux"
+import { TTTBoard } from "src/components/organisms/TTTBoard"
+import { TTTGameInfo } from "src/components/organisms/TTTGameInfo"
+import { RootState } from "src/ducks/store"
+import { tttOperations } from "src/ducks/tic-tac-toe"
 
 type ReduxStateProps = {}
 

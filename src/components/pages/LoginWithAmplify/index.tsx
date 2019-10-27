@@ -2,15 +2,15 @@
 import { jsx } from "@emotion/core"
 import Amplify from "aws-amplify"
 import { withAuthenticator } from "aws-amplify-react"
+import React from "react"
+import Helmet from "react-helmet"
 import {
   COGNITO_APP_CLIENT_ID,
   COGNITO_IDENTITY_POOL_ID,
   COGNITO_REGION,
   COGNITO_USER_POOL_ID,
-} from "constants/Env"
-import React from "react"
-import Helmet from "react-helmet"
-import { AmplifyConfig } from "types/@typesAlternative/aws-amplify"
+} from "src/constants/Env"
+import { AmplifyConfig } from "src/types/@typesAlternative/aws-amplify"
 import { LoggedIn } from "./LoggedIn"
 
 /**

@@ -1,6 +1,6 @@
 import produce from "immer"
 import { handleActions, ReduxCompatibleReducer } from "redux-actions"
-import { AllowedAny } from "types/Utils"
+import { AllowedAny } from "src/types/Utils"
 import * as actions from "./actions"
 import { CounterActionType } from "./types"
 

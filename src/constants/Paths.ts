@@ -1,4 +1,4 @@
-import { Brand, CastAny, ValueOf } from "types/Utils"
+import { Brand, CastAny, ValueOf } from "src/types/Utils"
 
 /**
  * react-router用のパスの定義

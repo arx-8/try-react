@@ -1,9 +1,9 @@
-import { RoutePath } from "constants/Paths"
-import { authSelectors } from "ducks/auth"
-import { RootState } from "ducks/store"
 import React from "react"
 import { connect, MapStateToProps } from "react-redux"
 import { Redirect, Route, RouteProps } from "react-router-dom"
+import { RoutePath } from "src/constants/Paths"
+import { authSelectors } from "src/ducks/auth"
+import { RootState } from "src/ducks/store"
 
 type ReduxStateProps = {
   isAuthenticated: boolean

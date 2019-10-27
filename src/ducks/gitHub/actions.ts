@@ -1,8 +1,8 @@
-import { ActionWithPayloadHandler, ActionHandler } from "types/ReduxTypes"
+import { ActionHandler, ActionWithPayloadHandler } from "src/types/ReduxTypes"
 import {
-  FetchMembersParams,
-  FetchMemberResponse,
   FetchMemberError,
+  FetchMemberResponse,
+  FetchMembersParams,
 } from "./types"
 
 export const ActionTypes = {

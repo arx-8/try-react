@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import { Button } from "@material-ui/core"
-import { DynamicRoutePath, RoutePath } from "constants/Paths"
 import { Field, Formik } from "formik"
 import React from "react"
 import { useHistory } from "react-router"
+import { DynamicRoutePath, RoutePath } from "src/constants/Paths"
 import * as Yup from "yup"
 
 type Props = {

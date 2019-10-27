@@ -1,5 +1,5 @@
-import { TodoId } from "domain/models/Todo"
 import produce from "immer"
+import { TodoId } from "src/domain/models/Todo"
 import * as actions from "./actions"
 import { initialState, reducer } from "./reducers"
 
