@@ -13,8 +13,8 @@ import {
   MapDispatchToPropsFunction,
   MapStateToProps,
 } from "react-redux"
+import { useParams } from "react-router"
 import { Card, Header, Image } from "semantic-ui-react"
-import useReactRouter from "use-react-router"
 
 type ReduxStateProps = {
   isLoading: boolean
@@ -38,10 +38,9 @@ const _Members: React.FC<Props> = ({
   isLoading,
   users,
 }) => {
-  const { match } = useReactRouter<
+  const { companyName } = useParams<
     Partial<DynamicRouteParams["GitHubExplorer_Members"]>
   >()
-  const { companyName } = match.params
 
   useEffect(() => {
     // 空検索（例えばページの初期表示）はしないため
