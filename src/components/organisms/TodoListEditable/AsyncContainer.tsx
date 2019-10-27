@@ -1,11 +1,11 @@
-import { CallPutTodoReq } from "data/apis/TodoAPIClient"
-import { Todo, TodoId } from "domain/models/Todo"
-import { RootState } from "ducks/store"
-import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
 import React from "react"
 import { connect, MapStateToProps } from "react-redux"
-import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
-import { equals, sort } from "utils/ArrayUtils"
+import { CallPutTodoReq } from "src/data/apis/TodoAPIClient"
+import { Todo, TodoId } from "src/domain/models/Todo"
+import { RootState } from "src/ducks/store"
+import { todoAsyncOperations, todoAsyncSelectors } from "src/ducks/todoAsync"
+import { MapThunkDispatchToPropsFunction } from "src/types/ReduxTypes"
+import { equals, sort } from "src/utils/ArrayUtils"
 import { OwnProps, _TodoListEditable as Presentational } from "."
 
 export type ReduxStateProps = {

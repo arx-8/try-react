@@ -5,9 +5,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormLabel from "@material-ui/core/FormLabel"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
-import { VisibilityFilter, VisibilityFilterValue } from "domain/models/Todo"
 import React, { useCallback } from "react"
-import { AllowedAny } from "types/Utils"
+import { VisibilityFilter, VisibilityFilterValue } from "src/domain/models/Todo"
+import { AllowedAny } from "src/types/Utils"
 
 type ReduxStateProps = {
   currentVisibilityFilter: VisibilityFilter

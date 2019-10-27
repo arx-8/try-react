@@ -9,8 +9,8 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import DeleteIcon from "@material-ui/icons/Delete"
-import { TodoId, TodoStatus } from "domain/models/Todo"
 import React, { Fragment, useCallback } from "react"
+import { TodoId, TodoStatus } from "src/domain/models/Todo"
 import { ReduxDispatchProps, ReduxStateProps } from "./AsyncContainer"
 
 export type OwnProps = {

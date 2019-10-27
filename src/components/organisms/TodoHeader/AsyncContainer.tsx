@@ -1,8 +1,8 @@
-import { RootState } from "ducks/store"
-import { todoAsyncOperations, todoAsyncSelectors } from "ducks/todoAsync"
 import React, { useEffect } from "react"
 import { connect, MapStateToProps } from "react-redux"
-import { MapThunkDispatchToPropsFunction } from "types/ReduxTypes"
+import { RootState } from "src/ducks/store"
+import { todoAsyncOperations, todoAsyncSelectors } from "src/ducks/todoAsync"
+import { MapThunkDispatchToPropsFunction } from "src/types/ReduxTypes"
 import {
   ReduxDispatchProps,
   ReduxStateProps,

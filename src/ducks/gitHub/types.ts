@@ -1,5 +1,5 @@
-import { SerializableError } from "domain/errors/SerializableError"
-import { User } from "domain/models/GitHub"
+import { SerializableError } from "src/domain/errors/SerializableError"
+import { User } from "src/domain/models/GitHub"
 
 export type GitHubState = Readonly<{
   users: User[]

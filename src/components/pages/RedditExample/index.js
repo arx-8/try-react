@@ -1,8 +1,8 @@
-import { redditActions } from "ducks/reddit"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import Helmet from "react-helmet"
 import { connect } from "react-redux"
+import { redditActions } from "src/ducks/reddit"
 import { Picker } from "./Picker"
 import { Posts } from "./Posts"
 

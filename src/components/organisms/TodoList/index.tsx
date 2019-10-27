@@ -9,8 +9,8 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction"
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import DeleteIcon from "@material-ui/icons/Delete"
-import { Todo, TodoId, TodoStatus } from "domain/models/Todo"
 import React, { useCallback } from "react"
+import { Todo, TodoId, TodoStatus } from "src/domain/models/Todo"
 
 export type ReduxStateProps = {
   todoList: Todo[]

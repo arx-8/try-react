@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { counterSelectors } from "ducks/counter"
-import { RootState } from "ducks/store"
 import React from "react"
 import { connect, MapStateToProps } from "react-redux"
 import { Label, SemanticCOLORS } from "semantic-ui-react"
-import { range } from "utils/ArrayUtils"
+import { counterSelectors } from "src/ducks/counter"
+import { RootState } from "src/ducks/store"
+import { range } from "src/utils/ArrayUtils"
 
 const COLORS: readonly SemanticCOLORS[] = [
   "red",

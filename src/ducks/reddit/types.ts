@@ -1,4 +1,4 @@
-import { FixMeAny } from "types/Utils"
+import { FixMeAny } from "src/types/Utils"
 
 export type PostsBySubredditState = {
   isFetching: boolean

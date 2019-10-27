@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import React, { useEffect, useState } from "react"
 import dayjs from "dayjs"
-import { isErrorTime } from "data/apis/TodoAPIClient"
+import React, { useEffect, useState } from "react"
+import { isErrorTime } from "src/data/apis/TodoAPIClient"
 
 type Props = {
   children?: never

@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios"
 import dayjs, { Dayjs } from "dayjs"
-import { Todo, TodoId } from "domain/models/Todo"
-import { AllowedAny } from "types/Utils"
+import { Todo, TodoId } from "src/domain/models/Todo"
+import { AllowedAny } from "src/types/Utils"
 import { ulid } from "ulid"
 
 const createTodoId = (): TodoId => {

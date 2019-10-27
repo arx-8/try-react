@@ -1,5 +1,5 @@
-import { AuthToken } from "domain/models/Auth"
 import produce from "immer"
+import { AuthToken } from "src/domain/models/Auth"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
 import * as actions from "./actions"
 

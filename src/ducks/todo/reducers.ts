@@ -1,6 +1,6 @@
-import { TodoId } from "domain/models/Todo"
 import produce from "immer"
 import { Reducer } from "redux"
+import { TodoId } from "src/domain/models/Todo"
 import { ulid } from "ulid"
 import * as actions from "./actions"
 import { ActionTypes, TodoState } from "./types"

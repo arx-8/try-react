@@ -1,6 +1,6 @@
-import { RootState } from "ducks/store"
 import { Action } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
+import { RootState } from "src/ducks/store"
 import { AnyAction } from "typescript-fsa"
 
 /**

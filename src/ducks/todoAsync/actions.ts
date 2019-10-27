@@ -1,12 +1,12 @@
-import { APP_NAME } from "constants/App"
+import { APP_NAME } from "src/constants/App"
 import {
   CallDeleteTodoReq,
   CallGetTodoReq,
   CallPostTodoReq,
   CallPutTodoReq,
-} from "data/apis/TodoAPIClient"
-import { SerializableError } from "domain/errors/SerializableError"
-import { Todo, TodoId, VisibilityFilter } from "domain/models/Todo"
+} from "src/data/apis/TodoAPIClient"
+import { SerializableError } from "src/domain/errors/SerializableError"
+import { Todo, TodoId, VisibilityFilter } from "src/domain/models/Todo"
 import actionCreatorFactory from "typescript-fsa"
 
 export const ActionTypes = {

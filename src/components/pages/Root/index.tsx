@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import logo from "assets/logo.svg"
 import React from "react"
 import Helmet from "react-helmet"
+import logo from "src/assets/logo.svg"
 
 export const Root: React.FC = () => {
   return (

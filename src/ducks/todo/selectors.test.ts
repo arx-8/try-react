@@ -1,5 +1,5 @@
-import { TodoId, VisibilityFilter } from "domain/models/Todo"
 import produce from "immer"
+import { TodoId, VisibilityFilter } from "src/domain/models/Todo"
 import { initialState } from "./reducers"
 import { filterTodoList } from "./selectors"
 

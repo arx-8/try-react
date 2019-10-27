@@ -1,8 +1,8 @@
-import * as actions from "./actions"
-import { range } from "utils/ArrayUtils"
-import { reducerWithInitialState } from "typescript-fsa-reducers"
-import { TTTState, PlayerName, InputValue } from "./types"
 import produce from "immer"
+import { range } from "src/utils/ArrayUtils"
+import { reducerWithInitialState } from "typescript-fsa-reducers"
+import * as actions from "./actions"
+import { InputValue, PlayerName, TTTState } from "./types"
 
 export const initialState: TTTState = {
   currentPlayerName: "O",

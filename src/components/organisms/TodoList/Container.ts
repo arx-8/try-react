@@ -1,10 +1,10 @@
-import { RootState } from "ducks/store"
-import { todoOperations, todoSelectors } from "ducks/todo"
 import {
   connect,
   MapDispatchToPropsFunction,
   MapStateToProps,
 } from "react-redux"
+import { RootState } from "src/ducks/store"
+import { todoOperations, todoSelectors } from "src/ducks/todo"
 import { OwnProps, ReduxDispatchProps, ReduxStateProps, _TodoList } from "."
 
 const mapStateToProps: MapStateToProps<ReduxStateProps, OwnProps, RootState> = (

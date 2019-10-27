@@ -1,4 +1,4 @@
-import { Brand } from "types/Utils"
+import { Brand } from "src/types/Utils"
 
 export type TodoId = Brand<string, "TodoId">
 

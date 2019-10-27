@@ -1,4 +1,4 @@
-import { APP_NAME } from "constants/App"
+import { APP_NAME } from "src/constants/App"
 
 export const ActionTypes = {
   REQUEST_POSTS: APP_NAME + "reddit/REQUEST_POSTS",

@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import { RootState } from "ducks/store"
-import { tttOperations } from "ducks/tic-tac-toe"
-import { InputValue, PlayerName } from "ducks/tic-tac-toe/types"
 import React from "react"
 import {
   connect,
   MapDispatchToPropsFunction,
   MapStateToProps,
 } from "react-redux"
+import { RootState } from "src/ducks/store"
+import { tttOperations } from "src/ducks/tic-tac-toe"
+import { InputValue, PlayerName } from "src/ducks/tic-tac-toe/types"
 import { TTTSquare } from "./TTTSquare"
 
 type ReduxStateProps = {

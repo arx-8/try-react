@@ -1,4 +1,3 @@
-import { isDevelopment } from "constants/Env"
 import {
   AnyAction,
   applyMiddleware,
@@ -12,7 +11,8 @@ import persistState from "redux-localstorage"
 import createSagaMiddleware from "redux-saga"
 import { createSerializableStateInvariantMiddleware } from "redux-starter-kit"
 import thunkMiddleWare from "redux-thunk"
-import { FixMeAny } from "types/Utils"
+import { isDevelopment } from "src/constants/Env"
+import { FixMeAny } from "src/types/Utils"
 import { authReducer, AuthState } from "./auth"
 import { counterReducer } from "./counter"
 import { CounterState } from "./counter/reducers"

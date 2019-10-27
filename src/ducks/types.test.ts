@@ -1,4 +1,4 @@
-import { toUniq } from "utils/ArrayUtils"
+import { toUniq } from "src/utils/ArrayUtils"
 import { ActionTypes as AuthActionTypes } from "./auth/actions"
 import { CounterActionType } from "./counter/types"
 import { ActionTypes as GitHubActionTypes } from "./gitHub/actions"
