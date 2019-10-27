@@ -54,7 +54,7 @@
     "@types/redux-immutable-state-invariant": "2.1.1",
     "@types/redux-localstorage": "1.0.8",
     "@types/yup": "0.26.24",
-    "eslint-config-prettier": "6.4.0",
+    "eslint-config-prettier": "6.5.0",
     "eslint-plugin-jest": "22.19.0",
     "eslint-plugin-only-error": "1.0.2",
     "eslint-plugin-prettier": "3.1.1",
