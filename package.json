@@ -7,7 +7,7 @@
     "npm": ">=6"
   },
   "dependencies": {
-    "@emotion/core": "10.0.22",
+    "@emotion/core": "10.1.1",
     "@material-ui/core": "4.5.2",
     "@material-ui/icons": "4.5.1",
     "aws-amplify": "1.2.4",
@@ -17,7 +17,7 @@
     "emotion-normalize": "10.1.0",
     "formik": "1.5.8",
     "immer": "5.0.0",
-    "jest-emotion": "10.0.17",
+    "jest-emotion": "10.0.32",
     "lodash": "4.17.15",
     "react": "16.11.0",
     "react-dom": "16.11.0",
